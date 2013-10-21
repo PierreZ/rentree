@@ -14,9 +14,13 @@
     width: $size;
     height: $size;
     border-radius: 10000px;
+    overflow: hidden;
+    animation: spinner-spin linear 2s infinite;
+    -webkit-animation: spinner-spin linear 2s infinite;
     &:before{
         content: "";
         -moz-box-sizing: border-box;
+        box-sizing: border-box;
         display: block;
         border: $ring-color $thickness solid;
         border-radius: 10000px;
@@ -32,16 +36,24 @@
         margin: 0; padding: 0;
         display: block;
         border: $color $size/2 solid;
+        border-right-color: fade-out($color, 1);
         border-bottom-color: fade-out($color, 1);
         border-left-color: fade-out($color, 1);
-        border-top-color: fade-out($color, 1);
-        width: 0;
-        height: 0;
+        width: 1px;
+        height: 1px;
         position: absolute;
         top: 0;
         left: 0;
         border-radius: 0;
-        animation: spinner-spin linear 2s infinite;
+    }
+}
+
+@-webkit-keyframes spinner-spin{
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
     }
 }
 

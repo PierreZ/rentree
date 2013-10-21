@@ -1,13 +1,15 @@
 function login(e){
     e.preventDefault();
-
-    // send login and password, recieve session key, blah blah blah
-
     var b = document.querySelector("button");
     b.disabled = true;
     b.classList.add("loading");
-    window.setTimeout(function(){document.body.classList.add("logged-in");}, 1000, false);
-    window.setTimeout(function(){document.body.classList.remove("login");},  2000, false);
+
+    // send login and password, recieve session key, blah blah blah
+
+    window.setTimeout(function(){document.body.classList.add("logged-in");}, 2000, false);
+    window.setTimeout(function(){document.body.classList.remove("login");},  3000, false);
+
+    // this is where we load the next page
 }
 window.onload = function(){
     var b = document.querySelector("button");
