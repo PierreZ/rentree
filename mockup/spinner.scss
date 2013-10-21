@@ -1,0 +1,55 @@
+@mixin spinner(
+    $color: rgba(0,0,0,1),
+    $ring-color: rgba(0,0,0,0.4),
+    $size: 2em,
+    $thickness: 0.3em
+){
+    min-width: $size;
+    min-height: $size;
+
+    content: "";
+    display: block;
+    position: relative;
+    border: none;
+    width: $size;
+    height: $size;
+    border-radius: 10000px;
+    &:before{
+        content: "";
+        -moz-box-sizing: border-box;
+        display: block;
+        border: $ring-color $thickness solid;
+        border-radius: 10000px;
+        width: $size;
+        height: $size;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    &:after {
+        content: "";
+        z-index: 2e9;
+        margin: 0; padding: 0;
+        display: block;
+        border: $color $size/2 solid;
+        border-bottom-color: fade-out($color, 1);
+        border-left-color: fade-out($color, 1);
+        border-top-color: fade-out($color, 1);
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+        animation: spinner-spin linear 2s infinite;
+    }
+}
+
+@keyframes spinner-spin{
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

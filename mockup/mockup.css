@@ -1,0 +1,158 @@
+@font-face {
+  font-family: target-light;
+  src: url("target/TargetLight.ttf");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: target-book;
+  src: url("target/TargetBooK.ttf");
+  font-weight: normal;
+  font-style: normal; }
+
+.logo-isen {
+  display: inline-block;
+  font-family: target-light;
+  color: #b82a28;
+  padding: 0 0.3em;
+  text-align: left; }
+  .logo-isen h1 {
+    display: inline-block;
+    font-family: target-book;
+    font-size: 2.4em;
+    line-height: 0;
+    font-weight: normal;
+    text-transform: uppercase; }
+  .logo-isen h2 {
+    display: inline-block;
+    font-family: target-light;
+    font-size: 1em;
+    line-height: 1em;
+    font-weight: normal;
+    max-width: 6em;
+    margin-left: .3em;
+    padding-left: .5em;
+    border-left: 0.06em solid #b82a28;
+    text-transform: lowercase; }
+
+@keyframes spinner-spin {
+  0% {
+    transform: rotate(0deg); }
+
+  100% {
+    transform: rotate(360deg); } }
+
+@-moz-document url-prefix() {
+  input {
+    width: 0px; } }
+
+* {
+  margin: 0;
+  padding: 0; }
+
+html {
+  background: #444;
+  height: 100%;
+  min-width: 530px; }
+
+body {
+  text-align: center;
+  transition: max-width 1s;
+  margin: 0 auto;
+  min-height: 100%;
+  background: #fcfcfb;
+  max-width: 70%; }
+  body > * {
+    transition: opacity 1s; }
+
+body.logged-in {
+  max-width: 100%; }
+  body.logged-in > * {
+    opacity: 0; }
+
+body.login form {
+  margin: 60px auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 300px; }
+  body.login form label {
+    align-self: flex-start; }
+  body.login form input, body.login form button {
+    flex: 1 1 auto;
+    margin-bottom: 1.5em;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    background: white;
+    font-size: 1em;
+    padding: 0.5em 0.8em;
+    border-radius: 0.5em;
+    border: 1px rgba(0, 0, 0, 0.2) solid; }
+    body.login form input:hover, body.login form button:hover {
+      border-color: rgba(184, 42, 40, 0.6); }
+    body.login form input:focus, body.login form button:focus {
+      border-color: #b82a28; }
+  body.login form button {
+    width: auto;
+    position: relative;
+    align-self: flex-end; }
+    body.login form button .button-label {
+      position: relative;
+      left: 0%;
+      transition: left 0.3s; }
+    body.login form button.loading .button-label {
+      left: -200%; }
+    body.login form button .spinner {
+      overflow: auto;
+      content: "";
+      display: inline-block;
+      transition: left 0.3s;
+      min-width: 2em;
+      min-height: 2em;
+      content: "";
+      display: block;
+      position: relative;
+      border: none;
+      width: 2em;
+      height: 2em;
+      border-radius: 10000px;
+      position: absolute;
+      margin-left: -1em;
+      margin-top: -1em;
+      left: 150%;
+      top: 50%; }
+      body.login form button .spinner:before {
+        content: "";
+        -moz-box-sizing: border-box;
+        display: block;
+        border: #b82a28 0.2em solid;
+        border-radius: 10000px;
+        width: 2em;
+        height: 2em;
+        position: absolute;
+        top: 0;
+        left: 0; }
+      body.login form button .spinner:after {
+        content: "";
+        z-index: 2e9;
+        margin: 0;
+        padding: 0;
+        display: block;
+        border: #b82a28 1em solid;
+        border-bottom-color: rgba(184, 42, 40, 0);
+        border-left-color: rgba(184, 42, 40, 0);
+        border-top-color: rgba(184, 42, 40, 0);
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+        animation: spinner-spin linear 2s infinite; }
+    body.login form button.loading .spinner {
+      left: 50%; }
+
+.logo-isen {
+  margin: 20px;
+  font-size: 2em; }
