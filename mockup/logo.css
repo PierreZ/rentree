@@ -22,7 +22,9 @@
     font-size: 2.4em;
     line-height: 0;
     font-weight: normal;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    width: 2.5em;
+    text-align: right; }
   .logo-isen h2 {
     display: inline-block;
     font-family: target-light;

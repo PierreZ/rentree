@@ -4,9 +4,11 @@ function login(e){
     b.disabled = true;
     b.classList.add("loading");
 
+    document.activeElement.blur();
+
     // send login and password, recieve session key, blah blah blah
 
-    window.setTimeout(function(){document.body.classList.add("logged-in");}, 2000, false);
+    window.setTimeout(function(){document.body.classList.add("fade");}, 2000, false);
     window.setTimeout(function(){document.body.classList.remove("login");},  3000, false);
 
     // this is where we load the next page
