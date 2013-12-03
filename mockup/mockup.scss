@@ -117,6 +117,12 @@ button {
     }
 }
 
+body.fade.panes {
+    & > div {
+        opacity: 0;
+    }
+}
+
 body.panes {
     max-width: none;
     overflow: none;

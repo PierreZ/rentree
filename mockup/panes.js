@@ -17,7 +17,7 @@ function submit(e){
     }, 1500, false);
 }
 
-window.onload = function(){
+function initPanes(){
     var b = document.querySelector("button");
     b.disabled = false;
     document.querySelector("form").addEventListener("submit", submit, false);

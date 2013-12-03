@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <title>Documents de rentrée</title>
+        <link rel="stylesheet" href="mockup.css"/>
+        <script src="login.js"></script>
+        <script src="panes.js"></script>
+        <script>window.onload = initLogin;</script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    </head>
+    <body class="login">
+        <div class="logo-isen" style="font-size: 2Opx">
+            <h1>ISEN</h1>
+            <h2>documents de rentrée</h2>
+        </div>
+        <form>
+            <label for="email">E-mail :</label>
+            <input type="text" name="email" id="email"/>
+            <label for="password">Mot de passe (reçu par e-mail) :</label>
+            <input type="password" name="password" id="password"/>
+            <button><div class="label">Connexion</div><div class="spinner"></div></button>
+        </form>
+    </body>
+    <template class="panes step-1">
+        <div class="bienvenue">
+            <div>
+                <h1>Bienvenue à l'ISEN.</h1>
+                <p>Avant de visionner les documents de rentrée, veuillez entrer vos informations de contact.</p>
+            </div>
+        </div>
+        <div class="contact">
+            <form>
+                <h2>Informations de contact :</h2>
+
+                <h3>Vous :</h3>
+
+                <label for="nom">Nom :</label>
+                <input type="text" name="nom" id="nom"/>
+                <label for="email">Adresse E-mail :</label>
+                <input type="email" name="email" id="email"/>
+                <label for="ddn">Date de naissance :</label>
+                <input type="text" name="ddn" id="ddn"/>
+
+                <h3>Vos parents :</h3>
+
+                <label for="email-parents">Adresse E-mail :</label>
+                <input type="email" name="email-parents" id="email-parents"/>
+                <label for="tel-parents">Téléphone mobile :</label>
+                <input type="text" name="tel-parents" id="tel-parents"/>
+                <button><div class="label">Envoyer</div><div class="spinner"></div><div class="success-label">Merci !</button>
+            </form>
+        </div>
+        <div class="documents">
+            <h1>here be dragons</h1>
+            <p>navigation of some sort goes here</p>
+            <ul>
+                <li>kjfldjkfljf jkslmfdskjl</li>
+                <li>bahlabalh</li>
+                <li>Document important</li>
+                <li>hjklhjklhklj</li>
+                <li>bahlabalh</li>
+                <li>Un document avec un nom très très long</li>
+            </ul>
+        </div>
+        <div class="document-viewer">
+        </div>
+    </template>
+</html>
