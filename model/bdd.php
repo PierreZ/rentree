@@ -1,5 +1,7 @@
 <?php
 
+require_once("$root/conf/config.php");
+
 class bdd
 {
 	private static $instance;
@@ -7,7 +9,6 @@ class bdd
 
 	private function __construct(){
 		try{
-			require('../conf/config.php');
 		        $options = array(
 				        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',									);
 			$this->instancePDO = new PDO($dsn, $user, $passwd, $options);
