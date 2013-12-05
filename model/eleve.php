@@ -81,18 +81,18 @@ class Eleve{
 
 	function toJson(){
 		return json_encode(Array(
-			"id" => $this->getId();
-			"nom" => $this->getNom();
-			"email" => $this->getEmail();
-			"datenaissance" => $this->getDateNaissance();
-			"emailparent" => $this->getEmailParent();
-			"telparent" => $this->getTelParent();
-			"nomparent" => $this->getNomParent();
+			"id" => $this->getId(),
+			"nom" => $this->getNom(),
+			"email" => $this->getEmail(),
+			"datenaissance" => $this->getDateNaissance(),
+			"emailparent" => $this->getEmailParent(),
+			"telparent" => $this->getTelParent(),
+			"nomparent" => $this->getNomParent()
 		));
 	}
 
-	function patchFromJson(json){
-		$values = json_decode(json);
+	function patchFromJson($json){
+		$values = json_decode($json);
 		foreach($values as $key => $value){
 			switch($key){
 			case "id":
@@ -120,9 +120,9 @@ class Eleve{
 		}
 	}
 
-	static function fromJson(json){
+	static function fromJson($json){
 		$e = new Eleve();
-		$e->patchFromJson(json);
+		$e->patchFromJson($json);
 		return $e;
 	}
 

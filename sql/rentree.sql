@@ -2,7 +2,7 @@
 --     and Pierre Zemb
 
 CREATE DATABASE rentree CHARACTER SET utf8 collate utf8_bin;
-use rentree
+USE rentree;
 
 CREATE TABLE `eleve` (
 	`id` int NOT NULL auto_increment,
@@ -31,7 +31,8 @@ CREATE TABLE `promotion` (
 CREATE TABLE `admin` (
 	`admin_id` int NOT NULL AUTO_INCREMENT,
 	`email` varchar(256) NOT NULL,
-	`pw_hash` varchar(256) NOT NULL
+	`pw_hash` varchar(256) NOT NULL,
+	PRIMARY KEY (`admin_id`)
 );
 
 CREATE TABLE `session` (

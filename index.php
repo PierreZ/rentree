@@ -32,5 +32,8 @@ dispatch("/eleve/:id", "get_eleve");
 
 //dispatch("/admins/", "get_admins");
 
-dispatch("/ping/", "pong");
+dispatch("/ping", "pong");
+
+run();
+
 ?>

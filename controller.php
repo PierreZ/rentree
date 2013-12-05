@@ -17,17 +17,19 @@ function generate_404($type="json", $error="Not Found"){
 	}
 }
 function get_eleve(){
-	if(!is_admin() && !is_self(params("id"))
+	/*if(!is_admin() && !is_self(params("id"))) /// TODO
 		return generate_403();
+    */
 
-	$e = Eleve.find($id=params("id"));
+	$e = Eleve::find($id=params("id"));
 	if(!$e)
 		return generate_404();
 
-	return $e.toJson();
+	return $e->toJson();
 }
 
 function pong(){
 	return "pong";
 }
+
 ?>
