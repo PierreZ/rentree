@@ -1,5 +1,4 @@
 <?php
-require_once("setup/config.php");
 require_once("lib/limonade.php");
 ?>
 
