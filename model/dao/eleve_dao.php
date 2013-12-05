@@ -2,7 +2,14 @@
 include_once "$root/model/dao/dao.php";
 include_once "$root/model/eleve.php";
 
-class eleve_dao extends dao {
+class eleve_dao {
+	
+	public $database;
+
+	
+	public function __construct(){
+	                $this->database = bdd::getInstance()->getInstancePDO();
+	}	
 	
 	function find($id=null,$email=null){
 		if(is_null($email)==TRUE){	
