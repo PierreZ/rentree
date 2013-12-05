@@ -27,3 +27,14 @@ CREATE TABLE `promotion` (
 	`nompromotion` varchar(256) NOT NULL,
 	PRIMARY KEY (`id`)
 );
+
+CREATE TABLE `admin` (
+	`admin_id` int NOT NULL AUTO_INCREMENT,
+	`email` varchar(256) NOT NULL,
+	`pw_hash` varchar(256) NOT NULL
+);
+
+CREATE TABLE `session` (
+	`admin_id` int PRIMARY KEY REFERENCES admin(admin_id),
+	`key` varchar(256) NOT NULL
+);
