@@ -1,6 +1,6 @@
 <?php
 
-class eleve{
+class Eleve{
 	private $eleve_id;
 	private $nom;
 	private $email;

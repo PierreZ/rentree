@@ -2,7 +2,7 @@
 include_once "$root/model/dao/dao.php";
 include_once "$root/model/eleve.php";
 
-class eleve_dao {
+class Eleve_dao {
 	
 	public $database;
 
@@ -32,7 +32,7 @@ class eleve_dao {
 				$telparent = $resultat['telparent'];
 				$nomparent = $resultat['nomparent'];
 
-				$eleve = new eleve($nom,$email,$datenaissance,$emailparent,$telparent,$nomparent);
+				$eleve = new Eleve($nom,$email,$datenaissance,$emailparent,$telparent,$nomparent);
 				$eleve->setId($id);    
 				return $eleve;
 			}
