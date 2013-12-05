@@ -1,4 +1,7 @@
 <?php
+
+require_once("conf/config.php");
+
 require_once("lib/limonade.php");
 require_once("controller.php");
 

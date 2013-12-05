@@ -1,7 +1,8 @@
 <?php
 //Please fill the information below
-$dsn = 'mysql:host=localhost;dbname=rentree';
-$user = "rentree";
-$passwd = "ISEN2013";
-$root = "/var/www/rentree"
+const DSN     = 'mysql:host=localhost;dbname=rentree';
+const USER    = "root";
+const PASSWD  = "rentree";
+const ROOT    = "/srv/http/rentree/";
+const WWWROOT = "http://localhost/rentree/?";
 ?>

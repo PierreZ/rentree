@@ -1,4 +1,6 @@
 <?php
+require_once(ROOT."/model/eleve.php");
+
 function generate_403($type="json", $error="Forbidden"){
 	header("HTTP/1.1 403 Forbidden");
 	if($type="json"){

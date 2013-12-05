@@ -1,4 +1,5 @@
 <?php
+require_once(ROOT."/model/bdd.php");
 
 class Eleve{
 	private $eleve_id;
