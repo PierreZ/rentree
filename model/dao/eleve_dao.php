@@ -4,11 +4,17 @@ include_once "$root/model/eleve.php";
 
 class eleve_dao extends dao {
 	
-	function find($id){
-		$query  = "SELECT * FROM eleve WHERE id = :id;"; 
+	function find($id=null,$email=null){
+		if(is_null($email)==TRUE){	
+			$query  = "SELECT * FROM eleve WHERE id = :id;"; 
 			$prepared_query = $this->database->prepare($query);
 			$prepared_query->bindParam(':id', $id);
-			            
+
+		}else{
+			$query  = "SELECT * FROM eleve WHERE email = :email;"; 
+			$prepared_query = $this->database->prepare($query);
+			$prepared_query->bindParam(':email', $email);
+		}		
 			if (($prepared_query->execute())&&($prepared_query->rowCount()>0)){
 				$resultat = $prepared_query->fetch(PDO::FETCH_ASSOC);
 				
