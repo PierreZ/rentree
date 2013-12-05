@@ -77,6 +77,52 @@ class eleve{
 	function setNomParent($nomparent){
 		$this->nomparent=$nomparent;
 	}
-}
 
+	function toJson(){
+		return json_encode(Array(
+			"id" => $this->getId();
+			"nom" => $this->getNom();
+			"email" => $this->getEmail();
+			"datenaissance" => $this->getDateNaissance();
+			"emailparent" => $this->getEmailParent();
+			"telparent" => $this->getTelParent();
+			"nomparent" => $this->getNomParent();
+		));
+	}
+
+	function patchFromJson(json){
+		$values = json_decode(json);
+		foreach($values as $key => $value){
+			switch($key){
+			case "id":
+				$this->setId($value);
+				break;
+			case "nom":
+				$this->setNom($value);
+				break;
+			case "email":
+				$this->setEmail($value);
+				break;
+			case "datenaissance":
+				$this->setDateNaissance($value);
+				break;
+			case "emailparent":
+				$this->setEmailParent($value);
+				break;
+			case "telparent":
+				$this->setTelParent($value);
+				break;
+			case "nomparent":
+				$this->setNomParent($value);
+				break;
+			}
+		}
+	}
+
+	static function fromJson(json){
+		$e = new Eleve();
+		$e->patchFromJson(json);
+		return $e;
+	}
+}
 ?>
