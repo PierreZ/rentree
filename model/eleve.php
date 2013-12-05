@@ -124,5 +124,101 @@ class Eleve{
 		$e->patchFromJson(json);
 		return $e;
 	}
+
+	static function find($id=null,$email=null){
+		$database = bdd::getInstance()->getInstancePDO();
+		if(is_null($email)==TRUE){
+			$query  = "SELECT * FROM eleve WHERE id = :id;";
+			$prepared_query = $database->prepare($query);
+			$prepared_query->bindParam(':id', $id);
+
+		}else{
+			$query  = "SELECT * FROM eleve WHERE email = :email;";
+			$prepared_query = $database->prepare($query);
+			$prepared_query->bindParam(':email', $email);
+		}		
+		if (($prepared_query->execute())&&($prepared_query->rowCount()>0)){
+			$resultat = $prepared_query->fetch(PDO::FETCH_ASSOC);
+
+			$nom = $resultat['nom'];
+			$email = $resultat['email'];
+			$datenaissance = $resultat['datenaissance'];
+			$emailparent = $resultat['emailparent'];
+			$telparent = $resultat['telparent'];
+			$nomparent = $resultat['nomparent'];
+			$id = $resultat['id'];
+
+			$eleve = new Eleve($nom,$email,$datenaissance,$emailparent,$telparent,$nomparent);
+			$eleve->setId($id);
+			return $eleve;
+		}
+		else return false;
+	}
+
+	function insert(){
+		$database = bdd::getInstance()->getInstancePDO();
+
+		$nom = $this->getNom();
+		$email = $this->getEmail();
+		$datenaissance =$this->getDateNaissance();
+		$emailparent = $this->getEmailParent();
+		$telparent = $this->getTelParent();
+		$nomparent = $this->getNomParent();
+		$query  = "INSERT INTO eleve (email, nom, datenaissance, emailparent, telparent, nomparent) VALUES (:email,:nom,:datenaissance,:emailparent, :telparent, :nomparent);";
+
+		$prepared_query = $database->prepare($query);
+		$prepared_query->bindParam(':email', $email);
+		$prepared_query->bindParam(':nom', $nom);
+		$prepared_query->bindParam(':datenaissance', $datenaissance);
+		$prepared_query->bindParam(':emailparent', $emailparent);
+		$prepared_query->bindParam(':telparent', $telparent);
+		$prepared_query->bindParam(':nomparent', $nomparent);
+		if ($prepared_query->execute()){
+			$this->setId($database->lastinsertid());
+			return true;
+		}
+		else return false;
+	}
+
+	function update(){
+		$database = bdd::getInstance()->getInstancePDO();
+
+		$id = $this->getId();
+		$nom = $this->getNom();
+		$email = $this->getEmail();
+		$datenaissance =$this->getDateNaissance();
+		$emailparent = $this->getEmailParent();
+		$telparent = $this->getTelParent();
+		$nomparent = $this->getNomParent();
+		$query  = "UPDATE eleve SET nom=:nom, email=:email, datenaissance=:datenaissance, emailparent=:emailparent, telparent=:telparent,nomparent=:nomparent WHERE id = :id;";
+		$prepared_query = $database->prepare($query);
+		$prepared_query->bindParam(':email', $email);
+		$prepared_query->bindParam(':nom', $nom);
+		$prepared_query->bindParam(':datenaissance', $datenaissance);
+		$prepared_query->bindParam(':emailparent', $emailparent);
+		$prepared_query->bindParam(':telparent', $telparent);
+		$prepared_query->bindParam(':nomparent', $nomparent);
+		$prepared_query->bindParam(':id', $id);
+
+		if ($prepared_query->execute())
+			return true;
+		else return false;
+	}
+
+	function delete(){
+		$database = bdd::getInstance()->getInstancePDO();
+
+		$id = $this->getId();
+		$query  = "DELETE FROM eleve WHERE id = :id;";
+
+		$prepared_query = $atabase->prepare($query);
+		$prepared_query->bindParam(':id', $id);
+
+		if ($prepared_query->execute()){
+			$this->setId(null);
+			return true;
+		}
+		else return false;
+	}
 }
 ?>
