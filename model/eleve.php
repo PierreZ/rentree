@@ -50,7 +50,7 @@ class eleve{
 		return $this->datenaissance;
 	}
 
-	function SetDateNaissance($datenaissance){
+	function setDateNaissance($datenaissance){
 		$this->datenaissance=$datenaissance;
 	}
 
@@ -67,7 +67,7 @@ class eleve{
 	}
 	
 	function setTelParent($telparent){
-		return $this->telparent;
+		$this->telparent = $telparent;
 	}
 
 	function getNomParent(){
