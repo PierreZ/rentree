@@ -130,7 +130,7 @@ class Eleve{
 		$database = bdd::getInstance()->getInstancePDO();
 		if(is_int($id)==TRUE){
 			// ID is an int type
-			$query  = "SELECT * FROM eleve WHERE id = :id;";
+			$query  = "SELECT * FROM eleve WHERE id_eleve = :id;";
 			$prepared_query = $database->prepare($query);
 			$prepared_query->bindParam(':id', $id);
 
@@ -193,7 +193,7 @@ class Eleve{
 		$emailparent = $this->getEmailParent();
 		$telparent = $this->getTelParent();
 		$nomparent = $this->getNomParent();
-		$query  = "UPDATE eleve SET nom=:nom, email=:email, datenaissance=:datenaissance, emailparent=:emailparent, telparent=:telparent,nomparent=:nomparent WHERE id = :id;";
+		$query  = "UPDATE eleve SET nom=:nom, email=:email, datenaissance=:datenaissance, emailparent=:emailparent, telparent=:telparent,nomparent=:nomparent WHERE id_eleve = :id;";
 		$prepared_query = $database->prepare($query);
 		$prepared_query->bindParam(':email', $email);
 		$prepared_query->bindParam(':nom', $nom);
@@ -212,7 +212,7 @@ class Eleve{
 		$database = bdd::getInstance()->getInstancePDO();
 
 		$id = $this->getId();
-		$query  = "DELETE FROM eleve WHERE id = :id;";
+		$query  = "DELETE FROM eleve WHERE id_eleve = :id;";
 
 		$prepared_query = $atabase->prepare($query);
 		$prepared_query->bindParam(':id', $id);
