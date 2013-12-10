@@ -28,6 +28,15 @@ function get_eleve(){
 	return $e->toJson();
 }
 
+function post_eleve(){
+	
+	$e->patchFromJson(file_get_contents("php://input"));
+	$e->insert($e);
+	if(!$e)
+		return generate_404();
+	return true;
+}
+
 function pong(){
 	return "pong";
 }
