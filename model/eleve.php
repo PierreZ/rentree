@@ -126,17 +126,19 @@ class Eleve{
 		return $e;
 	}
 
-	static function find($id=null,$email=null){
+	static function find($id=null){
 		$database = bdd::getInstance()->getInstancePDO();
-		if(is_null($email)==TRUE){
+		if(is_int($id)==TRUE){
+			// ID is an int type
 			$query  = "SELECT * FROM eleve WHERE id = :id;";
 			$prepared_query = $database->prepare($query);
 			$prepared_query->bindParam(':id', $id);
 
 		}else{
+			//ID represent an email here
 			$query  = "SELECT * FROM eleve WHERE email = :email;";
 			$prepared_query = $database->prepare($query);
-			$prepared_query->bindParam(':email', $email);
+			$prepared_query->bindParam(':email', $id);
 		}		
 		if (($prepared_query->execute())&&($prepared_query->rowCount()>0)){
 			$resultat = $prepared_query->fetch(PDO::FETCH_ASSOC);

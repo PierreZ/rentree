@@ -70,17 +70,19 @@ class Document{
 		return $e;
 	}
 
-	static function find($id=null,$nompromotion=null){
+	static function find($id=null){
 		
 		database = bdd::getInstance()->getInstancePDO();
-		if(is_null($nompromotion)==TRUE){
+		if(is_int($nompromotion)==TRUE){
+			//ID
 			$query  = "SELECT * FROM document WHERE id = :id;"; 
 			$prepared_query =database->prepare($query);
 			$prepared_query->bindParam(':id', $id);
 		}else{
+			// Promotion
 			$query  = "SELECT * FROM document WHERE nompromotion = :nompromotion;"; 
 			$prepared_query = database->prepare($query);
-			$prepared_query->bindParam(':nompromotion', $nompromotion);
+			$prepared_query->bindParam(':nompromotion', $id);
 		}
 		if (($prepared_query->execute())&&($prepared_query->rowCount()>0)){
 			$resultat = $prepared_query->fetch(PDO::FETCH_ASSOC);
