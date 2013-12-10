@@ -75,7 +75,7 @@ class Document{
 		database = bdd::getInstance()->getInstancePDO();
 		if(is_int($nompromotion)==TRUE){
 			//ID
-			$query  = "SELECT * FROM document WHERE id = :id;"; 
+			$query  = "SELECT * FROM document WHERE id_document = :id;"; 
 			$prepared_query =database->prepare($query);
 			$prepared_query->bindParam(':id', $id);
 		}else{
@@ -92,6 +92,57 @@ class Document{
 			$document=new Document($fichier,$nompromotion);
 			$document->setId($id);
 		}else return false;	
+	}
+
+	static function insert(){
+		$database = bdd::getInstance()->getInstancePDO();
+		
+		$id_document=$this->getId();
+		$fichier=$this->getFichier();
+		$nompromotion=$this->getNomPromotion();
+		$query  = "INSERT INTO document (id_document, fichier, id_promotion) VALUES (:id,:fichier,:id_promotion);";
+		$prepared_query = $database->prepare($query);
+	        $prepared_query->bindParam(':id_document', $id_document);
+	        $prepared_query->bindParam(':fichier', $fichier);
+		$prepared_query->bindParam(':nompromotion', $nompromotion);
+
+		if ($prepared_query->execute()){
+			$this->setId($database->lastinsertid());
+			return true;
+		}else return false;	
+	}
+
+	static function update(){
+		$database = bdd::getInstance()->getInstancePDO();
+		
+		$id_document=$this->getId();
+		$fichier=$this->getFichier();
+		$nompromotion=$this->getNomPromotion();
+
+		$query  = "UPDATE document SET fichier=:fichier, nompromotion=:nompromotion WHERE id_document = :id_document;";
+		$prepared_query = $database->prepare($query);
+	        $prepared_query->bindParam(':id_document', $id_document);
+	        $prepared_query->bindParam(':fichier', $fichier);
+		$prepared_query->bindParam(':nompromotion', $nompromotion);
+		if ($prepared_query->execute())
+			return true;
+		else return false;
+	}
+
+	static function delete(){
+		$database = bdd::getInstance()->getInstancePDO();
+
+		$id = $this->getId();
+		$query  = "DELETE FROM document WHERE id_document = :id_document;";
+
+		$prepared_query = $atabase->prepare($query);
+		$prepared_query->bindParam(':id_document', $id);
+
+		if ($prepared_query->execute()){
+			$this->setId(null);
+			return true;
+		}
+		else return false;
 	}
 
 }
