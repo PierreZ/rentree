@@ -5,7 +5,7 @@ CREATE DATABASE rentree CHARACTER SET utf8 collate utf8_bin;
 USE rentree;
 
 CREATE TABLE `eleve` (
-	`id` int NOT NULL auto_increment,
+	`id_eleve` int NOT NULL auto_increment,
 	`email` varchar(256) NOT NULL,
 	`nom` varchar(256) NOT NULL,
 	`datenaissance` DATE NOT NULL,
@@ -16,26 +16,26 @@ CREATE TABLE `eleve` (
 );
 
 CREATE TABLE `document` (
-	`id` int NOT NULL auto_increment,
+	`id_document` int NOT NULL auto_increment,
 	`fichier` varchar(256) NOT NULL,
-	`nompromotion` varchar(256) REFERENCES promotion(nompromotion),
+	`id_promotion` int REFERENCES promotion(id_promotion),
 	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `promotion` (
-	`id` int NOT NULL auto_increment,
+	`id_promotion` int NOT NULL auto_increment,
 	`nompromotion` varchar(256) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `admin` (
-	`admin_id` int NOT NULL AUTO_INCREMENT,
+	`id_admin` int NOT NULL AUTO_INCREMENT,
 	`email` varchar(256) NOT NULL,
 	`pw_hash` varchar(256) NOT NULL,
 	PRIMARY KEY (`admin_id`)
 );
 
 CREATE TABLE `session` (
-	`admin_id` int PRIMARY KEY REFERENCES admin(admin_id),
+	`id_admin` int PRIMARY KEY REFERENCES admin(id_admin),
 	`key` varchar(256) NOT NULL
 );
