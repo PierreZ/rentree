@@ -158,6 +158,34 @@ class Eleve{
 		else return false;
 	}
 
+	static function findAll(){
+		$database = bdd::getInstance()->getInstancePDO();
+
+		$query = "SELECT * eleve";
+		if (($prepared_query->execute())&&($prepared_query->rowCount()>0)){
+			$resultat = $prepared_query->fetchAll();
+			$array;
+			foreach($resultat as $result){
+				$nom = $result['nom'];
+				$email = $result['email'];
+				$datenaissance = $result['datenaissance'];
+				$emailparent = $result['emailparent'];
+				$telparent = $result['telparent'];
+				$nomparent = $result['nomparent'];
+				$id = $resultat['id'];
+				
+				$eleve = new Eleve($nom,$email,$datenaissance,$emailparent,$telparent,$nomparent);
+				$eleve->setId($id);
+				
+				array_push($array,$eleve);
+				unset($eleve);
+			}
+			return $array;
+		}
+		else return false;
+	}
+
+
 	static function insert(){
 		$database = bdd::getInstance()->getInstancePDO();
 
