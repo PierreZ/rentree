@@ -25,7 +25,7 @@ function get_eleve(){
 	if(!$e)
 		return generate_404();
 
-	return $e->toJson();
+	return json_encode($e);
 }
 
 function post_eleve(){

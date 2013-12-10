@@ -1,7 +1,7 @@
 <?php
 require_once(ROOT."/model/bdd.php");
 
-class Eleve{
+class Eleve implements JsonSerializable{
 	private $eleve_id;
 	private $nom;
 	private $email;
@@ -79,8 +79,8 @@ class Eleve{
 		$this->nomparent=$nomparent;
 	}
 
-	function toJson(){
-		return json_encode(Array(
+	function jsonSerialize(){
+		return Array(
 			"id" => $this->getId(),
 			"nom" => $this->getNom(),
 			"email" => $this->getEmail(),
@@ -88,7 +88,7 @@ class Eleve{
 			"emailparent" => $this->getEmailParent(),
 			"telparent" => $this->getTelParent(),
 			"nomparent" => $this->getNomParent()
-		));
+		);
 	}
 
 	function patchFromJson($json){
