@@ -73,7 +73,7 @@ class Document{
 	static function find($id=null){
 		
 		database = bdd::getInstance()->getInstancePDO();
-		if(is_int($nompromotion)==TRUE){
+		if(is_int($id)==TRUE){
 			//ID
 			$query  = "SELECT * FROM document WHERE id_document = :id;"; 
 			$prepared_query =database->prepare($query);
