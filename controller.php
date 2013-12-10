@@ -21,7 +21,7 @@ function get_eleve(){
 		return generate_403();
     */
 
-	$e = Eleve::find($id=params("id"));
+	$e = Eleve::find(params("id"));
 	if(!$e)
 		return generate_404();
 
@@ -32,6 +32,15 @@ function post_eleve(){
 	
 	$e->patchFromJson(file_get_contents("php://input"));
 	$e->insert($e);
+	if(!$e)
+		return generate_404();
+	return true;
+}
+
+function put_eleve(){
+
+	$e->patchFromJson(file_get_contents("php://input"));
+	$e->update(params("id"));
 	if(!$e)
 		return generate_404();
 	return true;

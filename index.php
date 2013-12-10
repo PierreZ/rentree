@@ -9,7 +9,7 @@ require_once("controller.php");
 
 dispatch("/eleve/:id", "get_eleve");
 dispatch_post("/eleve/", "post_eleve");
-//dispatch_put("/eleve/:id", "put_eleve");
+dispatch_put("/eleve/:id", "put_eleve");
 
 //dispatch("/eleves/", "get_eleves");
 
