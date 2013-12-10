@@ -158,7 +158,7 @@ class Eleve{
 		else return false;
 	}
 
-	function insert(){
+	static function insert(){
 		$database = bdd::getInstance()->getInstancePDO();
 
 		$nom = $this->getNom();
@@ -183,7 +183,7 @@ class Eleve{
 		else return false;
 	}
 
-	function update(){
+	static function update(){
 		$database = bdd::getInstance()->getInstancePDO();
 
 		$id = $this->getId();
@@ -208,7 +208,7 @@ class Eleve{
 		else return false;
 	}
 
-	function delete(){
+	static function delete(){
 		$database = bdd::getInstance()->getInstancePDO();
 
 		$id = $this->getId();
