@@ -58,6 +58,15 @@ function get_eleves(){
 	return json_encode($serialize);
 }
 
+function get_document(){
+
+	$d = Documents::find(params("id"));
+	if(!$d)
+		return generate_404();
+
+	return json_encode($d);
+}
+
 function pong(){
 	return "pong";
 }
