@@ -80,6 +80,15 @@ function post_document(){
 	return $d;
 }
 
+function put_document(){
+
+	$d->patchFromJson(file_get_contents("php://input"));
+	$d->update(params("id"));
+	if(!$d)
+		return generate_404();
+	return $d;
+}
+
 function pong(){
 	return "pong";
 }
