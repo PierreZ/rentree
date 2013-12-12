@@ -128,7 +128,7 @@ class Eleve implements JsonSerializable{
 
 	static function find($id=null){
 		$database = bdd::getInstance()->getInstancePDO();
-		if(is_int($id)==TRUE){
+		if((int)$id){
 			// ID is an int type
 			$query  = "SELECT * FROM eleve WHERE id_eleve = :id;";
 			$prepared_query = $database->prepare($query);
@@ -149,7 +149,7 @@ class Eleve implements JsonSerializable{
 			$emailparent = $resultat['emailparent'];
 			$telparent = $resultat['telparent'];
 			$nomparent = $resultat['nomparent'];
-			$id = $resultat['id'];
+			$id = $resultat['id_eleve'];
 
 			$eleve = new Eleve($nom,$email,$datenaissance,$emailparent,$telparent,$nomparent);
 			$eleve->setId($id);
