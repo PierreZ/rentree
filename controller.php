@@ -46,6 +46,18 @@ function put_eleve(){
 	return true;
 }
 
+function get_eleves(){
+	
+	$array=Eleve::findAll();
+	if(!$array)
+		return generate_404();
+	$serialize=Array();
+	foreach($array as  $eleve{
+		array_push($serialize,$eleve);
+	}
+	return json_encode($serialize);
+}
+
 function pong(){
 	return "pong";
 }
