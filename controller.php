@@ -67,6 +67,15 @@ function get_document(){
 	return json_encode($d);
 }
 
+function post_document(){
+	
+	$d->patchFromJson(file_get_contents("php://input"));
+	$d->insert($d);
+	if(!$d)
+		return generate_404();
+	return $d;
+}
+
 function pong(){
 	return "pong";
 }
