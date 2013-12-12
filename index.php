@@ -11,7 +11,7 @@ dispatch("/eleve/:id", "get_eleve");
 dispatch_post("/eleve/", "post_eleve");
 dispatch_put("/eleve/:id", "put_eleve");
 
-//dispatch("/eleves/", "get_eleves");
+dispatch("/eleves/", "get_eleves");
 
 //dispatch("/document/:id", "get_document");
 //dispatch_post("/document/", "post_document");
