@@ -1,6 +1,6 @@
 <?php
 
-class Document{
+class Document implements JsonSerializable{
 	private $document_id;
 	private $fichier;
 	private $nompromotion;
@@ -40,12 +40,12 @@ class Document{
 	}
 
 
-	function toJson(){
-		return json_encode(Array(
+	function jsonSerialize(){
+		return Array(
 			"id" => $this->getId();
 			"fichier" => $this->getFichier();
 			"nompromotion" => $this->getNomPromotion();
-		));
+		);
 	}
 	
 	function patchFromJson($json){
