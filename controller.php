@@ -1,5 +1,6 @@
 <?php
 require_once(ROOT."/model/eleve.php");
+require_once(ROOT."/model/admin.php");
 
 function generate_403($type="json", $error="Forbidden"){
 	header("HTTP/1.1 403 Forbidden");
@@ -21,29 +22,32 @@ function get_eleve(){
 		return generate_403();
     */
 
-	$e = Eleve::find(params("id"));
+	$e = Eleve::find((int)params("id"));
 	if(!$e)
 		return generate_404();
 
+	header("Content-Type: application/json");
 	return json_encode($e);
 }
 
 function post_eleve(){
-	
-	$e->patchFromJson(file_get_contents("php://input"));
-	$e->insert($e);
-	if(!$e)
-		return generate_404();
-	return true;
+	$e = Eleve::fromJson(file_get_contents("php://input"));
+	$e->insert();
+	header("Content-Type: application/json");
+	return json_encode($e);
 }
 
 function put_eleve(){
+	$e = Eleve::find((int)params("id"));
 
-	$e->patchFromJson(file_get_contents("php://input"));
-	$e->update(params("id"));
 	if(!$e)
 		return generate_404();
-	return true;
+
+	$e->patch($GLOBALS["_PUT"]);
+	$e->update();
+
+	header("Content-Type: application/json");
+	return json_encode($e);
 }
 
 function get_eleves(){
@@ -78,6 +82,18 @@ function post_document(){
 
 function pong(){
 	return "pong";
+}
+
+function get_admin(){
+	/*if(!is_admin()) /// TODO
+		return generate_403();
+    */
+
+	$e = Admin::find(params("id"));
+	if(!$e)
+		return generate_404();
+
+	return json_encode($e);
 }
 
 ?>

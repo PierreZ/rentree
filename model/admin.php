@@ -2,11 +2,11 @@
 require_once(ROOT."/model/bdd.php");
 require_once(ROOT."/tools/key.php");
 
-class Admin {
+class Admin implements JsonSerializable{
 	private $id_admin;
 	private $email;
 	private $new_pw;
-	private $session_key
+	private $session_key;
 
 	public function __construct($id_admin=null, $email=null){
 		$this->id_admin = $id_admin;
@@ -97,6 +97,16 @@ class Admin {
 		while($row = $q->fetch())
 			array_push($admins, new Admin($row[0], $row[1]));
 		return $admins;
+	}
+
+	public function jsonSerialize(){
+		$json = Array(
+			"id" => $this->id_admin,
+			"email" => $this->email
+		);
+		if(isset($this->session_key))
+			$json["session-key"] = $this->session_key;
+		return $json;
 	}
 }
 ?>

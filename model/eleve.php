@@ -91,9 +91,8 @@ class Eleve implements JsonSerializable{
 		);
 	}
 
-	function patchFromJson($json){
-		$values = json_decode($json);
-		foreach($values as $key => $value){
+	function patch($arr){
+		foreach($arr as $key => $value){
 			switch($key){
 			case "id":
 				$this->setId($value);
@@ -120,6 +119,11 @@ class Eleve implements JsonSerializable{
 		}
 	}
 
+	function patchFromJson($json){
+		$arr = json_decode($json);
+		$this->patch($arr);
+	}
+
 	static function fromJson($json){
 		$e = new Eleve();
 		$e->patchFromJson($json);
@@ -128,7 +132,7 @@ class Eleve implements JsonSerializable{
 
 	static function find($id=null){
 		$database = bdd::getInstance()->getInstancePDO();
-		if((int)$id){
+		if(is_int($id)){
 			// ID is an int type
 			$query  = "SELECT * FROM eleve WHERE id_eleve = :id;";
 			$prepared_query = $database->prepare($query);
@@ -186,7 +190,7 @@ class Eleve implements JsonSerializable{
 	}
 
 
-	static function insert(){
+	function insert(){
 		$database = bdd::getInstance()->getInstancePDO();
 
 		$nom = $this->getNom();
@@ -211,7 +215,7 @@ class Eleve implements JsonSerializable{
 		else return false;
 	}
 
-	static function update(){
+	function update(){
 		$database = bdd::getInstance()->getInstancePDO();
 
 		$id = $this->getId();
@@ -236,7 +240,7 @@ class Eleve implements JsonSerializable{
 		else return false;
 	}
 
-	static function delete(){
+	function delete(){
 		$database = bdd::getInstance()->getInstancePDO();
 
 		$id = $this->getId();
