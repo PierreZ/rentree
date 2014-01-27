@@ -14,8 +14,15 @@ INSERT INTO admin
 	(1, 'foo@bar.baz', PASSWORD('quux'))
 ;
 
-INSERT INTO session
-	(id_admin, `key`)
+INSERT INTO promotion
+	(id_promotion, nompromotion)
 	VALUES
-	(1, 'lol')
+	(1, 'CIR3')
+;
+
+INSERT INTO document
+	(id_document, fichier, id_promotion)
+	VALUES
+	(1, 'patate.pdf', NULL),
+	(2, 'tomate.pdf', 1)
 ;

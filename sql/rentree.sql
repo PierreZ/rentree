@@ -32,10 +32,6 @@ CREATE TABLE `admin` (
 	`id_admin` int NOT NULL AUTO_INCREMENT,
 	`email` varchar(256) NOT NULL,
 	`pw_hash` varchar(256) NOT NULL,
+	`session_key` varchar(256),
 	PRIMARY KEY (`id_admin`)
-);
-
-CREATE TABLE `session` (
-	`id_admin` int PRIMARY KEY REFERENCES admin(id_admin),
-	`key` varchar(256) NOT NULL
 );
