@@ -121,5 +121,8 @@ class Promotion{
 		else return false;
 	}
 
+	function findDocuments(){
+		return Document::findForPromo($this->getId());
+	}
 }
 ?>

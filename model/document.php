@@ -70,28 +70,39 @@ class Document implements JsonSerializable{
 		return $e;
 	}
 
+	// Given an ID, gets the document with that ID.
+	// Given a promo name (or null for no promo), finds all docs in that promo.
 	static function find($id=null){
 		
 		database = bdd::getInstance()->getInstancePDO();
 		if(is_int($id)==TRUE){
 			//ID
-			$query  = "SELECT * FROM document WHERE id_document = :id;"; 
-			$prepared_query =database->prepare($query);
+			$query = "SELECT fichier, nompromotion FROM document WHERE id_document = :id;";
+			$prepared_query = database->prepare($query);
 			$prepared_query->bindParam(':id', $id);
+			if ($prepared_query->execute())&&($prepared_query->rowCount()>0){
+				$resultat = $prepared_query->fetch(PDO::FETCH_ASSOC);
+
+				$document=new Document($resultat['fichier'],$resultat['nompromotion']);
+				$document->setId($id);
+			}else return false;
 		}else{
 			// Promotion
-			$query  = "SELECT * FROM document WHERE nompromotion = :nompromotion;"; 
+			$promo = $id;
+			$query = "SELECT id, fichier FROM document WHERE nompromotion = :nompromotion;";
 			$prepared_query = database->prepare($query);
-			$prepared_query->bindParam(':nompromotion', $id);
+			$prepared_query->bindParam(':nompromotion', $promo);
+			if ($prepared_query->execute()){
+				$docs = Array();
+				while($row = $prepared_query->fetch()){
+					$doc=new Document($row['fichier'],$id);
+					$doc->setId($row['id']);
+					array_push($docs, $doc);
+				}
+				return $docs;
+
+			}else return false;
 		}
-		if (($prepared_query->execute())&&($prepared_query->rowCount()>0)){
-			$resultat = $prepared_query->fetch(PDO::FETCH_ASSOC);
-			
-			$fichier=$resultat['fichier'];
-			$fichier=$resultat['nompromotion'];
-			$document=new Document($fichier,$nompromotion);
-			$document->setId($id);
-		}else return false;	
 	}
 
 	function insert(){
