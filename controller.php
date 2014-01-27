@@ -17,6 +17,15 @@ function generate_404($type="json", $error="Not Found"){
 		return json_encode(Array("error" => $error));
 	}
 }
+
+/*
+*
+* -------------------------------------
+* All the functions associate to eleve
+* -------------------------------------
+*
+*/
+
 function get_eleve(){
 	/*if(!is_admin() && !is_self(params("id"))) /// TODO
 		return generate_403();
@@ -62,6 +71,14 @@ function get_eleves(){
 	return json_encode($serialize);
 }
 
+/*
+*
+* -------------------------------------
+* All the functions associate to Documents
+* -------------------------------------
+*
+*/
+
 function get_document(){
 
 	$d = Documents::find(params("id"));
@@ -95,6 +112,40 @@ function download_document(){
 		return generate_404();
 
 	return json_encode($d.getFichier());
+}
+
+/*
+*
+* -------------------------------------
+* All the functions associate to promos
+* -------------------------------------
+*
+*/
+function get_promo(){
+
+	$d = Promotion::find(params("id"));
+	if(!$d)
+		return generate_404();
+
+	return json_encode($d);
+}
+
+function post_promo(){
+	
+	$d->patchFromJson(file_get_contents("php://input"));
+	$d->insert($d);
+	if(!$d)
+		return generate_404();
+	return $d;
+}
+
+function put_promo(){
+
+	$d->patchFromJson(file_get_contents("php://input"));
+	$d->update(params("id"));
+	if(!$d)
+		return generate_404();
+	return $d;
 }
 
 function pong(){

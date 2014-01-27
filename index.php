@@ -21,6 +21,11 @@ dispatch("/document/:id.pdf", "download_document");
 
 //dispatch("/documents/", "get_documents");
 
+dispatch("/promo/:id", "get_promo");
+dispatch_post("/promo/", "post_promo");
+dispatch_put("/promo/:id", "put_promo");
+
+//dispatch("/promos/", "get_promos");
 
 //dispatch_post("/session", "post_session");
 //dispatch_delete("/session/:admin_id", "delete_session");
