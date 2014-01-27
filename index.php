@@ -16,6 +16,7 @@ dispatch("/eleves/", "get_eleves");
 dispatch("/document/:id", "get_document");
 dispatch_post("/document/", "post_document");
 dispatch_put("/document/:id", "put_document");
+//dispatch_delete("/document/:id", "delete_document");
 
 dispatch("/document/:id.pdf", "download_document");
 
@@ -24,6 +25,7 @@ dispatch("/document/:id.pdf", "download_document");
 dispatch("/promo/:id", "get_promo");
 dispatch_post("/promo/", "post_promo");
 dispatch_put("/promo/:id", "put_promo");
+//dispatch_delete("/promo/:id", "delete_promo");
 
 //dispatch("/promos/", "get_promos");
 
