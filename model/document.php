@@ -42,9 +42,9 @@ class Document implements JsonSerializable{
 
 	function jsonSerialize(){
 		return Array(
-			"id" => $this->getId();
-			"fichier" => $this->getFichier();
-			"nompromotion" => $this->getNomPromotion();
+			"id" => $this->getId(),
+			"fichier" => $this->getFichier(),
+			"nompromotion" => $this->getNomPromotion()
 		);
 	}
 	
