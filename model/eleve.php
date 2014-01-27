@@ -165,26 +165,24 @@ class Eleve implements JsonSerializable{
 	static function findAll(){
 		$database = bdd::getInstance()->getInstancePDO();
 
-		$query = "SELECT * eleve";
-		if (($prepared_query->execute())&&($prepared_query->rowCount()>0)){
-			$resultat = $prepared_query->fetchAll();
-			$array;
-			foreach($resultat as $result){
-				$nom = $result['nom'];
-				$email = $result['email'];
-				$datenaissance = $result['datenaissance'];
-				$emailparent = $result['emailparent'];
-				$telparent = $result['telparent'];
-				$nomparent = $result['nomparent'];
-				$id = $resultat['id'];
+		$prepared_query = $database->prepare("SELECT * FROM eleve");
+		if ($prepared_query->execute()){
+			$eleves = Array();
+			while($row = $prepared_query->fetch()){
+				$nom = $row['nom'];
+				$email = $row['email'];
+				$datenaissance = $row['datenaissance'];
+				$emailparent = $row['emailparent'];
+				$telparent = $row['telparent'];
+				$nomparent = $row['nomparent'];
+				$id = $row['id_eleve'];
 				
 				$eleve = new Eleve($nom,$email,$datenaissance,$emailparent,$telparent,$nomparent);
 				$eleve->setId($id);
 				
-				array_push($array,$eleve);
-				unset($eleve);
+				array_push($eleves,$eleve);
 			}
-			return $array;
+			return $eleves;
 		}
 		else return false;
 	}

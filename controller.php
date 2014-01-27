@@ -60,15 +60,10 @@ function put_eleve(){
 }
 
 function get_eleves(){
-	
-	$array=Eleve::findAll();
-	if(!$array)
-		return generate_404();
-	$serialize=Array();
-	foreach($array as  $eleve{
-		array_push($serialize,$eleve);
-	}
-	return json_encode($serialize);
+	$eleves=Eleve::findAll();
+
+	header("Content-Type: application/json");
+	return json_encode($eleves);
 }
 
 /*
@@ -169,7 +164,7 @@ function get_admin(){
 }
 
 function serve_client_app(){
-	return render('login.php'); 
+	return render('login.php');
 }
 
 ?>
