@@ -1,6 +1,8 @@
 <?php
 require_once(ROOT."/model/eleve.php");
 require_once(ROOT."/model/admin.php");
+require_once(ROOT."/model/document.php");
+require_once(ROOT."/model/promotion.php");
 
 function generate_403($type="json", $error="Forbidden"){
 	header("HTTP/1.1 403 Forbidden");
@@ -146,6 +148,13 @@ function put_promo(){
 }
 
 //function delete_promo(){} // TODO
+
+function get_promo_documents(){
+	$docs = Document::forPromo((integer)params("id"));
+
+	header("Content-Type: application/json");
+	return json_encode($docs);
+}
 
 function pong(){
 	return "pong";

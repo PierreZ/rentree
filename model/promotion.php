@@ -1,6 +1,6 @@
 <?php
 
-class Promotion{
+class Promotion implements JsonSerializable{
 	private $id_promotion;
 	private $nompromotion;
 
@@ -31,11 +31,11 @@ class Promotion{
 	}
 
 
-	function toJson(){
-		return json_encode(Array(
-			"id" => $this->getId();
-			"nompromotion" => $this->getNomPromotion();
-		));
+	function jsonSerialize(){
+		return Array(
+			"id" => $this->getId(),
+			"nompromotion" => $this->getNomPromotion()
+		);
 	}
 	
 	function patchFromJson($json){
@@ -43,7 +43,7 @@ class Promotion{
 		foreach($values as $key => $value){
 			switch($key){
 			case "id":
-				$this:>setId($value);
+				$this->setId($value);
 				break;
 			case "nompromotion":
 				$this->setNomPromotion($value);
@@ -58,11 +58,10 @@ class Promotion{
 	}
 
 	static function find($id=null){
-		
-		database = bdd::getInstance()->getInstancePDO();
+		$database = bdd::getInstance()->getInstancePDO();
 			
-		$query  = "SELECT * FROM promotion WHERE id_promotion = :id;"; 
-		$prepared_query =database->prepare($query);
+		$query  = "SELECT * FROM promotion WHERE id_promotion = :id;";
+		$prepared_query = $database->prepare($query);
 		$prepared_query->bindParam(':id', $id);
 	
 		if (($prepared_query->execute())&&($prepared_query->rowCount()>0)){

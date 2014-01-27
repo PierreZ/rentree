@@ -27,6 +27,8 @@ dispatch_post("/promo/", "post_promo");
 dispatch_put("/promo/:id", "put_promo");
 //dispatch_delete("/promo/:id", "delete_promo");
 
+dispatch("/promo/:id/documents", "get_promo_documents");
+
 //dispatch("/promos/", "get_promos");
 
 //dispatch_post("/session", "post_session");
