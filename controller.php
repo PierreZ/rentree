@@ -164,4 +164,8 @@ function get_admin(){
 	return json_encode($e);
 }
 
+function serve_client_app(){
+	return render('login.php'); 
+}
+
 ?>

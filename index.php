@@ -5,7 +5,7 @@ require_once("conf/config.php");
 require_once("lib/limonade.php");
 require_once("controller.php");
 
-//dispatch("/", "serve_client_app");
+dispatch("/", "serve_client_app");
 
 dispatch("/eleve/:id", "get_eleve");
 dispatch_post("/eleve/", "post_eleve");
