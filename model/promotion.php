@@ -74,7 +74,7 @@ class Promotion{
 		}else return false;	
 	}
 
-	static function insert(){
+	function insert(){
 		$database = bdd::getInstance()->getInstancePDO();
 		
 		$id_promotion=$this->getId();
@@ -90,7 +90,7 @@ class Promotion{
 		}else return false;	
 	}
 
-	static function update(){
+	function update(){
 		$database = bdd::getInstance()->getInstancePDO();
 		
 		$id_promotion=$this->getId();
@@ -105,7 +105,7 @@ class Promotion{
 		else return false;
 	}
 
-	static function delete(){
+	function delete(){
 		$database = bdd::getInstance()->getInstancePDO();
 
 		$id = $this->getId();

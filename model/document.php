@@ -94,7 +94,7 @@ class Document implements JsonSerializable{
 		}else return false;	
 	}
 
-	static function insert(){
+	function insert(){
 		$database = bdd::getInstance()->getInstancePDO();
 		
 		$id_document=$this->getId();
@@ -102,17 +102,17 @@ class Document implements JsonSerializable{
 		$nompromotion=$this->getNomPromotion();
 		$query  = "INSERT INTO document (id_document, fichier, id_promotion) VALUES (:id,:fichier,:id_promotion);";
 		$prepared_query = $database->prepare($query);
-	        $prepared_query->bindParam(':id_document', $id_document);
-	        $prepared_query->bindParam(':fichier', $fichier);
+		$prepared_query->bindParam(':id_document', $id_document);
+		$prepared_query->bindParam(':fichier', $fichier);
 		$prepared_query->bindParam(':nompromotion', $nompromotion);
 
 		if ($prepared_query->execute()){
 			$this->setId($database->lastinsertid());
 			return true;
-		}else return false;	
+		} else return false;	
 	}
 
-	static function update(){
+	function update(){
 		$database = bdd::getInstance()->getInstancePDO();
 		
 		$id_document=$this->getId();
@@ -121,15 +121,15 @@ class Document implements JsonSerializable{
 
 		$query  = "UPDATE document SET fichier=:fichier, nompromotion=:nompromotion WHERE id_document = :id_document;";
 		$prepared_query = $database->prepare($query);
-	        $prepared_query->bindParam(':id_document', $id_document);
-	        $prepared_query->bindParam(':fichier', $fichier);
+		$prepared_query->bindParam(':id_document', $id_document);
+		$prepared_query->bindParam(':fichier', $fichier);
 		$prepared_query->bindParam(':nompromotion', $nompromotion);
 		if ($prepared_query->execute())
 			return true;
 		else return false;
 	}
 
-	static function delete(){
+	function delete(){
 		$database = bdd::getInstance()->getInstancePDO();
 
 		$id = $this->getId();
