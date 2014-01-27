@@ -17,7 +17,7 @@ dispatch("/document/:id", "get_document");
 dispatch_post("/document/", "post_document");
 dispatch_put("/document/:id", "put_document");
 
-//dispatch("/document/:id.pdf", "download_document");
+dispatch("/document/:id.pdf", "download_document");
 
 //dispatch("/documents/", "get_documents");
 

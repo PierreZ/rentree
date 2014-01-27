@@ -89,6 +89,14 @@ function put_document(){
 	return $d;
 }
 
+function download_document(){
+	$d = Documents::find(params("id"));
+	if(!$d)
+		return generate_404();
+
+	return json_encode($d.getFichier());
+}
+
 function pong(){
 	return "pong";
 }
