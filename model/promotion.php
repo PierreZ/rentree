@@ -68,9 +68,9 @@ class Promotion{
 		if (($prepared_query->execute())&&($prepared_query->rowCount()>0)){
 			$resultat = $prepared_query->fetch(PDO::FETCH_ASSOC);
 			
-			$fichier=$resultat['nompromotion'];
-			$document=new Document($nompromotion);
-			$document->setId($id);
+			$promo=new Promotion($resultat['id_promotion']);
+			$prom->setNomPromotion($resultat['nompromotion']);
+			return $promo;
 		}else return false;	
 	}
 
