@@ -53,7 +53,7 @@ class Document implements JsonSerializable{
 		foreach($values as $key => $value){
 			switch($key){
 			case "id":
-				$this:>setId($value);
+				$this->setId($value);
 				break;
 			case "fichier":
 				$this->setFichier($value);
