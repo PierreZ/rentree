@@ -106,6 +106,8 @@ function put_document(){
 	return $d;
 }
 
+//function delete_document(){} // TODO
+
 function download_document(){
 	$d = Documents::find(params("id"));
 	if(!$d)
@@ -147,6 +149,8 @@ function put_promo(){
 		return generate_404();
 	return $d;
 }
+
+//function delete_promo(){} // TODO
 
 function pong(){
 	return "pong";
