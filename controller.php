@@ -3,7 +3,15 @@ require_once(ROOT."/model/eleve.php");
 require_once(ROOT."/model/admin.php");
 require_once(ROOT."/model/document.php");
 require_once(ROOT."/model/promotion.php");
+require_once(ROOT."/model/session.php");
 
+function generate_400($type="json", $error="Forbidden"){
+	header("HTTP/1.1 400 Bad Request");
+	if($type="json"){
+		header("Content-Type: application/json");
+		return json_encode(Array("error" => $error));
+	}
+}
 function generate_403($type="json", $error="Forbidden"){
 	header("HTTP/1.1 403 Forbidden");
 	if($type="json"){
@@ -174,6 +182,18 @@ function get_admin(){
 
 function serve_client_app(){
 	return render('login.php');
+}
+
+function post_session(){
+	if(!array_key_exists('email', $_POST) || !array_key_exists('password', $_POST))
+		return generate_400("json", "Missing email or password");
+	$sess = new Session($_POST['email'], $_POST['password']);
+
+	if($sess->logIn()){
+		header("Content-Type: application/json");
+		return json_encode($sess);
+	}
+	else return generate_403();
 }
 
 ?>

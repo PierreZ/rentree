@@ -31,7 +31,7 @@ dispatch("/promo/:id/documents", "get_promo_documents");
 
 //dispatch("/promos/", "get_promos");
 
-//dispatch_post("/session", "post_session");
+dispatch_post("/session", "post_session");
 //dispatch_delete("/session/:admin_id", "delete_session");
 
 dispatch("/admin/:id", "get_admin");
@@ -39,7 +39,6 @@ dispatch("/admin/:id", "get_admin");
 //dispatch_put("/admin/:id", "put_admin");
 //dispatch_delete("/admin/:id", "delete_admin");
 
-//dispatch_post("/admin/session", "login");
 //dispatch_delete("/admin/:id/session", "delete");
 
 
