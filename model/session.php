@@ -8,7 +8,7 @@ class Session implements JsonSerializable{
 	private $id_eleve;
 	private $key = "";
 
-	function __construct($email, $pw){
+	function __construct($email, $pw=""){
 		$this->email = $email;
 		$this->password = $pw;
 	}
@@ -41,7 +41,20 @@ class Session implements JsonSerializable{
 			return true;
 		}
 		else return false;
+	}
 
+	static function fromKey($key){
+		$db = bdd::getInstance()->getInstancePDO();
+
+		$q = $db->prepare("SELECT id_admin, email FROM admin WHERE session_key = :key");
+		$q->bindValue(':key', $key);
+		if(!$q->execute() || !($row = $q->fetch()) ) return null;
+		$sess = new Session($row[1]);
+		$sess->id_admin = $row[0];
+		$sess->is_admin = true;
+		$sess->key = $key;
+
+		return $sess;
 	}
 
 	function getId(){
