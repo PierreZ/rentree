@@ -107,30 +107,40 @@ function get_eleves(){
 */
 
 function get_document(){
-
-	$d = Documents::find(params("id"));
+	$d = Document::get((int)params("id"));
 	if(!$d)
 		return generate_404();
 
+	header("Content-Type: application/json");
 	return json_encode($d);
 }
 
 function post_document(){
+	if(!is_admin())
+		return generate_403();
 	
+	/// TODO il faut récupérer le fichier, c'est pas tout le JSON!
+	/*
 	$d->patchFromJson(file_get_contents("php://input"));
 	$d->insert($d);
 	if(!$d)
 		return generate_404();
 	return $d;
+	*/
 }
 
 function put_document(){
+	if(!is_admin())
+		return generate_403();
 
+	// TODO idem
+	/*
 	$d->patchFromJson(file_get_contents("php://input"));
 	$d->update(params("id"));
 	if(!$d)
 		return generate_404();
 	return $d;
+	*/
 }
 
 function delete_document(){
@@ -149,11 +159,15 @@ function delete_document(){
 }
 
 function download_document(){
-	$d = Documents::find(params("id"));
-	if(!$d)
+	$d = Document::get((int)params(0));
+
+	if(!$d || !file_exists($d->getFichier()))
 		return generate_404();
 
-	return json_encode($d.getFichier());
+	header("Content-Type: application/pdf");
+	ob_clean();
+	flush();
+	readfile($d->getFichier());
 }
 
 /*

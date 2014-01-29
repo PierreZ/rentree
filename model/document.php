@@ -153,6 +153,7 @@ class Document implements JsonSerializable{
 
 		if ($prepared_query->execute()){
 			$this->setId(null);
+			unlink($this->fichier);
 			return true;
 		}
 		else return false;
