@@ -87,7 +87,8 @@ class Eleve implements JsonSerializable{
 			"datenaissance" => $this->getDateNaissance(),
 			"emailparent" => $this->getEmailParent(),
 			"telparent" => $this->getTelParent(),
-			"nomparent" => $this->getNomParent()
+			"nomparent" => $this->getNomParent(),
+			"session_key" => hash("sha256", $this->getId() . SECRET)
 		);
 	}
 

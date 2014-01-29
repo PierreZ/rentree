@@ -35,8 +35,8 @@ function generate_404($type="json", $error="Not Found"){
 }
 
 function is_self($id){
-	if(array_key_exists('id_eleve', $_COOKIE) &&
-		$id == $_COOKIE['id_eleve'])
+	if(array_key_exists('id_eleve', $_COOKIE) && array_key_exists('session_key', $_COOKIE) &&
+		$id == $_COOKIE['id_eleve'] && hash('sha256', $id . SECRET) === $_COOKIE['session_key'])
 		return true;
 	return false;
 }
@@ -57,9 +57,8 @@ function is_admin(){
 */
 
 function get_eleve(){
-	/*if(!is_admin() && !is_self(params("id"))) /// TODO
+	if(!is_admin() && !is_self((int)params("id")))
 		return generate_403();
-    */
 
 	$e = Eleve::find((int)params("id"));
 	if(!$e)
@@ -77,6 +76,9 @@ function post_eleve(){
 }
 
 function put_eleve(){
+	if(!is_admin() && !is_self((int)params("id")))
+		return generate_403();
+
 	$e = Eleve::find((int)params("id"));
 
 	if(!$e)
