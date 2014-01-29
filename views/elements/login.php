@@ -2,9 +2,9 @@
 <html lang="fr">
     <head>
         <title>Documents de rentrée</title>
-        <link rel="stylesheet" href="mockup.css"/>
-        <script src="login.js"></script>
-        <script src="panes.js"></script>
+        <link rel="stylesheet" href="style/somestyle.css"/>
+        <script src="js/login.js"></script>
+        <script src="js/panes.js"></script>
         <script>window.onload = initLogin;</script>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     </head>

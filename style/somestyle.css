@@ -1,12 +1,12 @@
 @font-face {
   font-family: target-light;
-  src: url("target/TargetLight.ttf");
+  src: url("fonts/target/TargetLight.ttf");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: target-book;
-  src: url("target/TargetBooK.ttf");
+  src: url("fonts/target/TargetBooK.ttf");
   font-weight: normal;
   font-style: normal; }
 
@@ -53,13 +53,13 @@
 
 @font-face {
   font-family: target-light;
-  src: url("target/TargetLight.ttf");
+  src: url("fonts/target/TargetLight.ttf");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: target-book;
-  src: url("target/TargetBooK.ttf");
+  src: url("fonts/target/TargetBooK.ttf");
   font-weight: normal;
   font-style: normal; }
 
@@ -142,19 +142,19 @@ body.login {
 
 @font-face {
   font-family: titillium-bold;
-  src: url("titillium/Titillium-Bold.otf");
+  src: url("fonts/titillium/Titillium-Bold.otf");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: titillium-thin;
-  src: url("titillium/Titillium-Thin.otf");
+  src: url("fonts/titillium/Titillium-Thin.otf");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: titillium-regular;
-  src: url("titillium/Titillium-Regular.otf");
+  src: url("fonts/titillium/Titillium-Regular.otf");
   font-weight: normal;
   font-style: normal; }
 
