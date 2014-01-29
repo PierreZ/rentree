@@ -4,6 +4,7 @@ class Document implements JsonSerializable{
 	private $id_document;
 	private $fichier;
 	private $id_promotion;
+	private $nom;
 
 	function __construct($fichier, $id_promotion=0){
 		$this->setFichier($fichier);
@@ -37,12 +38,19 @@ class Document implements JsonSerializable{
 		$this->id_promotion = $id;
 	}
 
+	function getNom(){
+		return $this->nom;
+	}
+
+	function setId($nom){
+		$this->nom=$nom;
 
 	function jsonSerialize(){
 		return Array(
 			"id" => $this->getId(),
 			"fichier" => $this->getFichier(),
-			"id_promotion" => $this->getIdPromotion()
+			"id_promotion" => $this->getIdPromotion(),
+			"nom" => $this->getNom()
 		);
 	}
 	
@@ -59,6 +67,9 @@ class Document implements JsonSerializable{
 			case "id_promotion":
 				$this->setIdPromotion($value);
 				break;
+			case "nom":
+				$this->setNom($value);
+				break;
 			}
 		}
 	}
@@ -72,7 +83,7 @@ class Document implements JsonSerializable{
 	static function get($id=0){
 		$database = bdd::getInstance()->getInstancePDO();
 
-		$query = "SELECT fichier, id_promotion FROM document WHERE id_document = :id;";
+		$query = "SELECT fichier, id_promotion, nom FROM document WHERE id_document = :id;";
 		$prepared_query = $database->prepare($query);
 		$prepared_query->bindParam(':id', $id);
 		if ($prepared_query->execute()&&$prepared_query->rowCount()>0){
@@ -80,6 +91,7 @@ class Document implements JsonSerializable{
 
 			$document=new Document($resultat['fichier'],$resultat['id_promotion']);
 			$document->setId($id);
+			$document->setNom($resultat['nom']);
 			return $document;
 		}else return false;
 	}
@@ -88,10 +100,10 @@ class Document implements JsonSerializable{
 		$database = bdd::getInstance()->getInstancePDO();
 
 		if($promoid == 0){
-			$query = "SELECT id_document, fichier FROM document WHERE id_promotion IS NULL";
+			$query = "SELECT id_document, fichier, nom FROM document WHERE id_promotion IS NULL";
 			$prepared_query = $database->prepare($query);
 		} else {
-			$query = "SELECT id_document, fichier FROM document WHERE id_promotion = :id;";
+			$query = "SELECT id_document, fichier, nom FROM document WHERE id_promotion = :id;";
 			$prepared_query = $database->prepare($query);
 			$prepared_query->bindValue(':id', $promoid);
 		}
@@ -100,6 +112,7 @@ class Document implements JsonSerializable{
 			while($row = $prepared_query->fetch()){
 				$doc=new Document($row['fichier'], $promoid);
 				$doc->setId($row['id_document']);
+				$doc->setNom($row['nom']);
 				array_push($docs, $doc);
 			}
 			return $docs;
@@ -113,11 +126,13 @@ class Document implements JsonSerializable{
 		$id_document=$this->getId();
 		$fichier=$this->getFichier();
 		$nompromotion=$this->getNomPromotion();
-		$query  = "INSERT INTO document (id_document, fichier, id_promotion) VALUES (:id,:fichier,:id_promotion);";
+		$nom=$this->getNom();
+		$query  = "INSERT INTO document (id_document, fichier, id_promotion, nom) VALUES (:id,:fichier,:id_promotion,:nom);";
 		$prepared_query = $database->prepare($query);
 		$prepared_query->bindParam(':id_document', $id_document);
 		$prepared_query->bindParam(':fichier', $fichier);
 		$prepared_query->bindParam(':nompromotion', $nompromotion);
+		$prepared_query->bindParam(':nom', $nom);
 
 		if ($prepared_query->execute()){
 			$this->setId($database->lastinsertid());
@@ -131,12 +146,14 @@ class Document implements JsonSerializable{
 		$id_document=$this->getId();
 		$fichier=$this->getFichier();
 		$nompromotion=$this->getNomPromotion();
+		$nom=$this->getNom();
 
-		$query  = "UPDATE document SET fichier=:fichier, nompromotion=:nompromotion WHERE id_document = :id_document;";
+		$query  = "UPDATE document SET fichier=:fichier, nompromotion=:nompromotion, nom=:nom WHERE id_document = :id_document;";
 		$prepared_query = $database->prepare($query);
 		$prepared_query->bindParam(':id_document', $id_document);
 		$prepared_query->bindParam(':fichier', $fichier);
 		$prepared_query->bindParam(':nompromotion', $nompromotion);
+		$prepared_query->bindParam(':nom', $nom);
 		if ($prepared_query->execute())
 			return true;
 		else return false;

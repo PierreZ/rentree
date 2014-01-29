@@ -19,6 +19,7 @@ CREATE TABLE `document` (
 	`id_document` int NOT NULL auto_increment,
 	`fichier` varchar(256) NOT NULL,
 	`id_promotion` int REFERENCES promotion(id_promotion),
+	`nom` varchar(256) NOT NULL,
 	PRIMARY KEY (`id_document`)
 );
 
