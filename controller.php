@@ -1,4 +1,5 @@
 <?php
+require_once(ROOT."/model/JsonSerialize.php");
 require_once(ROOT."/model/eleve.php");
 require_once(ROOT."/model/admin.php");
 require_once(ROOT."/model/document.php");
@@ -254,7 +255,7 @@ function get_admin(){
 }
 
 function serve_client_app(){
-	return render('login.php');
+	return render('elements/login.php');
 }
 
 function post_session(){
