@@ -26,7 +26,7 @@ class Promotion implements JsonSerializable{
 		return $this->nompromotion;
 	}
 
-	function setNomPromotion($id){
+	function setNomPromotion($nompromotion){
 		$this->nompromotion=$nompromotion;
 	}
 
@@ -38,8 +38,7 @@ class Promotion implements JsonSerializable{
 		);
 	}
 	
-	function patchFromJson($json){
-		$values=json_decode($json);
+	function patch($values){
 		foreach($values as $key => $value){
 			switch($key){
 			case "id":
@@ -51,13 +50,17 @@ class Promotion implements JsonSerializable{
 			}
 		}
 	}
+
+	function patchFromJson($json){
+		$this->patch(json_decode($json));
+	}
 	static function fromJson($json){
 		$e=new Promotion();
 		$e->patchFromJson($json);
 		return $e;
 	}
 
-	static function find($id=null){
+	static function get($id=null){
 		$database = bdd::getInstance()->getInstancePDO();
 			
 		$query  = "SELECT * FROM promotion WHERE id_promotion = :id;";
@@ -67,8 +70,8 @@ class Promotion implements JsonSerializable{
 		if (($prepared_query->execute())&&($prepared_query->rowCount()>0)){
 			$resultat = $prepared_query->fetch(PDO::FETCH_ASSOC);
 			
-			$promo=new Promotion($resultat['id_promotion']);
-			$prom->setNomPromotion($resultat['nompromotion']);
+			$promo=new Promotion($resultat['nompromotion']);
+			$promo->setId($resultat['id_promotion']);
 			return $promo;
 		}else return false;	
 	}
@@ -78,9 +81,8 @@ class Promotion implements JsonSerializable{
 		
 		$id_promotion=$this->getId();
 		$nompromotion=$this->getNomPromotion();
-		$query  = "INSERT INTO promotion (id_promotion, id_promotion) VALUES (:id,:id_promotion);";
+		$query  = "INSERT INTO promotion (nompromotion) VALUES (:nompromotion);";
 		$prepared_query = $database->prepare($query);
-	    $prepared_query->bindParam(':id_promotion', $id_promotion);
 		$prepared_query->bindParam(':nompromotion', $nompromotion);
 
 		if ($prepared_query->execute()){
@@ -110,7 +112,7 @@ class Promotion implements JsonSerializable{
 		$id = $this->getId();
 		$query  = "DELETE FROM promotion WHERE id_promotion = :id_promotion;";
 
-		$prepared_query = $atabase->prepare($query);
+		$prepared_query = $database->prepare($query);
 		$prepared_query->bindParam(':id_promotion', $id);
 
 		if ($prepared_query->execute()){

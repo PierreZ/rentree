@@ -178,33 +178,57 @@ function download_document(){
 *
 */
 function get_promo(){
-
-	$d = Promotion::find(params("id"));
-	if(!$d)
+	$p = Promotion::get((int)params("id"));
+	if(!$p)
 		return generate_404();
 
-	return json_encode($d);
+	header("Content-Type: application/json");
+	return json_encode($p);
 }
 
 function post_promo(){
+	if(!is_admin())
+		return generate_403();
 	
-	$d->patchFromJson(file_get_contents("php://input"));
-	$d->insert($d);
-	if(!$d)
+	$p = Promotion::fromJson(file_get_contents("php://input"));
+	$p->insert($p);
+	if(!$p)
 		return generate_404();
-	return $d;
+
+	header("Content-Type: application/json");
+	return json_encode($p);
 }
 
 function put_promo(){
+	if(!is_admin())
+		return generate_403();
 
-	$d->patchFromJson(file_get_contents("php://input"));
-	$d->update(params("id"));
-	if(!$d)
+	$p = Promotion::get((int)params("id"));
+
+	$p->patch($GLOBALS["_PUT"]);
+	$p->update();
+	if(!$p)
 		return generate_404();
-	return $d;
+
+	header("Content-Type: application/json");
+	return json_encode($p);
 }
 
-//function delete_promo(){} // TODO
+function delete_promo(){
+	if(!is_admin())
+		return generate_403();
+
+	$p = Promotion::get((int)params("id"));
+	if(!$p)
+		return generate_404();
+	else {
+		if($p->delete())
+			return generate_204();
+		else
+			return generate_500();
+	}
+
+}
 
 function get_promo_documents(){
 	$docs = Document::forPromo((integer)params("id"));

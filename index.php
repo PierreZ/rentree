@@ -25,7 +25,7 @@ dispatch_delete("/document/:id", "delete_document");
 dispatch("/promo/:id", "get_promo");
 dispatch_post("/promo/", "post_promo");
 dispatch_put("/promo/:id", "put_promo");
-//dispatch_delete("/promo/:id", "delete_promo");
+dispatch_delete("/promo/:id", "delete_promo");
 
 dispatch("/promo/:id/documents", "get_promo_documents");
 
