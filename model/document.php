@@ -125,13 +125,13 @@ class Document implements JsonSerializable{
 		
 		$id_document=$this->getId();
 		$fichier=$this->getFichier();
-		$nompromotion=$this->getNomPromotion();
+		$id_promotion=$this->getIdPromotion();
 		$nom=$this->getNom();
 		$query  = "INSERT INTO document (id_document, fichier, id_promotion, nom) VALUES (:id,:fichier,:id_promotion,:nom);";
 		$prepared_query = $database->prepare($query);
 		$prepared_query->bindParam(':id_document', $id_document);
 		$prepared_query->bindParam(':fichier', $fichier);
-		$prepared_query->bindParam(':nompromotion', $nompromotion);
+		$prepared_query->bindParam(':id_promotion', $id_promotion);
 		$prepared_query->bindParam(':nom', $nom);
 
 		if ($prepared_query->execute()){
@@ -145,14 +145,14 @@ class Document implements JsonSerializable{
 		
 		$id_document=$this->getId();
 		$fichier=$this->getFichier();
-		$nompromotion=$this->getNomPromotion();
+		$id_promotion=$this->getIdPromotion();
 		$nom=$this->getNom();
 
-		$query  = "UPDATE document SET fichier=:fichier, nompromotion=:nompromotion, nom=:nom WHERE id_document = :id_document;";
+		$query  = "UPDATE document SET fichier=:fichier, id_promotion=:id_promotion, nom=:nom WHERE id_document = :id_document;";
 		$prepared_query = $database->prepare($query);
 		$prepared_query->bindParam(':id_document', $id_document);
 		$prepared_query->bindParam(':fichier', $fichier);
-		$prepared_query->bindParam(':nompromotion', $nompromotion);
+		$prepared_query->bindParam(':id_promotion', $id_promotion);
 		$prepared_query->bindParam(':nom', $nom);
 		if ($prepared_query->execute())
 			return true;
