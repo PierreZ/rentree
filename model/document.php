@@ -76,10 +76,11 @@ class Document implements JsonSerializable{
 		$prepared_query = $database->prepare($query);
 		$prepared_query->bindParam(':id', $id);
 		if ($prepared_query->execute()&&$prepared_query->rowCount()>0){
-			$resultat = $prepared_query->fetch(PDO::FETCH_ASSOC);
+			$resultat = $prepared_query->fetch();
 
 			$document=new Document($resultat['fichier'],$resultat['id_promotion']);
 			$document->setId($id);
+			return $document;
 		}else return false;
 	}
 
@@ -147,8 +148,8 @@ class Document implements JsonSerializable{
 		$id = $this->getId();
 		$query  = "DELETE FROM document WHERE id_document = :id_document;";
 
-		$prepared_query = $atabase->prepare($query);
-		$prepared_query->bindParam(':id_document', $id);
+		$prepared_query = $database->prepare($query);
+		$prepared_query->bindValue(':id_document', $id);
 
 		if ($prepared_query->execute()){
 			$this->setId(null);

@@ -5,13 +5,19 @@ require_once(ROOT."/model/document.php");
 require_once(ROOT."/model/promotion.php");
 require_once(ROOT."/model/session.php");
 
-function generate_400($type="json", $error="Forbidden"){
+function generate_204(){
+	header("HTTP/1.1 204 No Content");
+	return "";
+}
+
+function generate_400($type="json", $error="Bad Request"){
 	header("HTTP/1.1 400 Bad Request");
 	if($type="json"){
 		header("Content-Type: application/json");
 		return json_encode(Array("error" => $error));
 	}
 }
+
 function generate_403($type="json", $error="Forbidden"){
 	header("HTTP/1.1 403 Forbidden");
 	if($type="json"){
@@ -26,6 +32,20 @@ function generate_404($type="json", $error="Not Found"){
 		header("Content-Type: application/json");
 		return json_encode(Array("error" => $error));
 	}
+}
+
+function is_self($id){
+	if(array_key_exists('id_eleve', $_COOKIE) &&
+		$id == $_COOKIE['id_eleve'])
+		return true;
+	return false;
+}
+
+function is_admin(){
+	if(array_key_exists('session_key', $_COOKIE) &&
+		Session::fromKey($_COOKIE['session_key']))
+		return true;
+	return false;
 }
 
 /*
@@ -111,7 +131,20 @@ function put_document(){
 	return $d;
 }
 
-//function delete_document(){} // TODO
+function delete_document(){
+	if(!is_admin())
+		return generate_403();
+
+	$d = Document::get((int)params("id"));
+	if(!$d)
+		return generate_404();
+	else {
+		if($d->delete())
+			return generate_204();
+		else
+			return generate_500();
+	}
+}
 
 function download_document(){
 	$d = Documents::find(params("id"));

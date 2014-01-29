@@ -16,7 +16,7 @@ dispatch("/eleves/", "get_eleves");
 dispatch("/document/:id", "get_document");
 dispatch_post("/document/", "post_document");
 dispatch_put("/document/:id", "put_document");
-//dispatch_delete("/document/:id", "delete_document");
+dispatch_delete("/document/:id", "delete_document");
 
 dispatch("/document/:id.pdf", "download_document");
 
