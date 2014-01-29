@@ -60,7 +60,7 @@ class Session implements JsonSerializable{
 	}
 
 	function getId(){
-		return $this->is_admin? $this->id_admin : $this->id_eleve;
+		return $this->id;
 	}
 
 	function getKey(){
