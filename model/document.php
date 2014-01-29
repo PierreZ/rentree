@@ -42,8 +42,9 @@ class Document implements JsonSerializable{
 		return $this->nom;
 	}
 
-	function setId($nom){
+	function setNom($nom){
 		$this->nom=$nom;
+	}
 
 	function jsonSerialize(){
 		return Array(
