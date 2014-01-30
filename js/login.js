@@ -8,19 +8,30 @@ $(document).ready(
 		b.classList.add("loading");
 
 		document.activeElement.blur();
-		var URL = window.location.protocol + "//" + window.location.host+"/session"
-		var $email=$('#email').val(),
-			$paswd=$('#password').val();
+		var URL = window.location.protocol + "//" + window.location.host+"/session";
+        alert(URL);
+		var email=$('#email').val(),
+			paswd=$('#password').val();
+
+        //Verification que les champs ne sont pas vides
+        if (email.length < 1 || paswd.length < 1) {
+            var b = document.querySelector("button");
+            b.disabled = false;
+            b.classList.remove("loading");
+            return false;
+        };
+        // Début de la requête AJAX
 		jQuery.ajax({
 			type: 'POST', 
 			url: URL,
 			data: {
-				email: $email, 
-				password: $paswd
+				email: email, 
+				password: paswd
 			}, 
 			success: function(data, textStatus, jqXHR) {
 				alert(data);
-				window.setTimeout(function(){document.body.classList.add("fade");}, 2000, false);
+                if (data) {};
+				document.body.classList.add("fade");
 				window.setTimeout(function(){
 					document.body.classList.remove("login");
 					document.body.innerHTML = document.querySelector("template.panes").innerHTML;
@@ -33,7 +44,10 @@ $(document).ready(
 					},  3000, false);
 				},
 			error: function(jqXHR, textStatus, errorThrown) {
-
+            var b = document.querySelector("button");
+            b.disabled = false;
+            b.classList.remove("loading");
+            return false;
 			}
 		});
 
