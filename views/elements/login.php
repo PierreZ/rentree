@@ -3,6 +3,8 @@
     <head>
         <title>Documents de rentrée</title>
         <link rel="stylesheet" href="style/somestyle.css"/>
+	<script src="lib/jquery-1.11.0.min.js" type="text/javascript"></script>
+	<script src="lib/angular.min.js" type="text/javascript"></script>
         <script src="js/login.js"></script>
         <script src="js/panes.js"></script>
         <script>window.onload = initLogin;</script>
