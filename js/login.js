@@ -8,7 +8,7 @@ $(document).ready(
 		b.classList.add("loading");
 
 		document.activeElement.blur();
-		var URL = window.location.protocol + "//" + window.location.host+"/index.php?/session";
+		var URL = window.location.protocol + "//" + window.location.host+"/session";
 		var email=$('#email').val(),
 			paswd=$('#password').val();
 
