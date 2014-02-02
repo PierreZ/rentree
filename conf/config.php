@@ -10,5 +10,6 @@ const WWWROOT = "http://localhost/rentree/?";
 const PASS_ELEVE = "isen2015";
 
 // Sel de hachage des sessions élève
+// À changer lors de l'installation finale !
 const SECRET = "yD6-IRa1gDy021vxKV2Iq-4kwipmQpyAu9SSJ_d8zwa-_5UEGt682CJrnAjIKrkfs9VX8OUUJlglcNKn_mtbKglFRWMGnPI56cqgQ8fV";
 ?>
