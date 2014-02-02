@@ -1,11 +1,11 @@
 <?php
-//Please fill the information below
 const DSN     = 'mysql:host=localhost;dbname=rentree';
 const USER    = "root";
 const PASSWD  = "rentree";
 const ROOT    = "/srv/http/rentree/";
 const WWWROOT = "http://localhost/rentree/?";
-const DOCROOT = "docs/"; // relative to ROOT and WWWROOT
+const DOCROOT = "docs/"; // relatif à ROOT
+// Attention, DOCROOT doit être accessible en écriture par l'utilisateur ou le groupe sous lequel tourne PHP !
 
 // Mot de passe pour les élèves
 const PASS_ELEVE = "isen2015";
