@@ -55,8 +55,7 @@ class Document implements JsonSerializable{
 		);
 	}
 	
-	function patchFromJson($json){
-		$values=json_decode($json);
+	function patch($values){
 		foreach($values as $key => $value){
 			switch($key){
 			case "id":
@@ -73,6 +72,11 @@ class Document implements JsonSerializable{
 				break;
 			}
 		}
+	}
+
+	function patchFromJson($json){
+		$values=json_decode($json);
+		$this->patch($values);
 	}
 	static function fromJson($json){
 		$e=new Document();
@@ -128,7 +132,7 @@ class Document implements JsonSerializable{
 		$fichier=$this->getFichier();
 		$id_promotion=$this->getIdPromotion();
 		$nom=$this->getNom();
-		$query  = "INSERT INTO document (id_document, fichier, id_promotion, nom) VALUES (:id,:fichier,:id_promotion,:nom);";
+		$query  = "INSERT INTO document (id_document, fichier, id_promotion, nom) VALUES (:id_document,:fichier,:id_promotion,:nom);";
 		$prepared_query = $database->prepare($query);
 		$prepared_query->bindParam(':id_document', $id_document);
 		$prepared_query->bindParam(':fichier', $fichier);

@@ -35,6 +35,14 @@ function generate_404($type="json", $error="Not Found"){
 	}
 }
 
+function generate_500($type="json", $error="Internal Server Error"){
+	header("HTTP/1.1 500 Internal Server Error");
+	if($type="json"){
+		header("Content-Type: application/json");
+		return json_encode(Array("error" => $error));
+	}
+}
+
 function is_self($id){
 	if(array_key_exists('id_eleve', $_COOKIE) && array_key_exists('session_key', $_COOKIE) &&
 		$id == $_COOKIE['id_eleve'] && hash('sha256', $id . SECRET) === $_COOKIE['session_key'])
@@ -120,28 +128,34 @@ function post_document(){
 	if(!is_admin())
 		return generate_403();
 	
-	/// TODO il faut récupérer le fichier, c'est pas tout le JSON!
-	/*
-	$d->patchFromJson(file_get_contents("php://input"));
-	$d->insert($d);
-	if(!$d)
-		return generate_404();
-	return $d;
-	*/
+	if(!array_key_exists('doc', $_FILES))
+		return generate_400();
+
+	$file = $_FILES['doc'];
+	$dest = ROOT . DOCROOT . $file['name'];
+	if(!move_uploaded_file($file['tmp_name'], $dest))
+		return generate_500();
+
+	$d = new Document($file['name']);
+	$d->setNom($file['name']);
+	$d->insert();
+	header("Content-Type: application/json");
+	return json_encode($d);
 }
 
 function put_document(){
 	if(!is_admin())
 		return generate_403();
 
-	// TODO idem
-	/*
-	$d->patchFromJson(file_get_contents("php://input"));
-	$d->update(params("id"));
+	$d = Document::get((int)params("id"));
 	if(!$d)
 		return generate_404();
-	return $d;
-	*/
+
+	$d->patch($GLOBALS["_PUT"]);
+	$d->update();
+
+	header("Content-Type: application/json");
+	return json_encode($d);
 }
 
 function delete_document(){
@@ -162,13 +176,13 @@ function delete_document(){
 function download_document(){
 	$d = Document::get((int)params(0));
 
-	if(!$d || !file_exists($d->getFichier()))
+	if(!$d || !file_exists(ROOT . DOCROOT . $d->getFichier()))
 		return generate_404();
 
 	header("Content-Type: application/pdf");
 	ob_clean();
 	flush();
-	readfile($d->getFichier());
+	readfile(ROOT . DOCROOT . $d->getFichier());
 }
 
 /*

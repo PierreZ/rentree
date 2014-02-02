@@ -5,6 +5,7 @@ const USER    = "root";
 const PASSWD  = "rentree";
 const ROOT    = "/srv/http/rentree/";
 const WWWROOT = "http://localhost/rentree/?";
+const DOCROOT = "docs/"; // relative to ROOT and WWWROOT
 
 // Mot de passe pour les élèves
 const PASS_ELEVE = "isen2015";
