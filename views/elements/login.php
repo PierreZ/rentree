@@ -21,6 +21,10 @@
             <input type="password" name="password" id="password"/>
             <button><div class="label">Connexion</div><div class="spinner"></div></button>
         </form>
-    </body>
+
+	<?php
+	require_once('views/elements/user.php');
+	?>    
+</body>
 
 </html>
