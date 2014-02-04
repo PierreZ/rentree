@@ -8,7 +8,7 @@ $(document).ready(
 		b.classList.add("loading");
 
 		document.activeElement.blur();
-		var URL = window.location.protocol + "//" + window.location.host+"/session";
+		var URL = window.location.protocol + "//" + window.location.host+"?/session";
 		var email=$('#email').val(),
 			paswd=$('#password').val();
 
@@ -26,36 +26,36 @@ $(document).ready(
 			data: {
 				email: email, 
 				password: paswd
-			}, 
-			success: function(data, textStatus, jqXHR) {
-				alert(data);
-                if (!data.id) {
+			},
+			statusCode: {
+				403: function() {
+					var b = document.querySelector("button");
+					b.disabled = false;
+					b.classList.remove("loading");
+					return false;
+				}
+			},
+			success: function(data) {
+				// Ajout des info de login dans les cookies
+				document.cookie = "session_key=" + data.key;
+				if(!data.is_admin)
+				document.cookie = "id_eleve=" + data.id;
 
-                    // Ajout des info de login dans les cookies
-                    document.cookie = "session_key=" + data.key;
-                    if(!data.is_admin)
-                        document.cookie = "id_eleve=" + data.id;
-
-                    // changement des classes pour le CSS
-                    document.body.classList.add("fade");
-                    window.setTimeout(function(){
-                        document.body.classList.remove("login");
-                        document.body.innerHTML = document.querySelector("template.panes").innerHTML;
-                        document.body.classList.add("step-1");
-                        document.body.classList.add("panes");
-                        window.setTimeout(function(){
-                            document.body.classList.remove("fade");
-                            }, 100, false);
-                        initPanes();
-                        },  3000, false);
-                    };
-				},
-			error: function(jqXHR, textStatus, errorThrown) {
-            var b = document.querySelector("button");
-            b.disabled = false;
-            b.classList.remove("loading");
-            return false;
-			}
+				// changement des classes pour le CSS
+				document.body.classList.add("fade");
+				window.setTimeout(function(){
+						document.body.classList.remove("login");
+						document.body.innerHTML = document.querySelector("template.panes").innerHTML;
+						document.body.classList.add("step-1");
+						document.body.classList.add("panes");
+						window.setTimeout(function(){
+							document.body.classList.remove("fade");
+							}, 100, false);
+						initPanes();
+						},  3000, false);
+				}
+				
+			
 		});
 
 		// this is where we load the next page
