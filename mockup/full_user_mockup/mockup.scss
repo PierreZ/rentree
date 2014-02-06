@@ -234,6 +234,41 @@ body.panes {
             }
         }
     }
+    .promos {
+        flex: 0 0 70%;
+        & > * {
+            transition: opacity .5s;
+        }
+        ul {
+            font-family: titillium-thin;
+            margin: 2em 0;
+            list-style: none;
+            font-size: 1.6em;
+            background: 2px solid rgba(0,0,0,0);
+            li {
+                padding: 1em 2em;
+                border: 2px solid rgba(0,0,0,0);
+                border-left: none; border-right: none;
+                margin-top: -2px;
+                cursor: pointer;
+                position: relative;
+                &.selected::after, &:hover::after {
+                    content: ">";
+                    position: absolute;
+                    line-height: 0;
+                    top:50%;
+                    right: 1em;
+                }
+                &.selected {
+                    border-color: rgba(0,0,0,0.2);
+                    background: #ddd;
+                }
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+    }
     .document-viewer {
         flex: 0 0 calc(100% - 30em);
         background: url("pdf.js.png") top center, black;
@@ -247,6 +282,10 @@ body.panes.step-1 {
         max-width: 100%;
     }
     .documents {
+        max-width: 0%;
+        padding: 0;
+    }
+    .promos {
         max-width: 0%;
         padding: 0;
     }
@@ -276,6 +315,39 @@ body.panes.step-2 {
             }
         }
     }
+    .promos {
+        max-width: 100%;
+    }
+    .documents {
+        max-width: 0%;
+        padding: 0;
+    }
+    .document-viewer {
+        max-width: 0%;
+        padding: 0;
+    }
+}
+body.panes.step-3 {
+    .bienvenue {
+        opacity: 0;
+        margin-left: -70%;
+    }
+    .contact {
+        opacity: 0;
+        margin-left: -30%;
+    }
+    .promos {
+        opacity: 0.4;
+        background-color: #eee;
+        max-width: 30%;
+        &.active,
+        &:hover {
+            opacity: 1;
+            button {
+                opacity: 1;
+            }
+        }
+    }
     .documents {
         max-width: 100%;
     }
@@ -285,12 +357,15 @@ body.panes.step-2 {
     }
 }
 
-body.panes.step-3 {
+body.panes.step-4 {
     .bienvenue {
         opacity: 0;
         margin-left: -70%;
     }
     .contact {
+    }
+    .promos {
+        margin-left: -30%;
     }
     .documents {
         //padding-left: 50%;
@@ -360,5 +435,50 @@ form {
     button {
         align-self: flex-end;
         width: auto;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    html{
+        background: none ;
+    }
+    body.panes.step-1 {
+        .bienvenue {
+            flex: 0 1 100%;
+        }
+        .contact {
+            flex: 0 1 100%;
+        }
+    }
+    body.panes.step-2 {
+        .contact{
+            margin-left: -33%; 
+        }
+        .promos{
+            flex: 0 1 100%;
+        }
+
+    }
+    body.panes.step-3 {
+        .promos{
+            margin-left: -33%; 
+        }
+        .documents{
+            flex: 0 1 100%;
+        }
+
+    }
+    body.panes.step-4 {
+
+        .promos{
+            margin-left: -60%;
+        }
+        .contact{
+            margin-left: -90%;
+        }
+
+        .document-viewer{
+            flex: 0 1 100%;
+        }
     }
 }

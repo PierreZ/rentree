@@ -28,6 +28,18 @@ function initPanes(){
                 var selected = document.querySelector(".documents li.selected");
                 if(selected) selected.classList.remove("selected");
             }, false);
+    var promos = document.querySelectorAll(".promos li");
+    for(var i = 0; i < promos.length; i++){
+        promos[i].addEventListener("click",
+                function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var selected = document.querySelector(".promos li.selected");
+                    if(selected) selected.classList.remove("selected");
+                    this.classList.add("selected");
+                    document.body.className = "panes step-3";
+                });
+    }
     var documents = document.querySelectorAll(".documents li");
     for(var i = 0; i < documents.length; i++){
         documents[i].addEventListener("click",
@@ -37,7 +49,7 @@ function initPanes(){
                     var selected = document.querySelector(".documents li.selected");
                     if(selected) selected.classList.remove("selected");
                     this.classList.add("selected");
-                    document.body.className = "panes step-3";
+                    document.body.className = "panes step-4";
                 });
     }
 }
