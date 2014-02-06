@@ -40,6 +40,7 @@ $(document).ready(
 				document.cookie = "session_key=" + data.key;
 				if(!data.is_admin)
 				document.cookie = "id_eleve=" + data.id;
+				var eleve_id = data.id;
 
 				// changement des classes pour le CSS
 				document.body.classList.add("fade");
