@@ -1,0 +1,38 @@
+@font-face {
+  font-family: target-light;
+  src: url("target/TargetLight.ttf");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: target-book;
+  src: url("target/TargetBooK.ttf");
+  font-weight: normal;
+  font-style: normal; }
+
+.logo-isen {
+  display: inline-block;
+  font-family: target-light;
+  color: #b82a28;
+  padding: 0 0.3em;
+  text-align: left; }
+  .logo-isen h1 {
+    display: inline-block;
+    font-family: target-book;
+    font-size: 2.4em;
+    line-height: 0;
+    font-weight: normal;
+    text-transform: uppercase;
+    width: 2.5em;
+    text-align: right; }
+  .logo-isen h2 {
+    display: inline-block;
+    font-family: target-light;
+    font-size: 1em;
+    line-height: 1em;
+    font-weight: normal;
+    max-width: 6em;
+    margin-left: .3em;
+    padding-left: .5em;
+    border-left: 0.06em solid #b82a28;
+    text-transform: lowercase; }

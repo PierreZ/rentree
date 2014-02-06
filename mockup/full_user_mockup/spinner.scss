@@ -1,0 +1,46 @@
+@mixin spinner(
+    $color: black,
+    $opacity: 0.3,
+    $size: 1.6em,
+    $thickness: 0.3em,
+    $time: .6s
+){
+    min-width: $size;
+    min-height: $size;
+
+    content: "";
+    display: block;
+    position: relative;
+    border: none;
+    width: $size;
+    height: $size;
+    border-radius: 10000px;
+    overflow: hidden;
+    opacity: $opacity;
+    &:before{
+        content: "";
+        display: block;
+        border: $color $thickness solid;
+        border-radius: 10000px;
+        border-right-color: fade-out($color, 1);
+        border-bottom-color: fade-out($color, 1);
+        width: $size - 2*$thickness;
+        height: $size - 2*$thickness;
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: spinner-spin linear $time infinite;
+        -webkit-animation: spinner-spin linear $time infinite;
+    }
+}
+
+@keyframes spinner-spin{
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+}
+
+@-webkit-keyframes spinner-spin{
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(-360deg); }
+}
+

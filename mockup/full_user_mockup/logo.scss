@@ -1,0 +1,46 @@
+$rouge-isen: #b82a28;
+
+@font-face {
+    font-family: target-light;
+    src: url('target/TargetLight.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: target-book;
+    src: url('target/TargetBooK.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.logo-isen {
+    display: inline-block;
+    font-family: target-light;
+    color: $rouge-isen;
+    padding: 0 0.3em;
+    text-align: left;
+    h1 {
+        display: inline-block;
+        font-family: target-book;
+        font-size: 2.4em;
+        line-height: 0;
+        font-weight: normal;
+        text-transform: uppercase;
+        width: (6em / 2.4);
+        text-align: right;
+    }
+
+    h2 {
+        display: inline-block;
+        font-family: target-light;
+        font-size: 1em;
+        line-height: 1em;
+        font-weight: normal;
+        max-width: 6em;
+        margin-left: .3em;
+        padding-left: .5em;
+        border-left: .06em solid $rouge-isen;
+        text-transform: lowercase;
+    }
+}
