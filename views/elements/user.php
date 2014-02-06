@@ -19,7 +19,8 @@
             <input type="text" name="ddn" id="ddn"/>
 
             <h3>Vos parents :</h3>
-
+            <label for="nom">Nom parent :</label>
+            <input type="text" name="nom" id="nom-parents"/>
             <label for="email-parents">Adresse E-mail :</label>
             <input type="email" name="email-parents" id="email-parents"/>
             <label for="tel-parents">Téléphone mobile :</label>
