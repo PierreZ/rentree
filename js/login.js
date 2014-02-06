@@ -1,6 +1,10 @@
 $(document).ready(
 	function() {
+		
+		// Appel de initLogin 
 		initLogin();
+
+		// Fonction permettant le login et la création de la session
 		function login(e){
 		e.preventDefault();
 		var b = document.querySelector("button");

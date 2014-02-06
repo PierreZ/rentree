@@ -1,3 +1,4 @@
+//Fonction submit des infos des étudiants
 function submit(e){
     e.preventDefault();
 
@@ -25,6 +26,8 @@ function submit(e){
     b.classList.add("loading");
 
     document.activeElement.blur();
+
+    //Requête AJAX pour mettre à jour les infos
     jQuery.ajax({
         type: 'POST', 
         url: URL,
@@ -39,7 +42,8 @@ function submit(e){
         },
         statusCode: {
             403: function() {
-                //TODO
+                b.querySelector(".label").innerHTML="Envoyer";
+                b.disabled = false;
             }
         },
         success: function(data) {
@@ -57,6 +61,7 @@ function submit(e){
     });
 }
 
+//initialisation des panneaux
 function initPanes(){
     var b = document.querySelector("button");
     b.disabled = false;
