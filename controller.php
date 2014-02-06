@@ -185,6 +185,15 @@ function download_document(){
 	readfile(ROOT . DOCROOT . $d->getFichier());
 }
 
+function get_documents(){
+	$d = Document::getall();
+	if(!$d)
+		return generate_404();
+
+	header("Content-Type: application/json");
+	return json_encode($d);
+}
+
 /*
 *
 * -------------------------------------
