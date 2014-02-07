@@ -10,7 +10,7 @@
     <script src="js/controller.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
-<body class="login">
+<body class="login" ng-controller="RentreeCtrl">
     <div class="logo-isen" style="font-size: 2Opx">
         <h1>ISEN</h1>
         <h2>documents de rentrée</h2>
