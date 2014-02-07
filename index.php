@@ -29,7 +29,7 @@ dispatch_delete("/promo/:id", "delete_promo");
 
 dispatch("/promo/:id/documents", "get_promo_documents");
 
-//dispatch("/promos/", "get_promos");
+dispatch("/promos/", "get_promos");
 
 dispatch_post("/session", "post_session");
 //dispatch_delete("/session/:admin_id", "delete_session");

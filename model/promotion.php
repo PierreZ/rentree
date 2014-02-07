@@ -76,6 +76,20 @@ class Promotion implements JsonSerializable{
 		}else return false;	
 	}
 
+	static function getall(){
+		$database = bdd::getInstance()->getInstancePDO();
+		$query  = "SELECT * FROM promotion";
+		if ($prepared_query->execute()&&$prepared_query->rowCount()>0){
+			$promos = Array();
+			while($row = $prepared_query->fetch()){
+				$promo=new Promotion($row['nompromotion']);
+				$promo->setId($row['id_promotion']);
+				array_push($promos, $promo);
+			}
+		}
+		return $promos;
+	}
+
 	function insert(){
 		$database = bdd::getInstance()->getInstancePDO();
 		

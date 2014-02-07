@@ -210,6 +210,16 @@ function get_promo(){
 	return json_encode($p);
 }
 
+function get_promos(){
+	$p = Promotion::getall();
+	if(!$p)
+		return generate_404();
+
+	header("Content-Type: application/json");
+	return json_encode($p);
+}
+}
+
 function post_promo(){
 	if(!is_admin())
 		return generate_403();
