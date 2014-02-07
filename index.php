@@ -20,7 +20,7 @@ dispatch_post("/document/", "post_document");
 dispatch_put("/document/:id", "put_document");
 dispatch_delete("/document/:id", "delete_document");
 
-//dispatch("/documents/", "get_documents");
+dispatch("/documents/", "get_documents");
 
 dispatch("/promo/:id", "get_promo");
 dispatch_post("/promo/", "post_promo");
