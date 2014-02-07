@@ -12,20 +12,20 @@
             <h3>Vous :</h3>
 
             <label for="nom">Nom :</label>
-            <input type="text" name="nom" id="nom"/>
+            <input type="text" name="nom" id="nom" ng-model="eleve.nom"/>
             <label for="email">Adresse E-mail :</label>
-            <input type="email" name="email" id="email"/>
+            <input type="email" name="email" id="email" ng-model="eleve.email"/>
             <label for="ddn">Date de naissance :</label>
-            <input type="text" name="ddn" id="ddn"/>
+            <input type="text" name="ddn" id="ddn" ng-model="eleve.datenaissance"/>
 
             <h3>Vos parents :</h3>
             <label for="nom">Nom parent :</label>
-            <input type="text" name="nom" id="nom-parents"/>
+            <input type="text" name="nom" id="nom-parents" ng-model="eleve.nomparent"/>
             <label for="email-parents">Adresse E-mail :</label>
-            <input type="email" name="email-parents" id="email-parents"/>
+            <input type="email" name="email-parents" id="email-parents" ng-model="eleve.emailparent"/>
             <label for="tel-parents">Téléphone mobile :</label>
-            <input type="text" name="tel-parents" id="tel-parents"/>
-            <button><div class="label">Envoyer</div><div class="spinner"></div><div class="success-label">Merci !</button>
+            <input type="text" name="tel-parents" id="tel-parents" ng-model="eleve.telparent"/>
+            <button ng-click="submit()"><div class="label">Envoyer</div><div class="spinner"></div><div class="success-label">Merci !</button>
         </form>
     </div>
     <div class="promos">

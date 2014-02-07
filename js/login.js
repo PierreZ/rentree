@@ -58,6 +58,10 @@ $(document).ready(
 							}, 100, false);
 						initPanes();
 						},  3000, false);
+						// Initialisation de la partie Angular
+					    var scope = angular.$('body').scope();
+		    			scope.init();
+				        })
 				}
 				
 			

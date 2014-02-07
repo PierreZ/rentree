@@ -1,15 +1,17 @@
 <!doctype html>
+<!--tout attribut commencant par ng-* est une balise spéciale pour AngularJS -->
 <html lang="fr" ng-app>
 <head>
     <title>Documents de rentrée</title>
     <link rel="stylesheet" href="style/somestyle.css"/>
     <script src="lib/jquery-1.11.0.min.js" type="text/javascript"></script>
     <script src="lib/angular.min.js" type="text/javascript"></script>
+    <script src="js/controller.js"></script>
     <script src="js/login.js"></script>
     <script src="js/panes.js"></script>
-    <script src="js/controller.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
+<!--Définition du controller-->
 <body class="login" ng-controller="RentreeCtrl">
     <div class="logo-isen" style="font-size: 2Opx">
         <h1>ISEN</h1>
