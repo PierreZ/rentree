@@ -51,7 +51,7 @@ $(document).ready(
 				window.setTimeout(function(){
 						document.body.classList.remove("login");
 						document.body.innerHTML = document.querySelector("template.panes").innerHTML;
-						document.body.classList.add("step-1");
+						document.body.classList.add("step-0");
 						document.body.classList.add("panes");
 						window.setTimeout(function(){
 							document.body.classList.remove("fade");

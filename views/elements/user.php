@@ -1,34 +1,35 @@
-<template class="panes step-1">
-    <div class="bienvenue">
-        <div>
-            <h1>Bienvenue à l'ISEN.</h1>
-            <p>Avant de visionner les documents de rentrée, veuillez entrer vos informations de contact.</p>
+<template class="panes step-0">
+        <div class="bienvenue">
+            <div>
+                <h1>Bienvenue à l'ISEN.</h1>
+                <p>Avant de visionner les documents de rentrée, veuillez entrer vos informations de contact.</p>
+                <button class="next">OK</button>
+            </div>
         </div>
-    </div>
-    <div class="contact">
-        <form>
-            <h2>Informations de contact :</h2>
+        <div class="contact">
+            <form>
+                <h2>Informations de contact :</h2>
 
-            <h3>Vous :</h3>
+                <h3>Vous :</h3>
 
-            <label for="nom">Nom :</label>
-            <input type="text" name="nom" id="nom" ng-model="eleve.nom"/>
-            <label for="email">Adresse E-mail :</label>
-            <input type="email" name="email" id="email" ng-model="eleve.email"/>
-            <label for="ddn">Date de naissance :</label>
-            <input type="text" name="ddn" id="ddn" ng-model="eleve.datenaissance"/>
+                <label for="nom">Nom :</label>
+                <input type="text" name="nom" id="nom"/>
+                <label for="email">Adresse E-mail :</label>
+                <input type="email" name="email" id="email"/>
+                <label for="ddn">Date de naissance :</label>
+                <input type="text" name="ddn" id="ddn"/>
 
-            <h3>Vos parents :</h3>
-            <label for="nom">Nom parent :</label>
-            <input type="text" name="nom" id="nom-parents" ng-model="eleve.nomparent"/>
-            <label for="email-parents">Adresse E-mail :</label>
-            <input type="email" name="email-parents" id="email-parents" ng-model="eleve.emailparent"/>
-            <label for="tel-parents">Téléphone mobile :</label>
-            <input type="text" name="tel-parents" id="tel-parents" ng-model="eleve.telparent"/>
-            <button ng-click="submit()"><div class="label">Envoyer</div><div class="spinner"></div><div class="success-label">Merci !</button>
-        </form>
-    </div>
+                <h3>Vos parents :</h3>
+
+                <label for="email-parents">Adresse E-mail :</label>
+                <input type="email" name="email-parents" id="email-parents"/>
+                <label for="tel-parents">Téléphone mobile :</label>
+                <input type="text" name="tel-parents" id="tel-parents"/>
+                <button><div class="label">Envoyer</div><div class="spinner"></div><div class="success-label">Merci !</button>
+            </form>
+        </div>
     <div class="promos">
+        <button class="back">Modifier mes informations</button>
         <h1>Sélectionner votre promotion</h1>
         <ul>
             <!--ng-click permet d'appeler une fonction contenu dans le controller. Les doubles accolades permettent de préciser à Angular qu'il faut interpréter le code-->
@@ -38,6 +39,7 @@
     </div>
 
     <div class="documents">
+        <button class="back">Changer de promotion</button>
         <h1>Sélectionner vos documents</h1>
         <ul>
             <!--ng-if permet de faire du test. Si la condition est vraie, alors l'élément est affiché -->

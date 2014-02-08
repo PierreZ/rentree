@@ -48,21 +48,21 @@ body.login {
 
 @font-face {
     font-family: titillium-bold;
-    src: url("fonts/titillium/Titillium-Bold.otf");
+    src: url("titillium/Titillium-Bold.otf");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: titillium-thin;
-    src: url("fonts/titillium/Titillium-Thin.otf");
+    src: url("titillium/Titillium-Thin.otf");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: titillium-regular;
-    src: url("fonts/titillium/Titillium-Regular.otf");
+    src: url("titillium/Titillium-Regular.otf");
     font-weight: normal;
     font-style: normal;
 }
@@ -134,9 +134,16 @@ body.panes {
     display: flex;
     align-items: stretch;
     align-content: stretch;
+    h1 {
+        margin: 1em;
+        transition: opacity .5s;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
     & > div {
         overflow: auto;
-        transition-property: opacity, padding, margin-left, max-width, background-color, color, flex;
+        transition-property: opacity, padding, margin-left, max-width, min-width, background-color, color, flex;
         transition-duration: .5s;
         transition-timing-function: cubic-bezier(0, 0, .5, 1);
         opacity: 1;
@@ -157,16 +164,19 @@ body.panes {
             flex: 1 auto;
             margin: 3em;
             h1 {
+                margin: 0;
                 font-family: titillium-thin;
                 font-size: 5em;
                 color: $rouge-isen;
                 display: inline-block;
+                white-space: normal;
             }
             p {
                 font-size: 2em;
                 display: inline-block;
             }
         }
+        .next { display: none; }
     }
     .contact {
         flex: 0 0 30%;
@@ -234,11 +244,47 @@ body.panes {
             }
         }
     }
+    .promos {
+        flex: 0 0 70%;
+        & > * {
+            transition: opacity .5s;
+        }
+        ul {
+            font-family: titillium-thin;
+            margin: 2em 0;
+            list-style: none;
+            font-size: 1.6em;
+            background: 2px solid rgba(0,0,0,0);
+            li {
+                padding: 1em 2em;
+                border: 2px solid rgba(0,0,0,0);
+                border-left: none; border-right: none;
+                margin-top: -2px;
+                cursor: pointer;
+                position: relative;
+                &.selected::after, &:hover::after {
+                    content: ">";
+                    position: absolute;
+                    line-height: 0;
+                    top:50%;
+                    right: 1em;
+                }
+                &.selected {
+                    border-color: rgba(0,0,0,0.2);
+                    background: #ddd;
+                }
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+    }
     .document-viewer {
         flex: 0 0 calc(100% - 30em);
         background: url("pdf.js.png") top center, black;
     }
 }
+body.panes.step-0,
 body.panes.step-1 {
     .bienvenue {
         max-width: 100%;
@@ -247,6 +293,10 @@ body.panes.step-1 {
         max-width: 100%;
     }
     .documents {
+        max-width: 0%;
+        padding: 0;
+    }
+    .promos {
         max-width: 0%;
         padding: 0;
     }
@@ -276,6 +326,43 @@ body.panes.step-2 {
             }
         }
     }
+    .promos {
+        max-width: 100%;
+    }
+    .documents {
+        max-width: 0%;
+        padding: 0;
+    }
+    .document-viewer {
+        max-width: 0%;
+        padding: 0;
+    }
+}
+body.panes.step-3 {
+    .bienvenue {
+        opacity: 0;
+        margin-left: -70%;
+    }
+    .contact {
+        opacity: 0;
+        margin-left: -30%;
+    }
+    .promos {
+        opacity: 0.4;
+        background-color: #eee;
+        max-width: 30%;
+        .back { opacity: 1; }
+        &.active,
+        &:hover {
+            opacity: 1;
+            button {
+                opacity: 1;
+            }
+        }
+        h1 {
+            opacity: 0;
+        }
+    }
     .documents {
         max-width: 100%;
     }
@@ -285,12 +372,15 @@ body.panes.step-2 {
     }
 }
 
-body.panes.step-3 {
+body.panes.step-4 {
     .bienvenue {
         opacity: 0;
         margin-left: -70%;
     }
     .contact {
+    }
+    .promos {
+        margin-left: -30%;
     }
     .documents {
         //padding-left: 50%;
@@ -298,7 +388,11 @@ body.panes.step-3 {
         //color: #eee;
         color: #666;
         flex: 0 0 30em;
+        & > .back { opacity: 1; }
         & > * {
+            opacity: 0.2;
+        }
+        & > h1 {
             opacity: 0;
         }
         & > ul {
@@ -330,6 +424,31 @@ body.panes.step-3 {
     }
 }
 
+input, button {
+    flex: 1 1 auto;
+    margin-bottom: 1.5em;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    background: white;
+    font-size: 1em;
+    padding: 0.5em 0.8em;
+    border-radius: 0.5em;
+    border: 1px rgba(0,0,0,0.2) solid;
+    &:hover {
+        border-color: fade-out($rouge-isen, 0.4);
+    }
+    &:focus {
+        border-color: $rouge-isen;
+    }
+}
+button {
+    align-self: flex-end;
+    width: auto;
+}
+
 form {
     margin: 5em auto;
     display: flex;
@@ -337,28 +456,94 @@ form {
     label {
         align-self: flex-start;
     }
-    input, button {
-        flex: 1 1 auto;
-        margin-bottom: 1.5em;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        width: 100%;
-        display: block;
-        overflow: hidden;
-        background: white;
-        font-size: 1em;
-        padding: 0.5em 0.8em;
-        border-radius: 0.5em;
-        border: 1px rgba(0,0,0,0.2) solid;
-        &:hover {
-            border-color: fade-out($rouge-isen, 0.4);
+}
+
+button.back {
+    transition: opacity .5s;
+    display: block;
+    background: rgba(0,0,0,0.01);
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid white;
+    padding: 0;
+    padding: 1em;
+    opacity: 0;
+    width: 100%;
+    text-align: left;
+    &::before {
+        content: "< ";
+    }
+}
+
+button.next {
+    margin: 1em 0;
+    font-size: 1.5em;
+    width: 100%;
+    height: 2em;
+    background: transparent;
+    border: 1px solid #ccc;
+}
+
+@media screen and (max-width: 900px) {
+    html{
+        min-width: 0;
+    }
+    .panes > * {
+        flex: 0 1 100% !important;
+        margin-left: 0% !important;
+        max-width: 100%;
+    }
+    @media screen and (max-width: 700px) {
+        body {
+            max-width: 100%;
         }
-        &:focus {
-            border-color: $rouge-isen;
+        .logo-isen{
+            margin: 1em auto;
+            @media screen and (max-width: 380px) {
+                h1, h2 {
+                    margin: 0;
+                    padding: 0;
+                    display: block;
+                    border: none;
+                    text-align: center;
+                    width: auto;
+                    max-width: none;
+                    line-height: 1em;
+                }
+            }
+        }
+        body.panes .bienvenue .next { display: block; }
+        body.panes.step-0 {
+            .contact {
+                max-width: 0;
+            }
+        }
+        body.panes.step-1 {
+            .bienvenue {
+                margin-left: -100% !important;
+            }
+        }
+        body.panes.step-2 {
+            .bienvenue {
+                max-width: 0;
+            }
         }
     }
-    button {
-        align-self: flex-end;
-        width: auto;
+    body.panes .contact {
+        min-width: 0;
+    }
+    body.panes.step-2 .bienvenue{
+        margin-left: -100% !important;
+        max-width: 0;
+    }
+    body.panes.step-3 {
+        .bienvenue, .contact{ max-width: 0; }
+        .promos{
+            margin-left: -100% !important;
+            max-width: 100%;
+        }
+    }
+    button.back {
+        opacity: 1;
     }
 }
