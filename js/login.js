@@ -62,7 +62,7 @@ $(document).ready(
 					    var scope = angular.$('body').scope();
 		    			scope.init();
 				        }
-				}
+				
 				
 			
 		});
