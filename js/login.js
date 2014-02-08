@@ -61,7 +61,7 @@ $(document).ready(
 						// Initialisation de la partie Angular
 					    var scope = angular.$('body').scope();
 		    			scope.init();
-				        })
+				        }
 				}
 				
 			
