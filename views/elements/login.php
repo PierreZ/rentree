@@ -10,6 +10,7 @@
     <script src="js/login.js"></script>
     <script src="js/panes.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 </head>
 <!--Définition du controller-->
 <body class="login" ng-controller="RentreeCtrl">

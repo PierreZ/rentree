@@ -218,7 +218,6 @@ function get_promos(){
 	header("Content-Type: application/json");
 	return json_encode($p);
 }
-}
 
 function post_promo(){
 	if(!is_admin())
