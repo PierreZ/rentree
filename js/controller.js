@@ -51,6 +51,7 @@ function init_documents(){
 
 //Fonction submit des infos des étudiants
 function submit(){
+  $scope.init();
 
     // Si le formulaire n'est pas complet
      if ($scope.eleve.nom.length < 1 || $scope.eleve.email.length < 1 || $scope.eleve.datenaissance.length < 1

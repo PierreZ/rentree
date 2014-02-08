@@ -59,7 +59,7 @@ $(document).ready(
 						initPanes();
 						},  3000, false);
 						// Initialisation de la partie Angular
-					    angular.element($("body")).scope().init();
+					    //angular.element($("body")).scope().init();
 				        }
 				
 				
