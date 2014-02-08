@@ -142,19 +142,19 @@ body.login {
 
 @font-face {
   font-family: titillium-bold;
-  src: url("fonts/titillium/Titillium-Bold.otf");
+  src: url("titillium/Titillium-Bold.otf");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: titillium-thin;
-  src: url("fonts/titillium/Titillium-Thin.otf");
+  src: url("titillium/Titillium-Thin.otf");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: titillium-regular;
-  src: url("fonts/titillium/Titillium-Regular.otf");
+  src: url("titillium/Titillium-Regular.otf");
   font-weight: normal;
   font-style: normal; }
 
@@ -237,9 +237,15 @@ body.panes {
   display: flex;
   align-items: stretch;
   align-content: stretch; }
+  body.panes h1 {
+    margin: 1em;
+    transition: opacity .5s;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; }
   body.panes > div {
     overflow: auto;
-    transition-property: opacity, padding, margin-left, max-width, background-color, color, flex;
+    transition-property: opacity, padding, margin-left, max-width, min-width, background-color, color, flex;
     transition-duration: .5s;
     transition-timing-function: cubic-bezier(0, 0, 0.5, 1);
     opacity: 1;
@@ -259,13 +265,17 @@ body.panes {
       flex: 1 auto;
       margin: 3em; }
       body.panes .bienvenue div h1 {
+        margin: 0;
         font-family: titillium-thin;
         font-size: 5em;
         color: #b82a28;
-        display: inline-block; }
+        display: inline-block;
+        white-space: normal; }
       body.panes .bienvenue div p {
         font-size: 2em;
         display: inline-block; }
+    body.panes .bienvenue .next {
+      display: none; }
   body.panes .contact {
     flex: 0 0 30%;
     display: flex;
@@ -322,17 +332,55 @@ body.panes {
         body.panes .documents ul li.selected {
           border-color: rgba(0, 0, 0, 0.2);
           background: #ddd; }
+  body.panes .promos {
+    flex: 0 0 70%; }
+    body.panes .promos > * {
+      transition: opacity .5s; }
+    body.panes .promos ul {
+      font-family: titillium-thin;
+      margin: 2em 0;
+      list-style: none;
+      font-size: 1.6em;
+      background: 2px solid rgba(0, 0, 0, 0); }
+      body.panes .promos ul li {
+        padding: 1em 2em;
+        border: 2px solid rgba(0, 0, 0, 0);
+        border-left: none;
+        border-right: none;
+        margin-top: -2px;
+        cursor: pointer;
+        position: relative;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden; }
+        body.panes .promos ul li.selected::after, body.panes .promos ul li:hover::after {
+          content: ">";
+          position: absolute;
+          line-height: 0;
+          top: 50%;
+          right: 1em; }
+        body.panes .promos ul li.selected {
+          border-color: rgba(0, 0, 0, 0.2);
+          background: #ddd; }
   body.panes .document-viewer {
     flex: 0 0 calc(100% - 30em);
     background: url("pdf.js.png") top center, black; }
 
+body.panes.step-0 .bienvenue,
 body.panes.step-1 .bienvenue {
   max-width: 100%; }
+body.panes.step-0 .contact,
 body.panes.step-1 .contact {
   max-width: 100%; }
+body.panes.step-0 .documents,
 body.panes.step-1 .documents {
   max-width: 0%;
   padding: 0; }
+body.panes.step-0 .promos,
+body.panes.step-1 .promos {
+  max-width: 0%;
+  padding: 0; }
+body.panes.step-0 .document-viewer,
 body.panes.step-1 .document-viewer {
   max-width: 0%;
   padding: 0; }
@@ -350,8 +398,11 @@ body.panes.step-2 .contact {
     opacity: 1; }
     body.panes.step-2 .contact.active button, body.panes.step-2 .contact:hover button {
       opacity: 1; }
-body.panes.step-2 .documents {
+body.panes.step-2 .promos {
   max-width: 100%; }
+body.panes.step-2 .documents {
+  max-width: 0%;
+  padding: 0; }
 body.panes.step-2 .document-viewer {
   max-width: 0%;
   padding: 0; }
@@ -359,7 +410,33 @@ body.panes.step-2 .document-viewer {
 body.panes.step-3 .bienvenue {
   opacity: 0;
   margin-left: -70%; }
+body.panes.step-3 .contact {
+  opacity: 0;
+  margin-left: -30%; }
+body.panes.step-3 .promos {
+  opacity: 0.4;
+  background-color: #eee;
+  max-width: 30%; }
+  body.panes.step-3 .promos .back {
+    opacity: 1; }
+  body.panes.step-3 .promos.active, body.panes.step-3 .promos:hover {
+    opacity: 1; }
+    body.panes.step-3 .promos.active button, body.panes.step-3 .promos:hover button {
+      opacity: 1; }
+  body.panes.step-3 .promos h1 {
+    opacity: 0; }
 body.panes.step-3 .documents {
+  max-width: 100%; }
+body.panes.step-3 .document-viewer {
+  max-width: 0%;
+  padding: 0; }
+
+body.panes.step-4 .bienvenue {
+  opacity: 0;
+  margin-left: -70%; }
+body.panes.step-4 .promos {
+  margin-left: -30%; }
+body.panes.step-4 .documents {
   background: #eee;
   color: #666;
   flex: 0 0 30em;
@@ -382,13 +459,39 @@ body.panes.step-3 .documents {
       }
   }
   */ }
-  body.panes.step-3 .documents > * {
-    opacity: 0; }
-  body.panes.step-3 .documents > ul {
+  body.panes.step-4 .documents > .back {
     opacity: 1; }
-body.panes.step-3 .document-viewer {
+  body.panes.step-4 .documents > * {
+    opacity: 0.2; }
+  body.panes.step-4 .documents > h1 {
+    opacity: 0; }
+  body.panes.step-4 .documents > ul {
+    opacity: 1; }
+body.panes.step-4 .document-viewer {
   max-width: 100%;
   padding: 0; }
+
+input, button {
+  flex: 1 1 auto;
+  margin-bottom: 1.5em;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  background: white;
+  font-size: 1em;
+  padding: 0.5em 0.8em;
+  border-radius: 0.5em;
+  border: 1px rgba(0, 0, 0, 0.2) solid; }
+  input:hover, button:hover {
+    border-color: rgba(184, 42, 40, 0.6); }
+  input:focus, button:focus {
+    border-color: #b82a28; }
+
+button {
+  align-self: flex-end;
+  width: auto; }
 
 form {
   margin: 5em auto;
@@ -396,23 +499,78 @@ form {
   flex-direction: column; }
   form label {
     align-self: flex-start; }
-  form input, form button {
-    flex: 1 1 auto;
-    margin-bottom: 1.5em;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 100%;
-    display: block;
-    overflow: hidden;
-    background: white;
-    font-size: 1em;
-    padding: 0.5em 0.8em;
-    border-radius: 0.5em;
-    border: 1px rgba(0, 0, 0, 0.2) solid; }
-    form input:hover, form button:hover {
-      border-color: rgba(184, 42, 40, 0.6); }
-    form input:focus, form button:focus {
-      border-color: #b82a28; }
-  form button {
-    align-self: flex-end;
-    width: auto; }
+
+button.back {
+  transition: opacity .5s;
+  display: block;
+  background: rgba(0, 0, 0, 0.01);
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid white;
+  padding: 0;
+  padding: 1em;
+  opacity: 0;
+  width: 100%;
+  text-align: left; }
+  button.back::before {
+    content: "< "; }
+
+button.next {
+  margin: 1em 0;
+  font-size: 1.5em;
+  width: 100%;
+  height: 2em;
+  background: transparent;
+  border: 1px solid #ccc; }
+
+@media screen and (max-width: 900px) {
+  html {
+    min-width: 0; }
+
+  .panes > * {
+    flex: 0 1 100% !important;
+    margin-left: 0% !important;
+    max-width: 100%; }
+
+  body.panes .contact {
+    min-width: 0; }
+
+  body.panes.step-2 .bienvenue {
+    margin-left: -100% !important;
+    max-width: 0; }
+
+  body.panes.step-3 .bienvenue, body.panes.step-3 .contact {
+    max-width: 0; }
+  body.panes.step-3 .promos {
+    margin-left: -100% !important;
+    max-width: 100%; }
+
+  button.back {
+    opacity: 1; } }
+@media screen and (max-width: 900px) and (max-width: 700px) {
+  body {
+    max-width: 100%; }
+
+  .logo-isen {
+    margin: 1em auto; }
+  body.panes .bienvenue .next {
+    display: block; }
+
+  body.panes.step-0 .contact {
+    max-width: 0; }
+
+  body.panes.step-1 .bienvenue {
+    margin-left: -100% !important; }
+
+  body.panes.step-2 .bienvenue {
+    max-width: 0; } }
+  @media screen and (max-width: 900px) and (max-width: 700px) and (max-width: 380px) {
+    .logo-isen h1, .logo-isen h2 {
+      margin: 0;
+      padding: 0;
+      display: block;
+      border: none;
+      text-align: center;
+      width: auto;
+      max-width: none;
+      line-height: 1em; } }
