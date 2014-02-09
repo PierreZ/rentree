@@ -297,7 +297,7 @@ function post_session(){
 
 	if($sess->logIn()){
 		header("Content-Type: application/json");
-		return json_encode($sess);
+		return json_encode($sess->jsonSerialize());
 	}
 	else return generate_403();
 }
