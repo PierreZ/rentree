@@ -12,7 +12,7 @@ $(document).ready(
 		b.classList.add("loading");
 
 		document.activeElement.blur();
-		var URL = window.location.protocol + "//" + window.location.host+"?/session";
+		var URL = window.location.protocol + "//" + window.location.host + window.location.pathname +"?uri=session";
 		var email=$('#email').val(),
 			paswd=$('#password').val();
 
