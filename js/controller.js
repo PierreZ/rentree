@@ -86,7 +86,7 @@ $scope.init_eleve= function(){
     url: URL,
     success: function(data) {
       $scope.eleve=data;
-      $scope.apply();
+      $scope.$apply();
       $('#nom').val($scope.eleve.nom);
       $('#email').val($scope.eleve.email);
       $('#ddn').val($scope.eleve.datedenaissance);
