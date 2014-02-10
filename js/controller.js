@@ -13,9 +13,9 @@ $scope.selected=0;
 
 // Chargement des méthodes d'initialisation
 $scope.init= function (){
-  init_eleve();
-  init_promos();
-  init_documents();
+  $scope.init_eleve();
+  $scope.init_promos();
+  $scope.init_documents();
 }
 
 // Fonction permettant le login et la création de la session
@@ -71,7 +71,7 @@ jQuery.ajax({
           }, 100, false);
         initPanes();
         },  1000, false);
-    init();
+    $scope.init();
             }
     
     
