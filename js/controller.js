@@ -7,6 +7,9 @@ $scope.documents=new Array();
 //Initialisation de l'objet eleve
 $scope.eleve = {};
 
+// Initialisation de l'ID de l'élève
+$scope.eleve_id = 0;
+
 // Initialisation de la promo choisie
 // Selected permet de savoir quel promo à été choisies(plus précisément son ID)
 $scope.selected=0;
@@ -57,7 +60,7 @@ jQuery.ajax({
     document.cookie = "session_key=" + data.key;
     if(!data.is_admin)
     document.cookie = "id_eleve=" + data.id;
-    var eleve_id = data.id;
+    $scope.eleve_id = data.id;
 
     // changement des classes pour le CSS
     document.body.classList.add("fade");
@@ -80,7 +83,7 @@ jQuery.ajax({
 }
 
 $scope.init_eleve= function(){
-    var URL = window.location.protocol + "//" + window.location.host + window.location.pathname +"?uri=eleve/"+eleve_id;
+    var URL = window.location.protocol + "//" + window.location.host + window.location.pathname +"?uri=eleve/"+$scope.eleve_id;
   jQuery.ajax({
     type: 'GET', 
     url: URL,
@@ -124,7 +127,7 @@ $scope.submit = function(){
         };
 
     // On stocke les éléments du formulaire
-    var URL = window.location.protocol + "//" + window.location.host + window.location.pathname +"?uri=eleves/"+eleve_id;
+    var URL = window.location.protocol + "//" + window.location.host + window.location.pathname +"?uri=eleves/"+$scope.eleve_id;
 
     var b = document.querySelector("button");
     b.disabled = true;
