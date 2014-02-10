@@ -109,6 +109,9 @@ function put_eleve(){
 }
 
 function get_eleves(){
+	if(!is_admin() && !is_self((int)params("id")))
+		return generate_403();
+
 	$eleves=Eleve::findAll();
 
 	header("Content-Type: application/json");
