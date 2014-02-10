@@ -12,14 +12,14 @@ $scope.eleve = {};
 $scope.selected=0;
 
 // Chargement des méthodes d'initialisation
-function init(){
+$scope.init= function (){
   init_eleve();
   init_promos();
   init_documents();
 }
 
 // Fonction permettant le login et la création de la session
-function login(){
+$scope.login = function (){
 var b = document.querySelector("button");
 b.disabled = true;
 b.classList.add("loading");
@@ -79,7 +79,7 @@ jQuery.ajax({
 });
 }
 
-function init_eleve(){
+$scope.init_eleve= function(){
     var URL = window.location.protocol + "//" + window.location.host + window.location.pathname +"?uri=eleve/"+eleve_id;
   jQuery.ajax({
     type: 'GET', 
@@ -89,7 +89,7 @@ function init_eleve(){
     }
   });
 }
-function init_promos(){
+$scope.init_promos= function(){
     var URL = window.location.protocol + "//" + window.location.host + window.location.pathname +"?uri=promos/";
   jQuery.ajax({
     type: 'GET', 
@@ -99,7 +99,7 @@ function init_promos(){
     }
   });
 }
-function init_documents(){
+$scope.init_documents = function(){
     var URL = window.location.protocol + "//" + window.location.host + window.location.pathname +"?uri=documents/";
   jQuery.ajax({
     type: 'GET', 
@@ -111,7 +111,7 @@ function init_documents(){
 }
 
 //Fonction submit des infos des étudiants
-function submit(){
+$scope.submit = function(){
 
     // Si le formulaire n'est pas complet
      if ($scope.eleve.nom.length < 1 || $scope.eleve.email.length < 1 || $scope.eleve.datenaissance.length < 1
