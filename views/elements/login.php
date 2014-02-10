@@ -23,7 +23,7 @@
         <input type="text" name="email" id="email"/>
         <label for="password">Mot de passe (reçu par e-mail) :</label>
         <input type="password" name="password" id="password"/>
-        <button><div class="label">Connexion</div><div class="spinner"></div></button>
+        <button ng-click="login()"><div class="label">Connexion</div><div class="spinner"></div></button>
     </form>
 
     <?php
