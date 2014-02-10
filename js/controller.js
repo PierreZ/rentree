@@ -90,14 +90,14 @@ $scope.init_eleve= function(){
       document.getElementById('email').value = data.email;
       document.getElementById('ddn').value = data.datedenaissance;
       document.getElementById('nom-parents').value = data.nomparent;
-      document.getElementById('email-parents').value = data.emailparent);
+      document.getElementById('email-parents').value = data.emailparent;
       document.getElementById('tel-parents').value = data.telparent;
-      $('#nom').val(data.nom);
-      $('#email').val(data.email);
-      $('#ddn').val(data.datedenaissance);
-      $('#nom-parents').val(data.nomparent);
-      $('#email-parents').val(data.emailparent);
-      $('#tel-parents').val(data.telparent);
+      // $('#nom').val(data.nom);
+      // $('#email').val(data.email);
+      // $('#ddn').val(data.datedenaissance);
+      // $('#nom-parents').val(data.nomparent);
+      // $('#email-parents').val(data.emailparent);
+      // $('#tel-parents').val(data.telparent);
     }
   });
 }
