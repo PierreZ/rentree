@@ -43,6 +43,14 @@ function generate_500($type="json", $error="Internal Server Error"){
 	}
 }
 
+function myserialize($value){
+	if(method_exists($value, "jsonSerialize"))
+		return $value->jsonSerialize();
+	else if(is_array($value))
+		return array_map("myserialize", $value);
+	else return null;
+}
+
 function is_self($id){
 	if(array_key_exists('id_eleve', $_COOKIE) && array_key_exists('session_key', $_COOKIE) &&
 		$id == $_COOKIE['id_eleve'] && hash('sha256', $id . SECRET) === $_COOKIE['session_key'])
@@ -74,14 +82,14 @@ function get_eleve(){
 		return generate_404();
 
 	header("Content-Type: application/json");
-	return json_encode($e->jsonSerialize());
+	return json_encode(myserialize($e));
 }
 
 function post_eleve(){
-	$e = Eleve::fromJson(file_get_contents("php://input"));
+	$e = Eleve::fromjson_encode(myserialize(file_get_contents("php://input")));
 	$e->insert();
 	header("Content-Type: application/json");
-	return json_encode($e->jsonSerialize());
+	return json_encode(myserialize($e));
 }
 
 function put_eleve(){
@@ -97,14 +105,14 @@ function put_eleve(){
 	$e->update();
 
 	header("Content-Type: application/json");
-	return json_encode($e->jsonSerialize());
+	return json_encode(myserialize($e));
 }
 
 function get_eleves(){
 	$eleves=Eleve::findAll();
 
 	header("Content-Type: application/json");
-	return json_encode($eleves->jsonSerialize());
+	return json_encode(myserialize($eleves));
 }
 
 /*
@@ -121,7 +129,7 @@ function get_document(){
 		return generate_404();
 
 	header("Content-Type: application/json");
-	return json_encode($d->jsonSerialize());
+	return json_encode(myserialize($d));
 }
 
 function post_document(){
@@ -140,7 +148,7 @@ function post_document(){
 	$d->setNom($file['name']);
 	$d->insert();
 	header("Content-Type: application/json");
-	return json_encode($d->jsonSerialize());
+	return json_encode(myserialize($d));
 }
 
 function put_document(){
@@ -155,7 +163,7 @@ function put_document(){
 	$d->update();
 
 	header("Content-Type: application/json");
-	return json_encode($d->jsonSerialize());
+	return json_encode(myserialize($d));
 }
 
 function delete_document(){
@@ -191,7 +199,7 @@ function get_documents(){
 		return generate_404();
 
 	header("Content-Type: application/json");
-	return json_encode($d->jsonSerialize());
+	return json_encode(myserialize($d));
 }
 
 /*
@@ -207,7 +215,7 @@ function get_promo(){
 		return generate_404();
 
 	header("Content-Type: application/json");
-	return json_encode($p->jsonSerialize());
+	return json_encode(myserialize($p));
 }
 
 function get_promos(){
@@ -216,20 +224,20 @@ function get_promos(){
 		return generate_404();
 
 	header("Content-Type: application/json");
-	return json_encode($p->jsonSerialize());
+	return json_encode(myserialize($p));
 }
 
 function post_promo(){
 	if(!is_admin())
 		return generate_403();
 	
-	$p = Promotion::fromJson(file_get_contents("php://input"));
+	$p = Promotion::fromjson_encode(myserialize(file_get_contents("php://input")));
 	$p->insert($p);
 	if(!$p)
 		return generate_404();
 
 	header("Content-Type: application/json");
-	return json_encode($p->jsonSerialize());
+	return json_encode(myserialize($p));
 }
 
 function put_promo(){
@@ -244,7 +252,7 @@ function put_promo(){
 		return generate_404();
 
 	header("Content-Type: application/json");
-	return json_encode($p->jsonSerialize());
+	return json_encode(myserialize($p));
 }
 
 function delete_promo(){
@@ -267,7 +275,7 @@ function get_promo_documents(){
 	$docs = Document::forPromo((integer)params("id"));
 
 	header("Content-Type: application/json");
-	return json_encode($docs->jsonSerialize());
+	return json_encode(myserialize($docs));
 }
 
 function pong(){
@@ -283,7 +291,7 @@ function get_admin(){
 	if(!$e)
 		return generate_404();
 
-	return json_encode($e->jsonSerialize());
+	return json_encode(myserialize($e));
 }
 
 function serve_client_app(){
@@ -297,7 +305,7 @@ function post_session(){
 
 	if($sess->logIn()){
 		header("Content-Type: application/json");
-		return json_encode($sess->jsonSerialize());
+		return json_encode(myserialize($sess));
 	}
 	else return generate_403();
 }
