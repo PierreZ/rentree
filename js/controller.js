@@ -19,7 +19,7 @@ function init(){
 }
 
 function init_eleve(){
-    var URL = window.location.protocol + "//" + window.location.host+"?/eleve/"+eleve_id;
+    var URL = window.location.protocol + "//" + window.location.host + window.location.pathname +"?uri=eleve/"+eleve_id;
   jQuery.ajax({
     type: 'GET', 
     url: URL,
@@ -29,7 +29,7 @@ function init_eleve(){
   });
 }
 function init_promos(){
-    var URL = window.location.protocol + "//" + window.location.host+"?/promos/";
+    var URL = window.location.protocol + "//" + window.location.host + window.location.pathname +"?uri=promos/";
   jQuery.ajax({
     type: 'GET', 
     url: URL,
@@ -39,7 +39,7 @@ function init_promos(){
   });
 }
 function init_documents(){
-    var URL = window.location.protocol + "//" + window.location.host+"?/documents/";
+    var URL = window.location.protocol + "//" + window.location.host + window.location.pathname +"?uri=documents/";
   jQuery.ajax({
     type: 'GET', 
     url: URL,
@@ -63,7 +63,7 @@ function submit(){
         };
 
     // On stocke les éléments du formulaire
-    var URL = window.location.protocol + "//" + window.location.host+"?/eleves/"+eleve_id;
+    var URL = window.location.protocol + "//" + window.location.host + window.location.pathname +"?uri=eleves/"+eleve_id;
 
     var b = document.querySelector("button");
     b.disabled = true;
