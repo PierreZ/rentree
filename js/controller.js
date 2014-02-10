@@ -156,6 +156,12 @@ $scope.submit = function(){
                 button.classList.remove("success");
                 button.querySelector(".label").innerHTML="Mettre à jour";
             }, 1500, false);
+            $('#nom').val($scope.eleve.nom);
+            $('#email').val($scope.eleve.email);
+            $('#ddn').val($scope.eleve.datedenaissance);
+            $('#nom-parents').val($scope.eleve.nomparent);
+            $('#email-parents').val($scope.eleve.emailparent);
+            $('#tel-parents').val($scope.eleve.telparent);
 
         }
     });
