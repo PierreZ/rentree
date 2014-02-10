@@ -86,18 +86,14 @@ $scope.init_eleve= function(){
     url: URL,
     success: function(data) {
       $scope.eleve=data;
-      document.getElementById('nom').value = data.nom;
-      document.getElementById('email').value = data.email;
-      document.getElementById('ddn').value = data.datedenaissance;
-      document.getElementById('nom-parents').value = data.nomparent;
-      document.getElementById('email-parents').value = data.emailparent;
-      document.getElementById('tel-parents').value = data.telparent;
-      // $('#nom').val(data.nom);
-      // $('#email').val(data.email);
-      // $('#ddn').val(data.datedenaissance);
-      // $('#nom-parents').val(data.nomparent);
-      // $('#email-parents').val(data.emailparent);
-      // $('#tel-parents').val(data.telparent);
+      $scope.apply();
+      $('#nom').val($scope.eleve.nom);
+      $('#email').val($scope.eleve.email);
+      $('#ddn').val($scope.eleve.datedenaissance);
+      $('#nom-parents').val($scope.eleve.nomparent);
+      $('#email-parents').val($scope.eleve.emailparent);
+      $('#tel-parents').val($scope.eleve.telparent);
+
     }
   });
 }
