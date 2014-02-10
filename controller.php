@@ -86,7 +86,7 @@ function get_eleve(){
 }
 
 function post_eleve(){
-	$e = Eleve::fromjson_encode(myserialize(file_get_contents("php://input")));
+	$e = Eleve::fromJson(file_get_contents("php://input"));
 	$e->insert();
 	header("Content-Type: application/json");
 	return json_encode(myserialize($e));
@@ -234,7 +234,7 @@ function post_promo(){
 	if(!is_admin())
 		return generate_403();
 	
-	$p = Promotion::fromjson_encode(myserialize(file_get_contents("php://input")));
+	$p = Promotion::fromJson(file_get_contents("php://input"));
 	$p->insert($p);
 	if(!$p)
 		return generate_404();
