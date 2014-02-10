@@ -74,14 +74,14 @@ function get_eleve(){
 		return generate_404();
 
 	header("Content-Type: application/json");
-	return json_encode($e);
+	return json_encode($e->jsonSerialize());
 }
 
 function post_eleve(){
 	$e = Eleve::fromJson(file_get_contents("php://input"));
 	$e->insert();
 	header("Content-Type: application/json");
-	return json_encode($e);
+	return json_encode($e->jsonSerialize());
 }
 
 function put_eleve(){
@@ -97,14 +97,14 @@ function put_eleve(){
 	$e->update();
 
 	header("Content-Type: application/json");
-	return json_encode($e);
+	return json_encode($e->jsonSerialize());
 }
 
 function get_eleves(){
 	$eleves=Eleve::findAll();
 
 	header("Content-Type: application/json");
-	return json_encode($eleves);
+	return json_encode($eleves->jsonSerialize());
 }
 
 /*
@@ -121,7 +121,7 @@ function get_document(){
 		return generate_404();
 
 	header("Content-Type: application/json");
-	return json_encode($d);
+	return json_encode($d->jsonSerialize());
 }
 
 function post_document(){
@@ -140,7 +140,7 @@ function post_document(){
 	$d->setNom($file['name']);
 	$d->insert();
 	header("Content-Type: application/json");
-	return json_encode($d);
+	return json_encode($d->jsonSerialize());
 }
 
 function put_document(){
@@ -155,7 +155,7 @@ function put_document(){
 	$d->update();
 
 	header("Content-Type: application/json");
-	return json_encode($d);
+	return json_encode($d->jsonSerialize());
 }
 
 function delete_document(){
@@ -191,7 +191,7 @@ function get_documents(){
 		return generate_404();
 
 	header("Content-Type: application/json");
-	return json_encode($d);
+	return json_encode($d->jsonSerialize());
 }
 
 /*
@@ -207,7 +207,7 @@ function get_promo(){
 		return generate_404();
 
 	header("Content-Type: application/json");
-	return json_encode($p);
+	return json_encode($p->jsonSerialize());
 }
 
 function get_promos(){
@@ -216,7 +216,7 @@ function get_promos(){
 		return generate_404();
 
 	header("Content-Type: application/json");
-	return json_encode($p);
+	return json_encode($p->jsonSerialize());
 }
 
 function post_promo(){
@@ -229,7 +229,7 @@ function post_promo(){
 		return generate_404();
 
 	header("Content-Type: application/json");
-	return json_encode($p);
+	return json_encode($p->jsonSerialize());
 }
 
 function put_promo(){
@@ -244,7 +244,7 @@ function put_promo(){
 		return generate_404();
 
 	header("Content-Type: application/json");
-	return json_encode($p);
+	return json_encode($p->jsonSerialize());
 }
 
 function delete_promo(){
@@ -267,7 +267,7 @@ function get_promo_documents(){
 	$docs = Document::forPromo((integer)params("id"));
 
 	header("Content-Type: application/json");
-	return json_encode($docs);
+	return json_encode($docs->jsonSerialize());
 }
 
 function pong(){
@@ -283,7 +283,7 @@ function get_admin(){
 	if(!$e)
 		return generate_404();
 
-	return json_encode($e);
+	return json_encode($e->jsonSerialize());
 }
 
 function serve_client_app(){
