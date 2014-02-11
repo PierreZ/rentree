@@ -79,6 +79,7 @@ class Promotion implements JsonSerializable{
 	static function getall(){
 		$database = bdd::getInstance()->getInstancePDO();
 		$query  = "SELECT * FROM promotion";
+		$prepared_query = $database->prepare($query);
 		if ($prepared_query->execute()&&$prepared_query->rowCount()>0){
 			$promos = Array();
 			while($row = $prepared_query->fetch()){
