@@ -3,17 +3,13 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location) {
 	$scope.bodyClass = "step-0 panes fade";
 	$scope.status = null;
 	$scope.error = null;
-
+	$scope.get_documents();
 	$http({
 		method: "GET",
 		url: "eleve/" + $cookies.id_eleve
 	}).then(function success(resp){
 		$scope.eleve = resp.data;
-		// Si le mail des parents existent, alors on peut passer directement à pane-2
-		if ($scope.eleve.emailparent.length < 1)
-			$scope.bodyClass = "step-1 panes";
-		else
-			$scope.bodyClass = "step-2 panes";
+		$scope.bodyClass = "step-2 panes";
 	}, function error(resp){
 		if(resp.status == 403 && $rootScope.session)
 			$scope.eleve = { email: $rootScope.session.email };
@@ -48,5 +44,26 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location) {
 			else
 				$scope.error = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
 		});
+	}
+	$scope.get_documents = function get_documents(){
+
+			$http({
+			method: "GET",
+			data: $scope.eleve,
+			url: "eleve/" + $cookies.id_eleve,
+			timeout: 5000
+		}).then(function success(resp){
+			document.body.classList.add("step-2");
+			document.body.classList.remove("step-1");
+			$scope.status = null;
+
+		},function error(resp){
+			$scope.status = null;
+			if(resp.data.error)
+				$scope.error = resp.data.error;
+			else
+				$scope.error = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
+		});
+
 	}
 }
