@@ -1,4 +1,4 @@
-function LoginCtrl($scope, $http, $location) {
+function LoginCtrl($scope, $rootScope, $http, $location) {
 	$scope.bodyClass = "login";
 	$scope.status = null;
 	$scope.error = null;
@@ -24,6 +24,7 @@ function LoginCtrl($scope, $http, $location) {
 
 			document.body.addEventListener('transitionend', finishLogin);
 			document.body.classList.add("fade");
+			$rootScope.fading = true;
 
 		},function error(resp){
 			$scope.status = null;
