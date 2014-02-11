@@ -1,0 +1,19 @@
+<!doctype html>
+<!--tout attribut commencant par ng-* est une balise spéciale pour AngularJS -->
+<html lang="fr" ng-app="rentree">
+<head>
+    <title>Documents de rentrée</title>
+    <link rel="stylesheet" href="style/somestyle.css"/>
+    <script src="lib/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="lib/angular.min.js" type="text/javascript"></script>
+    <script src="lib/angular-route.min.js" type="text/javascript"></script>
+    <script src="js/app.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/user.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+</head>
+
+<body ng-view ng-class="bodyClass"></body>
+
+</html>

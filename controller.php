@@ -298,19 +298,19 @@ function get_admin(){
 }
 
 function serve_client_app(){
-	return render('elements/login.php');
+	return render('elements/app.html');
 }
 
 function post_session(){
 	if(!array_key_exists('email', $_POST) || !array_key_exists('password', $_POST))
-		return generate_400("json", "Missing email or password");
+		return generate_400("json", "Veillez à renseigner tous les champs.");
 	$sess = new Session($_POST['email'], $_POST['password']);
 
 	if($sess->logIn()){
 		header("Content-Type: application/json");
 		return json_encode(myserialize($sess));
 	}
-	else return generate_403();
+	else return generate_403("json", "Identifiants incorrects.");
 }
 
 ?>

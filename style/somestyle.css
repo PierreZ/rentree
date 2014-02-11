@@ -574,3 +574,9 @@ button.next {
       width: auto;
       max-width: none;
       line-height: 1em; } }
+
+p.error {
+  background: rgba(255, 0, 0, 0.2);
+  border: 1px solid red;
+  padding: 0.2em 1em;
+  margin: 1em 0; }
