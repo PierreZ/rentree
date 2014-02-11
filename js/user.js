@@ -2,7 +2,9 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location) {
 	
 	$scope.bodyClass = "step-0 panes fade";
 	$scope.status = null;
-	$scope.error = null;
+	$scope.error_form = null;
+	$scope.error_documents = null;
+	$scope.error_promos = null;
 	// Initialisation de la promo choisie
 	// Selected permet de savoir quel promo à été choisies(plus précisément son ID)
 	$scope.selected_promo=0;
@@ -35,9 +37,9 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location) {
 	},function error(resp){
 		$scope.status = null;
 		if(resp.data.error)
-			$scope.error = resp.data.error;
+			$scope.error_promos = resp.data.error;
 		else
-			$scope.error = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
+			$scope.error_promos = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
 	});
 
 	// Récupération des documents
@@ -50,9 +52,9 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location) {
 	},function error(resp){
 		$scope.status = null;
 		if(resp.data.error)
-			$scope.error = resp.data.error;
+			$scope.error_documents = resp.data.error;
 		else
-			$scope.error = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
+			$scope.error_documents = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
 	});
 
 	// Fonction d'envoi des coord de l'élève
@@ -80,9 +82,9 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location) {
 		},function error(resp){
 			$scope.status = null;
 			if(resp.data.error)
-				$scope.error = resp.data.error;
+				$scope.error_form = resp.data.error;
 			else
-				$scope.error = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
+				$scope.error_form = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
 		});
 	}
 	// Permet de setter la promo choisie
