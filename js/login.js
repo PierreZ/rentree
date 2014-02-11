@@ -1,4 +1,4 @@
-function LoginCtrl($scope, $rootScope, $http, $location) {
+function LoginCtrl($scope, $rootScope, $http, $location, $cookies) {
 	$scope.bodyClass = "login";
 	$scope.status = null;
 	$scope.error = null;
@@ -14,12 +14,18 @@ function LoginCtrl($scope, $rootScope, $http, $location) {
 			url: "session/",
 			timeout: 5000
 		}).then(function success(resp){
-			if(resp.data.key != "")
-				document.cookie = "session_key=" + resp.data.key;
+
+			var session = $rootScope.session = resp.data;
+
+			$cookies.session_key = session.key
+			if(!session.is_admin) $cookies.id_eleve = session.id
 
 			function finishLogin(e){
 				document.body.removeEventListener('transitionend', finishLogin);
-				$scope.$apply($location.path("/eleve/"));
+				if($rootScope.session.is_admin)
+					$scope.$apply($location.path("/admin/"));
+				else
+					$scope.$apply($location.path("/eleve/"));
 			}
 
 			document.body.addEventListener('transitionend', finishLogin);

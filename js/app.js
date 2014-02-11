@@ -1,4 +1,4 @@
-var rentree = angular.module('rentree', ['ngRoute']);
+var rentree = angular.module('rentree', ['ngRoute', 'ngCookies']);
 
 rentree.config(['$routeProvider',
 	function($routeProvider){
