@@ -10,7 +10,7 @@
         <h2>Informations de contact :</h2>
 
         <h3>Vous :</h3>
-
+        <p class="error" ng-show="error">{{error}}&nbsp;</p>
         <label for="nom">Nom :</label>
         <input type="text" name="nom" id="nom" ng-model="eleve.nom" ng-change="console.dir(eleve)"/>
         <label for="email">Adresse E-mail :</label>
@@ -25,7 +25,7 @@
         <input type="email" name="email-parents" id="email-parents" ng-model="eleve.emailparent"/>
         <label for="tel-parents">Téléphone mobile :</label>
         <input type="text" name="tel-parents" id="tel-parents" ng-model="eleve.telparent"/>
-        <button><div class="label">Envoyer</div><div class="spinner"></div><div class="success-label">Merci !</div></button>
+        <button ng-class="status" ng-disabled="status"><div class="label">Envoyer</div><div class="spinner"></div><div class="success-label">Merci !</div></button>
     </form>
 </div>
 <div class="promos">
