@@ -86,14 +86,12 @@ $scope.init_eleve= function(){
     url: URL,
     success: function(data) {
       $scope.eleve=data;
-      $scope.$apply();
-      $('#nom').val($scope.eleve.nom);
-      $('#email').val($scope.eleve.email);
-      $('#ddn').val($scope.eleve.datedenaissance);
-      $('#nom-parents').val($scope.eleve.nomparent);
-      $('#email-parents').val($scope.eleve.emailparent);
-      $('#tel-parents').val($scope.eleve.telparent);
-
+      // Si les infos sont déjà existantes, on change le contenu du bouton
+      if (!$scope.eleve.nom){
+        var button = document.querySelector(".contact button");
+        button.disabled = false;
+        button.querySelector(".label").innerHTML="Mettre à jour";
+      }
     }
   });
 }
@@ -132,7 +130,7 @@ $scope.submit = function(){
         };
 
     // On stocke les éléments du formulaire
-    var URL = window.location.protocol + "//" + window.location.host + window.location.pathname +"?uri=eleves/"+$scope.eleve_id;
+    var URL = window.location.protocol + "//" + window.location.host + window.location.pathname +"?uri=eleves/"+$scope.eleve.eleve_id;
 
     var b = document.querySelector("button");
     b.disabled = true;
