@@ -18,7 +18,7 @@ function LoginCtrl($scope, $rootScope, $http, $location, $cookies) {
 			var session = $rootScope.session = resp.data;
 
 			$cookies.session_key = session.key
-			if(!session.is_admin) $cookies.id_eleve = session.id
+			if(!session.is_admin) $cookies.id_eleve = ""+session.id
 
 			function finishLogin(e){
 				document.body.removeEventListener('transitionend', finishLogin);
