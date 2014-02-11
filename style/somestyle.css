@@ -142,19 +142,19 @@ body.login {
 
 @font-face {
   font-family: titillium-bold;
-  src: url("titillium/Titillium-Bold.otf");
+  src: url("fonts/titillium/Titillium-Bold.otf");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: titillium-thin;
-  src: url("titillium/Titillium-Thin.otf");
+  src: url("fonts/titillium/Titillium-Thin.otf");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: titillium-regular;
-  src: url("titillium/Titillium-Regular.otf");
+  src: url("fonts/titillium/Titillium-Regular.otf");
   font-weight: normal;
   font-style: normal; }
 
