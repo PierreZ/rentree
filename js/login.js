@@ -16,8 +16,15 @@ function LoginCtrl($scope, $http, $location) {
 		}).then(function success(resp){
 			if(resp.data.key != "")
 				document.cookie = "session_key=" + resp.data.key;
-			$scope.status = null;
-			$location.path("/eleve");
+
+			function finishLogin(e){
+				document.body.removeEventListener('transitionend', finishLogin);
+				$scope.$apply($location.path("/eleve/"));
+			}
+
+			document.body.addEventListener('transitionend', finishLogin);
+			document.body.classList.add("fade");
+
 		},function error(resp){
 			$scope.status = null;
 			if(resp.data.error)
