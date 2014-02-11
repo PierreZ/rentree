@@ -29,21 +29,21 @@
     </form>
 </div>
 <div class="promos">
-    <button class="back">Modifier mes informations</button>
+    <button class="back" ng-click="set_panel(2)">Modifier mes informations</button>
     <h1>Sélectionner votre promotion</h1>
     <ul>
         <!--ng-click permet d'appeler une fonction contenu dans le controller. Les doubles accolades permettent de préciser à Angular qu'il faut interpréter le code-->
-        <li ng-click="select(promo.id_promotion)" ng-repeat="promo in promos">{{promo.nompromotion}}</li>
+        <li ng-click="select_promo(promo.id)" ng-repeat="promo in promos">{{promo.nompromotion}}</li>
         <!--ng-repeat permet de boucler dans un tableau. Un simple promos.push quelques part dans le code mettra à jour la vue -->
     </ul>
 </div>
 
 <div class="documents">
-    <button class="back">Changer de promotion</button>
+    <button ng-click="set_panel(2)" class="back">Changer de promotion</button>
     <h1>Sélectionner vos documents</h1>
     <ul>
         <!--ng-if permet de faire du test. Si la condition est vraie, alors l'élément est affiché -->
-        <li ng-repeat="document in documents" ng-if="document.id_promotion==selected || selected==0">{{document.nom}}</li>
+        <li ng-click="select_document(document.id)" ng-repeat="document in documents">{{document.fichier}}</li>
         <!--Ici, l'élément est affiché si l'ID de promotion de l'élément correspond à la variable $scope.selected. 0 correspond aux documents communs-->
     </ul>
 </div>

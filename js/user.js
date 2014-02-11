@@ -5,7 +5,7 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location) {
 	$scope.error = null;
 	// Initialisation de la promo choisie
 	// Selected permet de savoir quel promo à été choisies(plus précisément son ID)
-	$scope.selected=0;
+	$scope.selected_promo=0;
 	$scope.documents = {};	
 
 	// Initialisation des tableaux
@@ -18,11 +18,11 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location) {
 		url: "eleve/" + $cookies.id_eleve
 	}).then(function success(resp){
 		$scope.eleve = resp.data;
-		$scope.bodyClass = "step-2 panes";
+		$scope.set_panel(2);
 	}, function error(resp){
 		if(resp.status == 403 && $rootScope.session)
 			$scope.eleve = { email: $rootScope.session.email };
-		$scope.bodyClass = "step-0 panes";
+		$scope.set_panel(0);
 	});
 
 	// Récupération des promos
@@ -84,5 +84,19 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location) {
 			else
 				$scope.error = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
 		});
+	}
+	// Permet de setter la promo choisie
+	$scope.select_promo= function(promo) {
+		$scope.selected_promo = promo;
+		$scope.set_panel(3);
+	};
+	// Permet de setter le document choisi
+	$scope.select_document= function(document) {
+		$scope.selected_document = document;
+		$scope.set_panel(4);
+	};
+	// Permet de setter le futur panel
+	$scope.set_panel = function(next_panel){
+		$scope.bodyClass = "step-"+next_panel+" panes";
 	}
 }
