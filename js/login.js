@@ -14,6 +14,8 @@ function LoginCtrl($scope, $http, $location) {
 			url: "session/",
 			timeout: 5000
 		}).then(function success(resp){
+			if(resp.data.key != "")
+				document.cookie = "session_key=" + resp.data.key;
 			$scope.status = null;
 			$location.path("/eleve");
 		},function error(resp){
