@@ -140,7 +140,7 @@ $scope.submit = function(){
 
     //Requête AJAX pour mettre à jour les infos
     jQuery.ajax({
-        type: 'POST', 
+        type: 'PUT', 
         url: URL,
         data: $scope.eleve ,
         statusCode: {
