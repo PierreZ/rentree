@@ -549,8 +549,19 @@ button.next {
 }
 
 p.error {
-    background: rgba(255,0,0,0.2);
-    border: 1px solid red;
-    padding: 0.2em 1em;
+    background: #c33;
+    color: white;
+    font-weight: bold;
+    border: 1px solid #900;
+    padding: 0.4em 1em;
     margin: 1em 0;
+    text-align: left;
+    &::before{
+        content: "⚡";
+        margin-right: 1em;
+        display: inline-block;
+        transform: scale(2);
+        transform-origin: baseline;
+        text-shadow: 0 1px 0 #900;
+    }
 }
