@@ -52,9 +52,15 @@ function AdminCtrl($scope, $cookies, $location, $http, $q){
 			$scope.eleves = resp.data;
 		}, httperr);
 
-	requests.promos = $http({ method: "GET", url: "promos/full" })
+	requests.promos = $http({ method: "GET", url: "promos/" })
 		.then(function success(resp){
 			$scope.promotions = resp.data;
+			$scope.promotions.push({"nompromotion": "Documents communs à toutes les promotions", "id": null, "priority": 1});
+		}, httperr);
+
+	requests.documents = $http({ method: "GET", url: "documents/" })
+		.then(function success(resp){
+			$scope.documents = resp.data;
 		}, httperr);
 
 	$q.all(requests).then(function(){ $scope.status = null; });

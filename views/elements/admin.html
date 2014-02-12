@@ -37,12 +37,12 @@
 		</table>
 	</div>
 	<ul class="promos" ng-show="mode == 'documents'">
-		<li ng-repeat="promo in promotions">
+		<li ng-repeat="promo in promotions | orderBy:['priority','nompromotion']">
 		<h3 ng-click="promo.expanded = !promo.expanded">
-			{{promo.nompromotion}} ({{promo.documents.length}} document{{promo.documents.length &gt; 1?"s":""}})
+			{{promo.nompromotion}}
 		</h3>
 		<ul ng-show="promo.expanded">
-			<li ng-repeat="document in promo.documents">{{document.nom}}</li>
+			<li ng-repeat="document in documents | filter:{id_promotion:promo.id}:true">{{document.nom}}</li>
 			<button ng-click="new_document(promo)">Nouveau document</button>
 		</ul>
 		</li>
