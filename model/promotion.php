@@ -84,35 +84,18 @@ class Promotion implements JsonSerializable{
 		}else return false;	
 	}
 
-	static function getall($full=false){
+	static function getall(){
 		$database = bdd::getInstance()->getInstancePDO();
-		if($full)
-			$query = "SELECT promotion.id_promotion, promotion.nompromotion, document.id_document, document.nom, document.fichier FROM promotion NATURAL JOIN document";
-		else
-			$query = "SELECT * FROM promotion";
+		$query = "SELECT * FROM promotion";
 		$prepared_query = $database->prepare($query);
 		if ($prepared_query->execute()&&$prepared_query->rowCount()>0){
 			$promos = Array();
 			while($row = $prepared_query->fetch()){
-				if(!$full){
-					$promo=new Promotion($row['nompromotion']);
-					$promo->setId($row['id_promotion']);
-					array_push($promos, $promo);
-				}
-				else {
-					if(!array_key_exists($row['id_promotion'], $promos)){
-						$promo=new Promotion($row['nompromotion']);
-						$promo->setId($row['id_promotion']);
-						$promos[$row['id_promotion']] = $promo;
-					}
-					$document=new Document($row['fichier'],$row['id_promotion']);
-					$document->setId($row['id_document']);
-					$document->setNom($row['nom']);
-					$promos[$row['id_promotion']]->pushDocument($document);
-				}
+				$promo=new Promotion($row['nompromotion']);
+				$promo->setId($row['id_promotion']);
+				array_push($promos, $promo);
 			}
 		}
-		if($full) $promos = array_values($promos); // turn into non-associative array
 		return $promos;
 	}
 

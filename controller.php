@@ -244,13 +244,6 @@ function get_promos(){
 	return json_encode(myserialize($p));
 }
 
-function get_promos_full(){
-	$p = Promotion::getall(true);
-
-	header("Content-Type: application/json");
-	return json_encode(myserialize($p));
-}
-
 function post_promo(){
 	if(!is_admin())
 		return generate_403();
