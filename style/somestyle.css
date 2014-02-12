@@ -599,7 +599,7 @@ body.admin {
   display: flex;
   flex-direction: row; }
   body.admin .sidebar {
-    flex: 0 1 20em;
+    flex: 0 0 20em;
     background: #333;
     display: flex;
     flex-direction: column; }
@@ -638,6 +638,7 @@ body.admin {
     right: 1em;
     margin: auto; }
   body.admin .main {
+    flex: 1 1 auto;
     margin: 1em; }
   body.admin table {
     border-collapse: collapse;
