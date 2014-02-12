@@ -23,14 +23,16 @@ TRUNCATE TABLE promotion;
 INSERT INTO promotion
 	(id_promotion, nompromotion)
 	VALUES
-	(1, 'CIR3')
+	(1, 'CIR3'),
+	(2, 'CIR2')
 ;
 
 TRUNCATE TABLE document;
 
 INSERT INTO document
-	(id_document, fichier, id_promotion)
+	(id_document, fichier, id_promotion, nom)
 	VALUES
-	(1, 'patate.pdf', NULL),
-	(2, 'tomate.pdf', 1)
+	(1, 'patate.pdf', NULL, 'patate'),
+	(2, 'tomate.pdf', 1, 'tomate'),
+	(3, 'Bongers.pdf', 1, 'bongers')
 ;
