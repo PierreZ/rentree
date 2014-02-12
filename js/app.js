@@ -14,5 +14,3 @@ rentree.config(['$routeProvider',
 		}).otherwise({ redirectTo: '/login' });
 	}
 ]);
-function AdminCtrl($scope) {
-}

@@ -10,6 +10,7 @@ dispatch("/", "serve_client_app");
 dispatch("/eleve/:id", "get_eleve");
 dispatch_post("/eleve/", "post_eleve");
 dispatch_put("/eleve/:id", "put_eleve");
+dispatch_delete("/eleve/:id", "delete_eleve");
 
 dispatch("/eleves/", "get_eleves");
 
@@ -30,6 +31,7 @@ dispatch_delete("/promo/:id", "delete_promo");
 dispatch("/promo/:id/documents", "get_promo_documents");
 
 dispatch("/promos/", "get_promos");
+dispatch("/promos/full/", "get_promos_full");
 
 dispatch_post("/session", "post_session");
 //dispatch_delete("/session/:admin_id", "delete_session");

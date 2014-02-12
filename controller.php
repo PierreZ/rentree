@@ -108,6 +108,22 @@ function put_eleve(){
 	return json_encode(myserialize($e));
 }
 
+function delete_eleve(){
+	if(!is_admin())
+		return generate_403();
+
+	$e = Eleve::find((int)params("id"));
+
+	if(!$e)
+		return generate_404();
+	else {
+		if($e->delete())
+			return generate_204();
+		else
+			return generate_500();
+	}
+}
+
 function get_eleves(){
 	if(!is_admin() && !is_self((int)params("id")))
 		return generate_403();
@@ -223,8 +239,13 @@ function get_promo(){
 
 function get_promos(){
 	$p = Promotion::getall();
-	if(!$p)
-		return generate_404();
+
+	header("Content-Type: application/json");
+	return json_encode(myserialize($p));
+}
+
+function get_promos_full(){
+	$p = Promotion::getall(true);
 
 	header("Content-Type: application/json");
 	return json_encode(myserialize($p));

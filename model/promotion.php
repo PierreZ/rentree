@@ -3,6 +3,7 @@
 class Promotion implements JsonSerializable{
 	private $id_promotion;
 	private $nompromotion;
+	private $documents = Array();
 
 	function __construct($nompromotion=null){
 		
@@ -30,12 +31,19 @@ class Promotion implements JsonSerializable{
 		$this->nompromotion=$nompromotion;
 	}
 
+	function pushDocument($document){
+		array_push($this->documents, $document);
+	}
+
 
 	function jsonSerialize(){
-		return Array(
+		$ret = Array(
 			"id" => $this->getId(),
 			"nompromotion" => $this->getNomPromotion()
 		);
+		if($this->documents)
+			$ret['documents'] = array_map(function($document){return $document->jsonSerialize();}, $this->documents);
+		return $ret;
 	}
 	
 	function patch($values){
@@ -76,17 +84,35 @@ class Promotion implements JsonSerializable{
 		}else return false;	
 	}
 
-	static function getall(){
+	static function getall($full=false){
 		$database = bdd::getInstance()->getInstancePDO();
-		$query  = "SELECT * FROM promotion";
+		if($full)
+			$query = "SELECT promotion.id_promotion, promotion.nompromotion, document.id_document, document.nom, document.fichier FROM promotion NATURAL JOIN document";
+		else
+			$query = "SELECT * FROM promotion";
+		$prepared_query = $database->prepare($query);
 		if ($prepared_query->execute()&&$prepared_query->rowCount()>0){
 			$promos = Array();
 			while($row = $prepared_query->fetch()){
-				$promo=new Promotion($row['nompromotion']);
-				$promo->setId($row['id_promotion']);
-				array_push($promos, $promo);
+				if(!$full){
+					$promo=new Promotion($row['nompromotion']);
+					$promo->setId($row['id_promotion']);
+					array_push($promos, $promo);
+				}
+				else {
+					if(!array_key_exists($row['id_promotion'], $promos)){
+						$promo=new Promotion($row['nompromotion']);
+						$promo->setId($row['id_promotion']);
+						$promos[$row['id_promotion']] = $promo;
+					}
+					$document=new Document($row['fichier'],$row['id_promotion']);
+					$document->setId($row['id_document']);
+					$document->setNom($row['nom']);
+					$promos[$row['id_promotion']]->pushDocument($document);
+				}
 			}
 		}
+		if($full) $promos = array_values($promos); // turn into non-associative array
 		return $promos;
 	}
 

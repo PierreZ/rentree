@@ -1,0 +1,54 @@
+<div class="sidebar">
+	<div class="logo-isen" style="font-size: 2Opx">
+		<h1>ISEN</h1>
+		<h2>documents de rentrée</h2>
+	</div>
+	<nav>
+		<button ng-click="mode = 'documents'" ng-class="mode == 'documents'?'active':''">Gestion des documents     </button>
+		<button ng-click="mode = 'eleves'"    ng-class="mode == 'eleves'?'active':''">   Gestion des élèves        </button>
+		<button ng-click="mode = 'admins'"    ng-class="mode == 'admins'?'active':''">   Gestion des administateurs</button>
+	</nav>
+	<button ng-click="logout()">Déconnexion</button>
+</div>
+<div class="main">
+	<div class="eleves" ng-show="mode == 'eleves'">
+		<label>Recherche: <input type="search" ng-model="search"/></label>
+		<table>
+			<thead><tr>
+					<td>Nom</td>
+					<td>Email</td>
+					<td>Date de naissance</td>
+					<td>Nom parents</td>
+					<td>Email parents</td>
+					<td>Tel. parents</td>
+			</tr></thead>
+			<tr ng-repeat="eleve in eleves | filter:search | orderBy:'id'" ng-class="eleve.success">
+				<form id="eleve{{eleve.id}}_form" ng-submit="commit_eleve(eleve)"></form>
+				<td><input type="text" form="eleve{{eleve.id}}_form" ng-model="eleve.nom" ng-disabled="!eleve.editing"/></td>
+				<td><input type="text" form="eleve{{eleve.id}}_form" ng-model="eleve.email" ng-disabled="!eleve.editing"/></td>
+				<td><input type="text" form="eleve{{eleve.id}}_form" ng-model="eleve.datenaissance" ng-disabled="!eleve.editing"/></td>
+				<td><input type="text" form="eleve{{eleve.id}}_form" ng-model="eleve.nomparent" ng-disabled="!eleve.editing"/></td>
+				<td><input type="text" form="eleve{{eleve.id}}_form" ng-model="eleve.emailparent" ng-disabled="!eleve.editing"/></td>
+				<td><input type="text" form="eleve{{eleve.id}}_form" ng-model="eleve.telparent" ng-disabled="!eleve.editing"/></td>
+				<td ng-show="eleve.editing"><button type="submit" form="eleve{{eleve.id}}_form" ng-disabled="eleve.waiting">&#10004;</button></td>
+				<td ng-show="!eleve.editing"><button type="button" ng-click="eleve.editing = !eleve.editing" ng-disabled="eleve.waiting">&#9998;</button></td>
+				<td><button ng-click="delete_eleve(eleve)" type="button" ng-disabled="eleve.waiting">&#10008;</button></td>
+			</tr>
+		</table>
+	</div>
+	<ul class="promos" ng-show="mode == 'documents'">
+		<li ng-repeat="promo in promotions">
+		<h3 ng-click="promo.expanded = !promo.expanded">
+			{{promo.nompromotion}} ({{promo.documents.length}} document{{promo.documents.length &gt; 1?"s":""}})
+		</h3>
+		<ul ng-show="promo.expanded">
+			<li ng-repeat="document in promo.documents">{{document.nom}}</li>
+			<button ng-click="new_document(promo)">Nouveau document</button>
+		</ul>
+		</li>
+		<button ng-click="new_promo()">Nouvelle promo</button>
+	</ul>
+	<div class="admins" ng-show="mode == 'admins'">
+	</div>
+</div>
+<p ng-show="error" class="error">{{error}}</div>

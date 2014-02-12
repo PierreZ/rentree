@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: target-light;
   src: url("fonts/target/TargetLight.ttf");
@@ -11,6 +12,7 @@
   font-style: normal; }
 
 .logo-isen {
+  cursor: default;
   display: inline-block;
   font-family: target-light;
   color: #b82a28;
@@ -64,6 +66,7 @@
   font-style: normal; }
 
 .logo-isen {
+  cursor: default;
   display: inline-block;
   font-family: target-light;
   color: #b82a28;
@@ -576,7 +579,100 @@ button.next {
       line-height: 1em; } }
 
 p.error {
-  background: rgba(255, 0, 0, 0.2);
-  border: 1px solid red;
-  padding: 0.2em 1em;
-  margin: 1em 0; }
+  background: #c33;
+  color: white;
+  font-weight: bold;
+  border: 1px solid #900;
+  padding: 0.4em 1em;
+  margin: 1em 0;
+  text-align: left; }
+  p.error::before {
+    content: "⚡";
+    margin-right: 1em;
+    display: inline-block;
+    transform: scale(2);
+    transform-origin: baseline;
+    text-shadow: 0 1px 0 #900; }
+
+body.admin {
+  max-width: 100%;
+  display: flex;
+  flex-direction: row; }
+  body.admin .sidebar {
+    flex: 0 1 20em;
+    background: #333;
+    display: flex;
+    flex-direction: column; }
+    body.admin .sidebar button {
+      color: white;
+      background: transparent;
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0;
+      margin: 0;
+      padding: 1em;
+      flex: 0 0 auto;
+      align-self: stretch;
+      transition: background .3s ease-out; }
+      body.admin .sidebar button:last-child {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+      body.admin .sidebar button:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transition-duration: .05s; }
+      body.admin .sidebar button.active {
+        background: rgba(255, 255, 255, 0.2); }
+    body.admin .sidebar .logo-isen {
+      font-size: 1.1em;
+      color: white;
+      align-self: center;
+      flex: 0 0 auto; }
+      body.admin .sidebar .logo-isen h2 {
+        border-color: white; }
+    body.admin .sidebar nav {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column; }
+  body.admin .error {
+    position: fixed;
+    top: 1em;
+    right: 1em;
+    margin: auto; }
+  body.admin .main {
+    margin: 1em; }
+  body.admin table {
+    border-collapse: collapse;
+    table-layout: fixed; }
+    body.admin table input, body.admin table button, body.admin table thead td {
+      background: transparent;
+      margin: 0;
+      padding: 0.6em 0.3em;
+      border-radius: 0; }
+    body.admin table input, body.admin table button {
+      border: 0; }
+    body.admin table input[disabled] {
+      color: inherit; }
+    body.admin table input:not([disabled]) {
+      background: white; }
+    body.admin table button {
+      font-size: 1.4em;
+      line-height: 0; }
+    body.admin table thead {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      background: #fcfcfb; }
+    body.admin table tr.success {
+      animation: success 1s ease-out; }
+    body.admin table td {
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.1);
+      margin: 0; }
+    body.admin table tr:nth-child(2n) td {
+      background: rgba(0, 0, 255, 0.05); }
+
+@keyframes success {
+  from {
+    background: rgba(0, 255, 0, 0.3); }
+
+  to {
+    background: rgba(0, 255, 0, 0); } }
