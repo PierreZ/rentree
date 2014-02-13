@@ -599,7 +599,7 @@ body.admin {
   display: flex;
   flex-direction: row; }
   body.admin .sidebar {
-    flex: 0 0 20em;
+    flex: 0 1 20em;
     background: #333;
     display: flex;
     flex-direction: column; }
@@ -640,36 +640,66 @@ body.admin {
   body.admin .main {
     flex: 1 1 auto;
     margin: 1em; }
-  body.admin table {
-    border-collapse: collapse;
-    table-layout: fixed; }
-    body.admin table input, body.admin table button, body.admin table thead td {
+    body.admin .main form, body.admin .main button, body.admin .main input {
+      display: inline;
+      width: auto; }
+    body.admin .main button, body.admin .main input {
       background: transparent;
       margin: 0;
-      padding: 0.6em 0.3em;
-      border-radius: 0; }
-    body.admin table input, body.admin table button {
-      border: 0; }
-    body.admin table input[disabled] {
-      color: inherit; }
-    body.admin table input:not([disabled]) {
-      background: white; }
-    body.admin table button {
-      font-size: 1.4em;
-      line-height: 0; }
-    body.admin table thead {
-      position: -webkit-sticky;
-      position: sticky;
-      top: 0;
-      background: #fcfcfb; }
-    body.admin table tr.success {
-      animation: success 1s ease-out; }
-    body.admin table td {
-      border: 1px solid rgba(0, 0, 0, 0.3);
-      background: rgba(0, 0, 0, 0.1);
-      margin: 0; }
-    body.admin table tr:nth-child(2n) td {
-      background: rgba(0, 0, 255, 0.05); }
+      padding: 0.3em; }
+      body.admin .main button[disabled], body.admin .main input[disabled] {
+        color: inherit;
+        border-color: transparent; }
+      body.admin .main button:not([disabled]), body.admin .main input:not([disabled]) {
+        background: white; }
+    body.admin .main li {
+      margin-bottom: 1em;
+      padding-left: 2em;
+      list-style: none; }
+    body.admin .main table {
+      border-collapse: collapse;
+      table-layout: fixed;
+      width: 99%;
+      margin: 1em auto; }
+      body.admin .main table thead td {
+        background: transparent;
+        padding: 0.6em 0.3em; }
+      body.admin .main table td {
+        overflow: hidden; }
+      body.admin .main table input, body.admin .main table button {
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        margin: 0;
+        padding: 0.3em;
+        padding: 0.6em 0.3em;
+        width: auto; }
+        body.admin .main table input[disabled], body.admin .main table button[disabled] {
+          color: inherit;
+          border-color: transparent; }
+        body.admin .main table input:not([disabled]), body.admin .main table button:not([disabled]) {
+          background: white; }
+      body.admin .main table button {
+        font-size: 1.4em;
+        line-height: 0; }
+        body.admin .main table button:not([disabled]) {
+          background: transparent; }
+      body.admin .main table thead {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        background: #fcfcfb; }
+      body.admin .main table tr.success {
+        animation: success 1s ease-out; }
+      body.admin .main table td {
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.1);
+        margin: 0; }
+      body.admin .main table tr:nth-child(2n) td {
+        background: rgba(0, 0, 255, 0.05); }
+      body.admin .main table colgroup.controls col {
+        width: 2.5em;
+        text-align: center; }
 
 @keyframes success {
   from {

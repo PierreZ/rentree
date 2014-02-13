@@ -1,3 +1,15 @@
+@mixin invisinput {
+    background: transparent;
+    margin: 0;
+    padding: 0.3em;
+    &[disabled]{
+        color: inherit;
+        border-color: transparent;
+    }
+    &:not([disabled]){
+        background: white;
+    }
+}
 body.admin {
     max-width: 100%;
     display: flex;
@@ -25,7 +37,7 @@ body.admin {
                 background: rgba(255,255,255, 0.2);
             }
         }
-        flex: 0 0 20em;
+        flex: 0 1 20em;
         background: #333;
         display: flex;
         flex-direction: column;
@@ -53,54 +65,77 @@ body.admin {
     .main {
         flex: 1 1 auto;
         margin: 1em;
+
+        form, button, input {
+            display: inline;
+            width: auto;
+        }
+        button, input { @include invisinput; }
+
+        li {
+            margin-bottom: 1em;
+            padding-left: 2em;
+            list-style: none;
+        }
+
+        table{
+            border-collapse: collapse;
+            table-layout: fixed;
+            width: 99%;
+            margin: 1em auto;
+
+            thead td{
+                background: transparent;
+                padding: 0.6em 0.3em;
+            }
+
+            td {
+                overflow: hidden;
+            }
+
+            input, button {
+                border: 0;
+                border-radius: 0;
+                @include invisinput;
+                padding: 0.6em 0.3em;
+                width: auto;
+            }
+
+            button{
+                font-size: 1.4em;
+                line-height: 0;
+                &:not([disabled]){ background: transparent; }
+            }
+
+            thead {
+                position: -webkit-sticky;
+                position: sticky;
+                top: 0;
+                background: #fcfcfb;
+            }
+
+            tr.success {
+                animation: success 1s ease-out;
+            }
+
+            td {
+                border: 1px solid rgba(0,0,0,0.3);
+                background: rgba(0,0,0,0.1);
+                margin: 0;
+            }
+            tr:nth-child(2n) td {
+                background: rgba(0,0,255,0.05);
+            }
+
+            colgroup.controls col {
+                width: 2.5em;
+                text-align: center;
+            }
+
     }
 
-    table{
-        border-collapse: collapse;
-        table-layout: fixed;
-
-        input, button, thead td{
-            background: transparent;
-            margin: 0;
-            padding: 0.6em 0.3em;
-            border-radius: 0;
-        }
-        input, button {
-            border: 0;
-        }
-        input[disabled]{
-            color: inherit;
-        }
-        input:not([disabled]){
-            background: white;
-        }
-
-        button{
-            font-size: 1.4em;
-            line-height: 0;
-        }
-
-        thead {
-            position: -webkit-sticky;
-            position: sticky;
-            top: 0;
-            background: #fcfcfb;
-        }
-
-        tr.success {
-            animation: success 1s ease-out;
-        }
-
-        td {
-            border: 1px solid rgba(0,0,0,0.3);
-            background: rgba(0,0,0,0.1);
-            margin: 0;
-        }
-        tr:nth-child(2n) td {
-            background: rgba(0,0,255,0.05);
-        }
-
     }
+
 }
 
 @keyframes success {

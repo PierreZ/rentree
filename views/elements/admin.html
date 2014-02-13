@@ -14,6 +14,7 @@
 	<div class="eleves" ng-show="mode == 'eleves'">
 		<label>Recherche: <input type="search" ng-model="search"/></label>
 		<table>
+			<colgroup><col><col><col><col><col><col></colgroup><colgroup class="controls"><col><col></colgroup>
 			<thead><tr>
 					<td>Nom</td>
 					<td>Email</td>
@@ -32,7 +33,7 @@
 				<td><input type="text" form="eleve{{eleve.id}}_form" ng-model="eleve.telparent" ng-disabled="!eleve.editing"/></td>
 				<td ng-show="eleve.editing"><button type="submit" form="eleve{{eleve.id}}_form" ng-disabled="eleve.waiting">&#10004;</button></td>
 				<td ng-show="!eleve.editing"><button type="button" ng-click="eleve.editing = !eleve.editing" ng-disabled="eleve.waiting">&#9998;</button></td>
-				<td><button ng-click="delete_eleve(eleve)" type="button" ng-disabled="eleve.waiting">&#10008;</button></td>
+				<td ng-show="!eleve.editing"><button ng-click="delete_eleve(eleve)" type="button" ng-disabled="eleve.waiting">&#10008;</button></td>
 			</tr>
 		</table>
 	</div>
@@ -42,7 +43,14 @@
 			{{promo.nompromotion}}
 		</h3>
 		<ul ng-show="promo.expanded">
-			<li ng-repeat="document in documents | filter:{id_promotion:promo.id}:true">{{document.nom}}</li>
+			<li ng-repeat="document in documents | filter:{id_promotion:promo.id}:true">
+				<form ng-submit="commit_document(document)">
+					<input ng-model="document.nom" ng-disabled="!document.editing"/>
+					<button ng-show="document.editing" ng-disabled="document.waiting">&#10004;</button>
+				</form>
+				<button ng-click="document.editing = true" ng-show="!document.editing" ng-disabled="document.waiting">&#9998;</button>
+				<button ng-click="delete_document(document)" ng-show="!document.editing" ng-disabled="document.waiting">&#10008;</button>
+			</li>
 			<button ng-click="new_document(promo)">Nouveau document</button>
 		</ul>
 		</li>
