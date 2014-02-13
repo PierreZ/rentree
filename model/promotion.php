@@ -3,6 +3,7 @@
 class Promotion implements JsonSerializable{
 	private $id_promotion;
 	private $nompromotion;
+	private $documents = Array();
 
 	function __construct($nompromotion=null){
 		
@@ -30,12 +31,19 @@ class Promotion implements JsonSerializable{
 		$this->nompromotion=$nompromotion;
 	}
 
+	function pushDocument($document){
+		array_push($this->documents, $document);
+	}
+
 
 	function jsonSerialize(){
-		return Array(
+		$ret = Array(
 			"id" => $this->getId(),
 			"nompromotion" => $this->getNomPromotion()
 		);
+		if($this->documents)
+			$ret['documents'] = array_map(function($document){return $document->jsonSerialize();}, $this->documents);
+		return $ret;
 	}
 	
 	function patch($values){
@@ -78,7 +86,7 @@ class Promotion implements JsonSerializable{
 
 	static function getall(){
 		$database = bdd::getInstance()->getInstancePDO();
-		$query  = "SELECT * FROM promotion";
+		$query = "SELECT * FROM promotion";
 		$prepared_query = $database->prepare($query);
 		if ($prepared_query->execute()&&$prepared_query->rowCount()>0){
 			$promos = Array();

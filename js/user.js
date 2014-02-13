@@ -21,9 +21,9 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location) {
 	}).then(function success(resp){
 		$scope.eleve = resp.data;
 		$scope.set_panel(2);
-	}, function error(resp){
-		if(resp.status == 403 && $rootScope.session)
-			$scope.eleve = { email: $rootScope.session.email };
+		}, function error(resp){
+			if(resp.status == 403 && $rootScope.session)
+				$scope.eleve = { email: $rootScope.session.email };
 		$scope.set_panel(0);
 	});
 
@@ -66,19 +66,17 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location) {
 				|| $scope.eleve.nomparent.length < 1) {
 					$scope.status = null;
 					$scope.error = "Merci de remplir tout les champs";
-;
 					return;
 				};
 		$http({
-			method: "PUT",
+			method: $scope.eleve.id?"PUT":"POST",
 			data: $scope.eleve,
-			url: "eleve/" + $cookies.id_eleve,
+			url: "eleve/" + ($scope.eleve.id?$scope.eleve.id:""),
 			timeout: 5000
 		}).then(function success(resp){
 			document.body.classList.add("step-2");
 			document.body.classList.remove("step-1");
 			$scope.status = null;
-
 		},function error(resp){
 			$scope.status = null;
 			if(resp.data.error)
@@ -100,5 +98,13 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location) {
 	// Permet de setter le futur panel
 	$scope.set_panel = function(next_panel){
 		$scope.bodyClass = "step-"+next_panel+" panes";
-	}
+		},function error(resp){
+			$scope.status = null;
+			if(resp.data.error)
+				$scope.error = resp.data.error;
+			else
+				$scope.error = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
+		
+
+	};
 }

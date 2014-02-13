@@ -1,6 +1,8 @@
 -- Made by Corentin Delcourt
 --     and Pierre Zemb
 
+DROP DATABASE IF EXISTS rentree;
+
 CREATE DATABASE rentree CHARACTER SET utf8 collate utf8_bin;
 USE rentree;
 
@@ -8,7 +10,7 @@ CREATE TABLE `eleve` (
 	`id_eleve` int NOT NULL auto_increment,
 	`email` varchar(256) NOT NULL,
 	`nom` varchar(256) NOT NULL,
-	`datenaissance` DATE NOT NULL,
+	`datenaissance` varchar(256) NOT NULL,
 	`emailparent` varchar(256) NOT NULL,
 	`telparent` varchar(256) NOT NULL,
 	`nomparent` varchar(256) NOT NULL,

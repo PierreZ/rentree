@@ -10,6 +10,7 @@ dispatch("/", "serve_client_app");
 dispatch("/eleve/:id", "get_eleve");
 dispatch_post("/eleve/", "post_eleve");
 dispatch_put("/eleve/:id", "put_eleve");
+dispatch_delete("/eleve/:id", "delete_eleve");
 
 dispatch("/eleves/", "get_eleves");
 

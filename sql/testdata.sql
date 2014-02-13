@@ -5,8 +5,12 @@ TRUNCATE TABLE eleve;
 INSERT INTO eleve
 	(email, nom, datenaissance, emailparent, nomparent, telparent)
 	VALUES
-	('duchmoll@isen.fr', 'Duchmoll', '1992-01-01', 'duchmoll@hotmail.fr', 'Duchmoll Senior', '0246810121')
+	('duchmoll@isen.fr', 'Duchmoll', '1992-01-01', 'duchmoll@hotmail.fr', 'Duchmoll Senior', '0246810121'),
+	('duchmoll2@isen.fr', 'Duchmoll deux le retour', '1993-01-01', 'duchmoll@hotmail.fr', 'Duchmoll Senior', '0246810121'),
+	('duchmoll3@isen.fr', 'Duchmoll trois la vengeance', '1994-01-01', 'duchmoll@hotmail.fr', 'Duchmoll Senior', '0246810121')
 ;
+
+TRUNCATE TABLE admin;
 
 INSERT INTO admin
 	(id_admin, email, pw_hash)
@@ -14,15 +18,21 @@ INSERT INTO admin
 	(1, 'foo@bar.baz', PASSWORD('quux'))
 ;
 
+TRUNCATE TABLE promotion;
+
 INSERT INTO promotion
 	(id_promotion, nompromotion)
 	VALUES
-	(1, 'CIR3')
+	(1, 'CIR3'),
+	(2, 'CIR2')
 ;
 
+TRUNCATE TABLE document;
+
 INSERT INTO document
-	(id_document, fichier, id_promotion)
+	(id_document, fichier, id_promotion, nom)
 	VALUES
-	(1, 'patate.pdf', NULL),
-	(2, 'tomate.pdf', 1)
+	(1, 'patate.pdf', NULL, 'patate'),
+	(2, 'tomate.pdf', 1, 'tomate'),
+	(3, 'Bongers.pdf', 1, 'bongers')
 ;

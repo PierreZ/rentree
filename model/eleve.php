@@ -245,7 +245,7 @@ class Eleve implements JsonSerializable{
 		$id = $this->getId();
 		$query  = "DELETE FROM eleve WHERE id_eleve = :id;";
 
-		$prepared_query = $atabase->prepare($query);
+		$prepared_query = $database->prepare($query);
 		$prepared_query->bindParam(':id', $id);
 
 		if ($prepared_query->execute()){
