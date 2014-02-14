@@ -112,16 +112,17 @@ class Document implements JsonSerializable{
 		$database = bdd::getInstance()->getInstancePDO();
 		$query = "SELECT * FROM document";
 		$prepared_query = $database->prepare($query);
-		if ($prepared_query->execute()&&$prepared_query->rowCount()>0){
-			$docs = Array();
+		$docs = Array();
+		if ($prepared_query->execute()){
 			while($row = $prepared_query->fetch()){
 				$doc=new Document($row['fichier'], $row['id_promotion']);
 				$doc->setId($row['id_document']);
 				$doc->setNom($row['nom']);
 				array_push($docs, $doc);
 			}
+			return $docs;
 		}
-		return $docs;
+		else return false;
 	}
 
 	static function forPromo($promoid=0){
