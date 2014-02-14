@@ -302,6 +302,7 @@ function get_promo_zip(){
 		return generate_404();
 
 	header("Content-Type: application/zip");
+	header("Content-Disposition: attachment; filename=\"Documents ".$p->getNomPromotion().".zip\"");
 	ob_clean();
 	flush();
 	readfile(Document::zipForPromo($p->getId()));
