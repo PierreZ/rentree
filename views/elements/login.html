@@ -5,8 +5,8 @@
 <form ng-submit="login()">
     <p class="error" ng-show="error">{{error}}&nbsp;</p>
     <label for="email">E-mail :</label>
-    <input type="text" name="email" id="email" ng-model="email"/>
+    <input type="text" name="email" id="email" ng-model="email" autocomplete="off"/>
     <label for="password">Mot de passe (reçu par e-mail) :</label>
-    <input type="password" name="password" id="password" ng-model="password"/>
+    <input type="password" name="password" id="password" ng-model="password"/ autocomplete="off">
     <button ng-class="status" ng-disabled="status"><div class="label">Connexion</div><div class="spinner"></div></button>
 </form>

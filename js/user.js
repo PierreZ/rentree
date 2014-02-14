@@ -1,4 +1,4 @@
-function EleveCtrl($scope, $rootScope, $http, $cookies, $location) {
+function EleveCtrl($scope, $rootScope, $http, $cookies, $location, $window) {
 	
 	$scope.bodyClass = "step-0 panes fade";
 	$scope.status = null;
@@ -93,7 +93,10 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location) {
 	// Permet de setter le document choisi
 	$scope.select_document= function(document) {
 		$scope.selected_document = document;
-		$scope.set_panel(4);
+		//alert($location.protocol()+'://'+$location.host()+window.location.pathname.slice(0,-1)+$location.path()+$scope.selected_document+'.pdf');
+		$window.open($location.protocol()+'://'+$location.host()+window.location.pathname+'/document/'+$scope.selected_document+'.pdf');
+		//$window.open($location.protocol()+'://'+$location.host().hash('dashboard');+'/rentree/document/'+$scope.selected_document+'.pdf');
+		
 	};
 	// Permet de setter le futur panel
 	$scope.set_panel = function(next_panel){
