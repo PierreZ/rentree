@@ -33,7 +33,7 @@
     <h1>Sélectionner votre promotion</h1>
     <ul>
         <!--ng-click permet d'appeler une fonction contenu dans le controller. Les doubles accolades permettent de préciser à Angular qu'il faut interpréter le code-->
-        <li ng-click="select_promo(promo.id)" ng-repeat="promo in promos">{{promo.nompromotion}}</li>
+        <li ng-click="select_promo(promo.id)" ng-repeat="promo in promos" ng-class="promo.id == selected_promo?'selected':''">{{promo.nompromotion}}</li>
         <!--ng-repeat permet de boucler dans un tableau. Un simple promos.push quelques part dans le code mettra à jour la vue -->
     </ul>
 </div>
