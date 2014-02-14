@@ -305,17 +305,17 @@ body.panes {
         margin-bottom: 1em; }
       body.panes .contact form button {
         transition: opacity 1s; }
-  body.panes .documents {
+  body.panes .documents, body.panes .promos {
     flex: 0 0 70%; }
-    body.panes .documents > * {
+    body.panes .documents > *, body.panes .promos > * {
       transition: opacity .5s; }
-    body.panes .documents ul {
+    body.panes .documents ul, body.panes .promos ul {
       font-family: titillium-thin;
       margin: 2em 0;
       list-style: none;
       font-size: 1.6em;
       background: 2px solid rgba(0, 0, 0, 0); }
-      body.panes .documents ul li {
+      body.panes .documents ul li, body.panes .promos ul li {
         padding: 1em 2em;
         border: 2px solid rgba(0, 0, 0, 0);
         border-left: none;
@@ -326,45 +326,29 @@ body.panes {
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden; }
-        body.panes .documents ul li.selected::after, body.panes .documents ul li:hover::after {
+        body.panes .documents ul li.selected::after, body.panes .documents ul li:hover::after, body.panes .promos ul li.selected::after, body.panes .promos ul li:hover::after {
           content: ">";
           position: absolute;
           line-height: 0;
           top: 50%;
           right: 1em; }
-        body.panes .documents ul li.selected {
+        body.panes .documents ul li.selected, body.panes .promos ul li.selected {
           border-color: rgba(0, 0, 0, 0.2);
           background: #ddd; }
-  body.panes .promos {
-    flex: 0 0 70%; }
-    body.panes .promos > * {
-      transition: opacity .5s; }
-    body.panes .promos ul {
-      font-family: titillium-thin;
-      margin: 2em 0;
-      list-style: none;
-      font-size: 1.6em;
-      background: 2px solid rgba(0, 0, 0, 0); }
-      body.panes .promos ul li {
-        padding: 1em 2em;
-        border: 2px solid rgba(0, 0, 0, 0);
-        border-left: none;
-        border-right: none;
-        margin-top: -2px;
-        cursor: pointer;
-        position: relative;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden; }
-        body.panes .promos ul li.selected::after, body.panes .promos ul li:hover::after {
-          content: ">";
-          position: absolute;
-          line-height: 0;
-          top: 50%;
-          right: 1em; }
-        body.panes .promos ul li.selected {
-          border-color: rgba(0, 0, 0, 0.2);
-          background: #ddd; }
+      body.panes .documents ul a.getall, body.panes .promos ul a.getall {
+        display: block;
+        font-family: titillium-regular;
+        text-decoration: none;
+        background: #b9a;
+        color: white;
+        padding: 1em;
+        text-align: center;
+        margin: 1em;
+        border-top: rgba(255, 255, 255, 0.4) solid 0.2em; }
+        body.panes .documents ul a.getall:hover, body.panes .promos ul a.getall:hover {
+          opacity: 0.9; }
+        body.panes .documents ul a.getall::before, body.panes .promos ul a.getall::before {
+          content: "★ "; }
   body.panes .document-viewer {
     flex: 0 0 calc(100% - 30em);
     background: url("pdf.js.png") top center, black; }

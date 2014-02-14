@@ -47,8 +47,8 @@
         <!--ng-if permet de faire du test. Si la condition est vraie, alors l'élément est affiché -->
         <li ng-click="select_document(document.id)" ng-repeat="document in documents" ng-if="document.id_promotion==selected_promo||document.id_promotion==null">{{document.nom}}</li>
         <!--Ici, l'élément est affiché si l'ID de promotion de l'élément correspond à la variable $scope.selected. 0 correspond aux documents communs-->
+        <a class="getall" href="promo/{{selected_promo}}/documents.zip">Télécharger tous les documents</a>
     </ul>
-    <a href="promo/{{selected_promo}}/documents.zip">Télécharger tous les documents</a>
 </div>
 <div class="document-viewer">
 </div>
