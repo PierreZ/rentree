@@ -38,20 +38,32 @@
 		</table>
 	</div>
 	<ul class="promos" ng-show="mode == 'documents'">
-		<li ng-repeat="promo in promotions | orderBy:['priority','nompromotion']">
-		<h3 ng-click="promo.expanded = !promo.expanded">
-			{{promo.nompromotion}}
+		<li ng-repeat="promo in promotions" drop="promo" dropstyle="dropped" ng-class="promo.expanded?'promo expanded':'promo'">
+		<h3>
+			<span ng-click="promo.expanded = !promo.expanded" ng-if="!promo.editing">{{promo.nompromotion}}</span>
+			<form ng-submit="commit_promotion(promo)" ng-if="promo.editing">
+				<input ng-model="promo.nompromotion"/>
+				<button ng-disabled="promo.waiting">&#10004;</button>
+			</form>
+			<button ng-click="promo.editing = true" ng-show="promo.id && !promo.editing">&#9998;</button>
+			<button ng-click="delete_promotion(promo)" ng-show="promo.id && !promo.editing">&#10008;</button>
 		</h3>
 		<ul ng-show="promo.expanded">
-			<li ng-repeat="document in documents | filter:{id_promotion:promo.id}:true">
-				<form ng-submit="commit_document(document)">
-					<input ng-model="document.nom" ng-disabled="!document.editing"/>
-					<button ng-show="document.editing" ng-disabled="document.waiting">&#10004;</button>
-				</form>
-				<button ng-click="document.editing = true" ng-show="!document.editing" ng-disabled="document.waiting">&#9998;</button>
-				<button ng-click="delete_document(document)" ng-show="!document.editing" ng-disabled="document.waiting">&#10008;</button>
-			</li>
-			<button ng-click="new_document(promo)">Nouveau document</button>
+			<table>
+				<colgroup><col></colgroup><colgroup class="controls"><col><col></colgroup>
+				<tr drag="document" dragstyle="dragged" ng-repeat="document in documents | filter:{id_promotion:promo.id}:true">
+					<form id="document{{document.id}}_form" ng-submit="commit_document(document)"></form>
+					<td><span ng-show="!document.editing">&#8645;</span>
+						<input form="document{{document.id}}_form" ng-model="document.nom" ng-disabled="!document.editing"/></td>
+					<td ng-show="document.editing"><button form="document{{document.id}}_form" ng-disabled="document.waiting">&#10004;</button></td>
+					<td ng-show="!document.editing"><button ng-click="document.editing = true" ng-disabled="document.waiting">&#9998;</button></td>
+					<td ng-show="!document.editing"><button ng-click="delete_document(document)" ng-disabled="document.waiting">&#10008;</button></td>
+				</tr>
+			</table>
+			<form action="document" method="POST" ng-upload="uploaded(content, promo)">
+				<input type="file" name="doc"/>
+				<input type="submit" value="Ajouter un nouveau document"/>
+			</form>
 		</ul>
 		</li>
 		<button ng-click="new_promo()">Nouvelle promo</button>

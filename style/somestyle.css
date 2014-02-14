@@ -700,6 +700,19 @@ body.admin {
       body.admin .main table colgroup.controls col {
         width: 2.5em;
         text-align: center; }
+    body.admin .main .promos table {
+      width: auto;
+      margin-left: 0; }
+    body.admin .main li.promo {
+      margin-bottom: 3em; }
+    body.admin .main .promo h3::before {
+      content: '+ ';
+      display: inline-block;
+      width: 1em; }
+    body.admin .main .promo.expanded h3::before {
+      content: '- '; }
+    body.admin .main .promo.dropped {
+      background: rgba(0, 0, 255, 0.1); }
 
 @keyframes success {
   from {

@@ -1,4 +1,4 @@
-var rentree = angular.module('rentree', ['ngRoute', 'ngCookies']);
+var rentree = angular.module('rentree', ['ngRoute', 'ngCookies', 'frangular-dragdrop', 'ngUpload']);
 
 rentree.config(['$routeProvider',
 	function($routeProvider){

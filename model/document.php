@@ -6,7 +6,7 @@ class Document implements JsonSerializable{
 	private $id_promotion;
 	private $nom;
 
-	function __construct($fichier, $id_promotion=0){
+	function __construct($fichier, $id_promotion=null){
 		$this->setFichier($fichier);
 		$this->setIdPromotion($id_promotion);
 	}
@@ -90,7 +90,7 @@ class Document implements JsonSerializable{
 
 		$query = "SELECT fichier, id_promotion, nom FROM document WHERE id_document = :id;";
 		$prepared_query = $database->prepare($query);
-		$prepared_query->bindParam(':id', $id);
+		$prepared_query->bindValue(':id', $id);
 		if ($prepared_query->execute()&&$prepared_query->rowCount()>0){
 			$resultat = $prepared_query->fetch();
 
@@ -120,7 +120,7 @@ class Document implements JsonSerializable{
 	static function forPromo($promoid=0){
 		$database = bdd::getInstance()->getInstancePDO();
 
-		if($promoid == 0){
+		if(!$promoid){
 			$query = "SELECT id_document, fichier, nom FROM document WHERE id_promotion IS NULL";
 			$prepared_query = $database->prepare($query);
 		} else {
@@ -132,7 +132,7 @@ class Document implements JsonSerializable{
 			$docs = Array();
 			while($row = $prepared_query->fetch()){
 				$doc=new Document($row['fichier'], $promoid);
-				$doc->setId($row['id_document']);
+				$doc->setId((int)$row['id_document']);
 				$doc->setNom($row['nom']);
 				array_push($docs, $doc);
 			}

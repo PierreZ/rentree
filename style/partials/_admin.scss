@@ -132,7 +132,27 @@ body.admin {
                 text-align: center;
             }
 
-    }
+        }
+
+        .promos table {
+            width: auto;
+            margin-left: 0;
+        }
+        li.promo {
+            margin-bottom: 3em;
+        }
+        .promo h3::before {
+            content:'+ ';
+            display: inline-block;
+            width: 1em;
+        }
+        .promo.expanded h3::before {
+            content:'- ';
+        }
+
+        .promo.dropped {
+            background: rgba(0,0,255,0.1);
+        }
 
     }
 
