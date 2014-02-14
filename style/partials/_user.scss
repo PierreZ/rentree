@@ -265,6 +265,12 @@ body.panes {
         flex: 0 0 calc(100% - 30em);
         background: url("pdf.js.png") top center, black;
     }
+
+    p.error {
+        position: fixed;
+        top: 1em; right: 1em;
+        margin: auto;
+    }
 }
 body.panes.step-0,
 body.panes.step-1 {

@@ -2,9 +2,7 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location, $window) {
 	
 	$scope.bodyClass = "step-0 panes fade";
 	$scope.status = null;
-	$scope.error_form = null;
-	$scope.error_documents = null;
-	$scope.error_promos = null;
+	$scope.error = null;
 	// Initialisation de la promo choisie
 	// Selected permet de savoir quel promo à été choisies(plus précisément son ID)
 	$scope.selected_promo=0;
@@ -37,9 +35,9 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location, $window) {
 	},function error(resp){
 		$scope.status = null;
 		if(resp.data.error)
-			$scope.error_promos = resp.data.error;
+			$scope.error = resp.data.error;
 		else
-			$scope.error_promos = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
+			$scope.error = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
 	});
 
 	// Récupération des documents
@@ -52,9 +50,9 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location, $window) {
 	},function error(resp){
 		$scope.status = null;
 		if(resp.data.error)
-			$scope.error_documents = resp.data.error;
+			$scope.error = resp.data.error;
 		else
-			$scope.error_documents = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
+			$scope.error = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
 	});
 
 	// Fonction d'envoi des coord de l'élève
@@ -65,7 +63,7 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location, $window) {
 				|| $scope.eleve.emailparent.length < 1  || $scope.eleve.telparent.length < 1
 				|| $scope.eleve.nomparent.length < 1) {
 					$scope.status = null;
-					$scope.error = "Merci de remplir tout les champs";
+					$scope.error = "Merci de remplir tout les champs.";
 					return;
 				};
 		$http({
@@ -77,12 +75,13 @@ function EleveCtrl($scope, $rootScope, $http, $cookies, $location, $window) {
 			document.body.classList.add("step-2");
 			document.body.classList.remove("step-1");
 			$scope.status = null;
+			$scope.error = null;
 		},function error(resp){
 			$scope.status = null;
 			if(resp.data.error)
-				$scope.error_form = resp.data.error;
+				$scope.error = resp.data.error;
 			else
-				$scope.error_form = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
+				$scope.error = "Une erreur inconnue est survenue. Veuillez réessayer plus tard.";
 		});
 	}
 	// Permet de setter la promo choisie

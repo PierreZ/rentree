@@ -1,3 +1,4 @@
+<p class="error" ng-show="error">{{error}}&nbsp;</p>
 <div class="bienvenue">
     <div>
         <h1>Bienvenue à l'ISEN.</h1>
@@ -10,7 +11,6 @@
         <h2>Informations de contact :</h2>
 
         <h3>Vous :</h3>
-        <p class="error" ng-show="error_form">{{error_form}}&nbsp;</p>
         <label for="nom">Nom :</label>
         <input type="text" name="nom" id="nom" ng-model="eleve.nom" ng-change="console.dir(eleve)"/>
         <label for="email">Adresse E-mail :</label>
@@ -31,7 +31,6 @@
 <div class="promos">
     <button class="back" ng-click="set_panel(2)">Modifier mes informations</button>
     <h1>Sélectionner votre promotion</h1>
-    <p class="error" ng-show="error_promos">{{error_promos}}&nbsp;</p>
     <ul>
         <!--ng-click permet d'appeler une fonction contenu dans le controller. Les doubles accolades permettent de préciser à Angular qu'il faut interpréter le code-->
         <li ng-click="select_promo(promo.id)" ng-repeat="promo in promos">{{promo.nompromotion}}</li>
@@ -40,7 +39,6 @@
 </div>
 
 <div class="documents">
-    <p class="error" ng-show="error_documents">{{error_documents}}&nbsp;</p>
     <button ng-click="set_panel(2)" class="back">Changer de promotion</button>
     <h1>Sélectionner vos documents</h1>
     <ul>
