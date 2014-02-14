@@ -154,7 +154,7 @@ function get_document(){
 function post_document(){
 	if(!is_admin())
 		return generate_403();
-	
+
 	if(!array_key_exists('doc', $_FILES))
 		return generate_400();
 
@@ -296,7 +296,7 @@ function get_promo_documents(){
 }
 
 function get_promo_zip(){
-	$p = Promotion::get((int)params(id));
+	$p = Promotion::get((int)params("id"));
 
 	if(!$p)
 		return generate_404();
