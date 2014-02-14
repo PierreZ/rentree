@@ -1,5 +1,12 @@
 <?php
 
+function pruneZips(){
+	$files = scandir(ROOT.ZIPROOT);
+	foreach($files as $_ => $file){
+		unlink($file);
+	}
+}
+
 class Document implements JsonSerializable{
 	private $id_document;
 	private $fichier;
@@ -141,6 +148,26 @@ class Document implements JsonSerializable{
 		}else return false;
 	}
 
+	static function zipForPromo($promoid=0){
+		$ziploc = ROOT . ZIPROOT . "/" . $promoid . ".zip";
+		if(file_exists($ziploc))
+			return $ziploc;
+
+		// else, generate zip
+		$zip = new ZipArchive();
+		if($zip->open($ziploc, ZipArchive::CREATE)!==true)
+			return false;
+
+		$documents = array_merge(Document::forPromo(0), Document::forPromo($promoid));
+		foreach($documents as $_ => $document){
+			$zip->addFile(ROOT.DOCROOT.$document->getFichier(), $document->getFichier());
+		}
+
+		$zip->close();
+
+		return $ziploc;
+	}
+
 	function insert(){
 		$database = bdd::getInstance()->getInstancePDO();
 		
@@ -157,6 +184,7 @@ class Document implements JsonSerializable{
 
 		if ($prepared_query->execute()){
 			$this->setId($database->lastinsertid());
+			pruneZips();
 			return true;
 		} else return false;
 	}
@@ -175,9 +203,10 @@ class Document implements JsonSerializable{
 		$prepared_query->bindParam(':fichier', $fichier);
 		$prepared_query->bindParam(':id_promotion', $id_promotion);
 		$prepared_query->bindParam(':nom', $nom);
-		if ($prepared_query->execute())
+		if ($prepared_query->execute()){
+			pruneZips();
 			return true;
-		else return false;
+		} else return false;
 	}
 
 	function delete(){
@@ -192,6 +221,7 @@ class Document implements JsonSerializable{
 		if ($prepared_query->execute()){
 			$this->setId(null);
 			unlink($this->fichier);
+			pruneZips();
 			return true;
 		}
 		else return false;

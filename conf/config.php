@@ -5,7 +5,8 @@ const PASSWD  = "rentree";
 const ROOT    = "/srv/http/rentree/";
 const WWWROOT = "http://localhost/rentree/?";
 const DOCROOT = "docs/"; // relatif à ROOT
-// Attention, DOCROOT doit être accessible en écriture par l'utilisateur ou le groupe sous lequel tourne PHP !
+const ZIPROOT = "zips/"; // idem
+// Attention, DOCROOT et ZIPROOT doivent être accessible en écriture par l'utilisateur ou le groupe sous lequel tourne PHP !
 
 // Mot de passe pour les élèves
 const PASS_ELEVE = "isen2015";

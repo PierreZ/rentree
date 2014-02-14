@@ -295,6 +295,18 @@ function get_promo_documents(){
 	return json_encode(myserialize($docs));
 }
 
+function get_promo_zip(){
+	$p = Promotion::get((int)params(id));
+
+	if(!$p)
+		return generate_404();
+
+	header("Content-Type: application/zip");
+	ob_clean();
+	flush();
+	readfile(Document::zipForPromo($p->getId()));
+}
+
 function pong(){
 	return "pong";
 }

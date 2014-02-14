@@ -29,6 +29,7 @@ dispatch_put("/promo/:id", "put_promo");
 dispatch_delete("/promo/:id", "delete_promo");
 
 dispatch("/promo/:id/documents", "get_promo_documents");
+dispatch("/promo/:id/documents.zip", "get_promo_zip");
 
 dispatch("/promos/", "get_promos");
 
