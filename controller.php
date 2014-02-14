@@ -313,9 +313,8 @@ function pong(){
 }
 
 function get_admin(){
-	/*if(!is_admin()) /// TODO
+	if(!is_admin())
 		return generate_403();
-    */
 
 	$e = Admin::find(params("id"));
 	if(!$e)
